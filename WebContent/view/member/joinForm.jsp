@@ -125,7 +125,7 @@
 	
 </head>
 <body>
-		<br><br>
+<div class="joinFrm">
 		<b><font size="6" color="gray">회원가입</font></b>
 		<br><br><br>
 		
@@ -134,7 +134,7 @@
 		<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
 		<form method="post" action="/member/joinProcAction.yo" 
 				name="userInfo" onsubmit="return checkValue()">
-			<table>
+			<table width="100%">
 				<tr>
 					<td id="title">아이디</td>
 					<td>
@@ -193,6 +193,6 @@
 			<input type="submit" value="가입"/>  
 			<input type="button" value="취소" onclick="goFirstForm()">
 		</form>
-
+</div>
 </body>
 </html>
