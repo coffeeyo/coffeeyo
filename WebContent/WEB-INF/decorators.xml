@@ -1,0 +1,14 @@
+<decorators defaultdir="/decorators">
+    <decorator name="admin" page="admin_decorator.jsp">
+        <pattern>/admin/*</pattern>
+    </decorator>
+    
+    <decorator name="popup" page="popup_decorator.jsp">
+        <pattern>/popup/*</pattern>
+    </decorator>
+    
+    <decorator name="main" page="main_decorator.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+
+</decorators>
