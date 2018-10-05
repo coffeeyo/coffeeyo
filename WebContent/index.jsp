@@ -14,7 +14,7 @@
 <script>
 </script>
 </head>
-<body>
+<body> 
 	<div class="board">
 	<!-- MD추천 목록 부분 -->
 	<c:if test="${fn:length(requestScope.recommList) > 0}">
