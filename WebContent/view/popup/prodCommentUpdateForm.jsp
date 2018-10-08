@@ -35,7 +35,7 @@
 				var param="comment_num="+comment_num+"&comment_content="+comment_content;
 				
 				$.ajax({
-					url: '/prodCommentUpdateAction.co',
+					url: '/prodCommentUpdateAction.yo',		//co가 아니라 yo라 수정합니다 근데 이건 properties에 없는데 어떻게 하나요 -송
 					type: 'POST',
 					data: param,
 					dataType: 'JSON',
