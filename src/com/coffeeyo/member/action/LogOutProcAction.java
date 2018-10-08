@@ -12,8 +12,8 @@ public class LogOutProcAction implements Action {
 		
 		request.getSession().invalidate();
 		
-		// 로그아웃 후 메인화면으로 돌아간다.
-		
-		return "/";
+		response.sendRedirect("/");
+   		
+   		return null;
 	}
 }

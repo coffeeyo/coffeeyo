@@ -279,7 +279,29 @@ public class MemberDAO {
 						}
 					}
 				} else {
-					check = 0;
+					StringBuilder sb = new StringBuilder();
+					sb.append("update member set ");
+					sb.append("hp=?, ");
+					sb.append("gender=?, ");
+					sb.append("birthday=?, ");
+					sb.append("job=?, ");
+					sb.append("updatedt=SYSDATE ");
+					sb.append("where userid=?");
+					
+					//pstmt = conn.prepareStatement(sb.toString());
+					pstmt = DBConnection.getPstmt(conn, sb.toString());
+					pstmt.setString(1, 	mb.getHp());
+					pstmt.setInt(2, 	mb.getGender());
+					pstmt.setString(3, 	mb.getBirthday());
+					pstmt.setInt(4, 	mb.getJob());
+					pstmt.setString(5, 	mb.getUserid());
+
+					int flag = pstmt.executeUpdate();
+					
+					if(flag > 0){
+						check = 1;		// 성공
+						conn.commit(); 	// 완료시 커밋
+					}
 				}
 			}
 			DBConnection.close(rs);

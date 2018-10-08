@@ -30,13 +30,13 @@ public class MemberUpdateProcAction implements Action {
 		member.setGender(Integer.parseInt(request.getParameter("gender")));
 		member.setBirthday(request.getParameter("birthday"));
 		member.setJob(Integer.parseInt(request.getParameter("job")));
-		
+		//System.out.println("gender:"+request.getParameter("gender"));
 		dao.updateMember(member);
 		
    		// 회원정보 수정 성공 메시지를 세션에 담는다.
    		session.setAttribute("msg", "0");
    		
-		response.sendRedirect("/member/resultFormAction.yo");
+		response.sendRedirect("../member/resultFormAction.yo");
 		return null;
 	}
 }

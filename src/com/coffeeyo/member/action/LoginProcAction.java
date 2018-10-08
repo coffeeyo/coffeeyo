@@ -69,7 +69,9 @@ public class LoginProcAction implements Action {
 	   		session.setAttribute("strLevel", info.getStrLevel());
 	   		
 	   		// 로그인 성공후 메인화면으로 이동
-	   		return "/";
+	   		response.sendRedirect("/");
+	   		
+	   		return null;
 		}
 	}
 }
