@@ -2,24 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.coffeeyo.member.model.Member" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>현재 유저정보 출력화면</title>
+<meta charset="UTF-8">
+	<title>회원정보</title>
 	
 	<style type="text/css">
-		table{
-			width:90%;
-			margin-left:auto; 
-			margin-right:auto;
-			border:3px solid skyblue;
-		}
 		
 		td{
-			border:1px solid skyblue
+			border:1px solid
 		}
 		
 		#title{
-			background-color:skyblue
+			width: 150px;
 		}
 	</style>
 	
@@ -29,10 +25,10 @@
 			if(val == "-1"){
 				location.href="/";
 			}else if(val == "0"){
-				location.href="/member/memberUpdateFormAction.do";
+				location.href="../member/memberUpdateFormAction.yo";
 			}else if(val == "1"){
 				if(confirm('탈퇴하시겠씁니까?')) {
-					location.href="/member/memberLeaveAction.yo";
+					location.href="../member/memberLeaveAction.yo";
 				}
 			}
 		}
@@ -41,15 +37,17 @@
 	
 </head>
 <body>
-		<br><br>
-		<b><font size="6" color="gray">내 정보</font></b>
-		<br><br><br>
+<div id="wrap">
+	<br><br>
+	<div class="board">
+		
+		<h1>내 정보</h1>
 		
 		<!-- 회원정보를 가져와 member 변수에 담는다. -->
 		<c:set var="member" value="${requestScope.memberInfo}"/>
 		
 		<!-- 가져온 회원정보를 출력한다. -->
-		<table>
+		<table border="1" class="bbs">
 			<tr>
 				<td id="title">아이디</td>
 				<td>${member.userid}</td>
@@ -61,34 +59,30 @@
 			</tr>
 					
 			<tr>
-				<td id="title">이름</td>
+				<td id="title">성명</td>
 				<td>${member.uname}</td>
 			</tr>
-			
+			<tr>
+				<td id="title">닉네임</td>
+				<td>${member.nick}</td>
+			</tr>
+			<tr>
+				<td id="title">핸드폰번호</td>
+				<td>${member.hp}</td>
+			</tr>
 			<tr>
 				<td id="title">성별</td>
 				<td>
-					<select name="gender" disabled>
-						<option value="0" <c:if test="${member.gender eq 0}">selected</c:if>>선택</option>
-						<option value="1" <c:if test="${member.gender eq 1}">selected</c:if>>남</option>
-						<option value="2" <c:if test="${member.gender eq 2}">selected</c:if>>여</option>
-					</select>
-				
+					<input type="radio" name="gender" value="1" <c:if test="${member.gender eq 1}">checked</c:if> />남자&nbsp;&nbsp;
+					<input type="radio" name="gender" value="2" <c:if test="${member.gender eq 2}">checked</c:if> />여자
 				</td>
 			</tr>
-					
 			<tr>
-				<td id="title">생일</td>
+				<td id="title">생년월일</td>
 				<td>
 					${member.birthday}
 				</td>
 			</tr>
-				
-			<tr>
-				<td id="title">휴대전화</td>
-				<td>${member.hp}</td>
-			</tr>
-			
 			<tr>
 				<td id="title">직업</td>
 				<td>
@@ -108,5 +102,7 @@
 		<input type="button" value="뒤로" onclick="changeForm(-1)">
 		<input type="button" value="회원정보 변경" onclick="changeForm(0)">
 		<input type="button" value="회원탈퇴" onclick="changeForm(1)">
+		</div>
+</div>
 </body>
 </html>
