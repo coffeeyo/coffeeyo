@@ -47,7 +47,7 @@
     <body>
     <c:set var="conPath" value="${pageContext.request.requestURI}"/>
     
-    <div class="navbar navbar-inverse" style="top:0; width:100%;">
+    <div class="navbar navbar-default" style="top:0; width:100%;">
     	<div class="container">
     		<div class="navbar-header " >
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
