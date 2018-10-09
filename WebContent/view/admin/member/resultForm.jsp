@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
 	<title>결과 페이지</title>
 	<script>
 		function goMemberInfo(id) {	
@@ -15,7 +17,9 @@
 	</script>
 </head>
 <body>
-	<br><br><br>
+<div id="wrap">
+	<br><br>
+	<div class="board" style="text-align:center;">
 	<form id="resFrm" name="resFrm" action="/admin/memberUpdateFormAction.yo" method="post">
 		<input type="hidden" id="userid" name="userid" /> 
 	</form>
@@ -27,7 +31,7 @@
 			<input type="button" value="회원정보확인" onclick="goMemberInfo('${id}');"/>
 			<script>
 				$(function(){
-					setTimeout(goMemberInfo('${id}'),3000);
+					//setTimeout(goMemberInfo('${id}'),3000);
 				});
 			</script>
 		</c:when>
@@ -36,7 +40,7 @@
 			<input type="button" value="회원목록으로" onclick="goMemberList();"/>
 			<script>
 				$(function(){
-					setTimeout(goMemberList(),3000);
+					//setTimeout(goMemberList(),3000);
 				});
 			</script>
 		</c:when>
@@ -45,7 +49,7 @@
 			<input type="button" value="회원목록으로" onclick="goMemberList();"/>
 			<script>
 				$(function(){
-					setTimeout(goMemberList(),3000);
+					//setTimeout(goMemberList(),3000);
 				});
 			</script>
 		</c:when>
@@ -61,6 +65,7 @@
 		<c:otherwise>
 		</c:otherwise>
 	</c:choose>
-	
+	</div>
+</div>
 </body>
 </html>

@@ -20,7 +20,7 @@
 	<b><font size="6" color="gray">로그인</font></b>
 	<br><br><br>
 	
-	<form name="login" action="/member/loginProcAction.yo" class="navbar-form navbar-left">
+	<form name="login" method="post" action="/member/loginProcAction.yo" class="navbar-form navbar-left">
 	    <div class="form-group">
 	      <input type="text" name="id" placeholder="userid" class="form-control">
 	    </div>

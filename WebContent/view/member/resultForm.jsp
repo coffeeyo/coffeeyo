@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
 	<title>결과 페이지</title>
 	<script>
 		function goMemberInfo(id) {	
@@ -16,8 +18,10 @@
 	</script>
 </head>
 <body>
-	<br><br><br>
-	<form id="resFrm" name="resFrm" action="/member/memberUpdateFormActionyo" method="post">
+<div id="wrap">
+	<br><br>
+	<div class="board" style="text-align:center;">
+	<form id="resFrm" name="resFrm" action="../member/memberUpdateFormAction.yo" method="post">
 		<input type="hidden" id="userid" name="userid" /> 
 	</form>
 	<c:set var="msg" value="${sessionScope.msg}" scope="session" />
@@ -26,7 +30,7 @@
 			<font size='6'>회원정보가 수정되었습니다.</font>
 			<script>
 				$(function(){
-					setTimeout(goMemberInfo('${id}'),5000);
+					//setTimeout(goMemberInfo('${id}'),10000);
 				});
 			</script>
 		</c:when>
@@ -35,7 +39,7 @@
 			<c:remove var="msg" scope="session"></c:remove>
 			<script>
 				$(function(){
-					setTimeout(goHome(),5000);
+					//setTimeout(goHome(),10000);
 				});
 			</script>
 		</c:when>
@@ -43,7 +47,7 @@
 			<font size='6'>탈퇴되었습니다.</font>
 			<script>
 				$(function(){
-					setTimeout(goHome(),5000);
+					//setTimeout(goHome(),10000);
 				});
 		</script>
 		</c:otherwise>
@@ -52,6 +56,7 @@
 
 	<br><br>
 	<input type="button" value="메인으로" onclick="javascript:window.location='/'"/>
-	
+	</div>
+</div>
 </body>
 </html>
