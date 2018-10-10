@@ -46,9 +46,9 @@
     </head>
     <body>
     <c:set var="conPath" value="${pageContext.request.requestURI}"/>
-    
-    <div class="navbar navbar-inverse" style="top:0; width:100%;">
-    	<div class="container">
+    <!-- header 스타일 수정(20181010) -->
+    <div class="navbar navbar-inverse" style="top:0; width:100%; background-color: #77563cf5; border-color: #77563cf5;">
+    	<div class="container" style="width:90%">
     		<div class="navbar-header " >
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
 	              <span class="sr-only">Toggle navigation</span>
@@ -56,7 +56,8 @@
 	              <span class="icon-bar"></span>
 	              <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="/">coffee YO!! logo</a>
+	            <a class="navbar-logo" href="/"><img src="/img/coffeeLogo.png" class="img-circle" style="width:150px; height:150px;" alt="coffee YO!! logo" title="coffee YO!! logo" /></a>
+	            
           	</div>
           	<div class="navbar-collapse collapse" style="float:right;">
           		<!-- https://www.w3schools.com/bootstrap/bootstrap_tabs_pills.asp 참고 -->
@@ -81,7 +82,7 @@
 							      <li><a href="#contact">주문조회</a></li>
 							      <li><a href="#contact">내글보기</a></li>
 							      <c:if test="${sessionScope.ulevel eq 10}">
-					              	<li><a href="/admin/memberListAction.yo">관리자</a></li>
+					              	<li><a href="/admin/productListAction.yo">관리자</a></li>
 					              </c:if>
 					              <c:if test="${sessionScope.userid ne null}">
 								  	<li><a href="/member/logOutAction.yo">로그아웃</a></li>
@@ -119,12 +120,12 @@
     <div id="viewCart" class="cart_r">
     	<div id="itemhead"><div id="cartBtn">
     		<c:if test="${sessionScope.userid ne null}">
-    		<button id="btnCartOpen" class="ir wing-toggle" onclick="setWingToggleHistory(this);">열기</button>
+    		<button id="btnCartOpen" class="ir wing-toggle btn-warning" onclick="setWingToggleHistory(this);">열기</button>
     		</c:if>
     	</div>
     	<div class="cartTitle">장바구니</div></div>
     	<div id="itemlst">
-    	<iframe src="/popup/cartListAction.yo" style="display:block; width:100%; height: 80vh"></iframe>
+    	<iframe src="/popup/cartListAction.yo" style="display:block; width:100%; height: 89vh"></iframe>
     	</div>
     </div>
     
