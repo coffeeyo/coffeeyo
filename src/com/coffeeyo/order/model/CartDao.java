@@ -360,7 +360,7 @@ public class CartDao {
 				
 				if(cart.getUserid() != null) {
 					sql.append("SELECT	");
-					sql.append(" sum( ((C.PRICE+C.OPTPRICE )* C.AMOUNT) ) as total ");
+					sql.append(" sum( ((C.PRICE+NVL(C.OPTPRICE,0) )* C.AMOUNT) ) as total ");
 					sql.append("FROM CART C ");
 					sql.append("WHERE C.USERID=? ");
 					if(cart.getBuychk().equals("Y")) {
