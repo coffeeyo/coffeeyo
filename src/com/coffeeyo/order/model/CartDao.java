@@ -65,9 +65,9 @@ public class CartDao {
 			StringBuffer sql = new StringBuffer();
 			sql.append("INSERT INTO CART ");
 			sql.append("(CIDX, USERID, PIDX, OPTIONS, ");
-			sql.append(" AMOUNT, PRICE, CREATEDT, BUYCHK) ");
+			sql.append(" AMOUNT, PRICE, OPTPRICE, CREATEDT, BUYCHK) ");
 			sql.append(" VALUES(");
-			sql.append("?,?,?,?,");
+			sql.append("?,?,?,?,?,");
 			sql.append("?,?,sysdate,?");
 			sql.append(" )");
 						
@@ -79,7 +79,8 @@ public class CartDao {
 			pstmt.setString(4, cart.getOptions());
 			pstmt.setInt(5, cart.getAmount());
 			pstmt.setLong(6, cart.getPrice());
-			pstmt.setString(7, cart.getBuychk());
+			pstmt.setLong(7, cart.getOptprice());
+			pstmt.setString(8, cart.getBuychk());
 
 			int flag = pstmt.executeUpdate();
 			if(flag > 0){
