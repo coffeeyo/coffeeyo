@@ -46,7 +46,7 @@
     </head>
     <body>
     <c:set var="conPath" value="${pageContext.request.requestURI}"/>
-    
+    <!-- header 스타일 수정(20181010) -->
     <div class="navbar navbar-inverse" style="top:0; width:100%; background-color: #77563cf5; border-color: #77563cf5;">
     	<div class="container">
     		<div class="navbar-header " >
