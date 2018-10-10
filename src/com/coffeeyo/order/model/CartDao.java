@@ -306,4 +306,46 @@ public class CartDao {
 		}
 		return cartList;
 	}
+	
+	public int getReadyTime(Cart cart) {
+		int tm = 0;
+		try {
+			conn = DBConnection.getConnection();
+			StringBuffer sql = new StringBuffer();
+			
+			if(cart.getUserid() != null) {
+				sql.append("SELECT");
+				sql.append(" sum( (P.maketm * C.AMOUNT) ) as mktm ");
+				sql.append("FROM CART C ");
+				sql.append("LEFT JOIN PRODUCT P ");
+				sql.append("ON C.PIDX=P.PIDX ");
+				sql.append("WHERE C.USERID=? ");
+				if(cart.getBuychk().equals("Y")) {
+					sql.append("AND C.BUYCHK='Y' ");
+				}
+				sql.append(" ORDER BY C.CIDX desc ");
+				
+				//pstmt = conn.prepareStatement(sql.toString());
+				pstmt = DBConnection.getPstmt(conn, sql.toString());
+				pstmt.setString(1, cart.getUserid());
+				
+				sql.delete(0, sql.toString().length());
+			}			
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			tm=rs.getInt("mktm");
+			
+			//System.out.println("cartList="+cartList.size());
+			DBConnection.close(rs);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			DBConnection.close(pstmt);
+			DBConnection.close(conn);
+		}
+		return tm;
+	}
 }
