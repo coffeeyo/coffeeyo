@@ -65,10 +65,10 @@ public class CartDao {
 			StringBuffer sql = new StringBuffer();
 			sql.append("INSERT INTO CART ");
 			sql.append("(CIDX, USERID, PIDX, OPTIONS, ");
-			sql.append(" AMOUNT, PRICE, CREATEDT, BUYCHK) ");
+			sql.append(" AMOUNT, PRICE, OPTPRICE, CREATEDT, BUYCHK) ");
 			sql.append(" VALUES(");
 			sql.append("?,?,?,?,");
-			sql.append("?,?,sysdate,?");
+			sql.append("?,?,?,sysdate,?");
 			sql.append(" )");
 						
 			//pstmt = conn.prepareStatement(sql.toString());
@@ -79,7 +79,8 @@ public class CartDao {
 			pstmt.setString(4, cart.getOptions());
 			pstmt.setInt(5, cart.getAmount());
 			pstmt.setLong(6, cart.getPrice());
-			pstmt.setString(7, cart.getBuychk());
+			pstmt.setLong(7, cart.getOptprice());
+			pstmt.setString(8, cart.getBuychk());
 
 			int flag = pstmt.executeUpdate();
 			if(flag > 0){
@@ -306,4 +307,89 @@ public class CartDao {
 		}
 		return cartList;
 	}
+	
+	// 주문에 넣을 readytm을 구하기 위한 메서드이다. 
+	public int getReadyTime(Cart cart) {
+		int tm = 0;
+		try {
+			conn = DBConnection.getConnection();
+			StringBuffer sql = new StringBuffer();
+			
+			if(cart.getUserid() != null) {
+				sql.append("SELECT");
+				sql.append(" sum( (P.maketm * C.AMOUNT) ) as mktm ");
+				sql.append("FROM CART C ");
+				sql.append("LEFT JOIN PRODUCT P ");
+				sql.append("ON C.PIDX=P.PIDX ");
+				sql.append("WHERE C.USERID=? ");
+				if(cart.getBuychk().equals("Y")) {
+					sql.append("AND C.BUYCHK='Y' ");
+				}
+				sql.append(" ORDER BY C.CIDX desc ");
+				
+				//pstmt = conn.prepareStatement(sql.toString());
+				pstmt = DBConnection.getPstmt(conn, sql.toString());
+				pstmt.setString(1, cart.getUserid());
+				
+				sql.delete(0, sql.toString().length());
+			}			
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			tm=rs.getInt("mktm");
+			
+			//System.out.println("cartList="+cartList.size());
+			DBConnection.close(rs);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			DBConnection.close(pstmt);
+			DBConnection.close(conn);
+		}
+		return tm;
+	}
+	
+	// 주문에 넣을 total을 구하기 위한 메서드이다. 
+		public long getTotalPrice(Cart cart) {
+			long total = 0;
+			try {
+				conn = DBConnection.getConnection();
+				StringBuffer sql = new StringBuffer();
+				
+				if(cart.getUserid() != null) {
+					sql.append("SELECT	");
+					sql.append(" sum( ((C.PRICE+NVL(C.OPTPRICE,0) )* C.AMOUNT) ) as total ");
+					sql.append("FROM CART C ");
+					sql.append("WHERE C.USERID=? ");
+					if(cart.getBuychk().equals("Y")) {
+						sql.append("AND C.BUYCHK='Y' ");
+					}
+					sql.append(" ORDER BY C.CIDX desc ");
+					
+					//pstmt = conn.prepareStatement(sql.toString());
+					pstmt = DBConnection.getPstmt(conn, sql.toString());
+					pstmt.setString(1, cart.getUserid());
+					
+					sql.delete(0, sql.toString().length());
+				}			
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				total=rs.getLong("total");
+				
+				//System.out.println("cartList="+cartList.size());
+				DBConnection.close(rs);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e.getMessage());
+			} finally {
+				DBConnection.close(pstmt);
+				DBConnection.close(conn);
+			}
+			return total;
+		}
+	
 }
