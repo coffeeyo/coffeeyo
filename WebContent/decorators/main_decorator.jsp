@@ -125,7 +125,7 @@
     	</div>
     	<div class="cartTitle">장바구니</div></div>
     	<div id="itemlst">
-    	<iframe src="/popup/cartListAction.yo" style="display:block; width:100%; height: 80vh"></iframe>
+    	<iframe src="/popup/cartListAction.yo" style="display:block; width:100%; height: 89vh"></iframe>
     	</div>
     </div>
     

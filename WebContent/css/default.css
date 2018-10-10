@@ -105,7 +105,7 @@
 	
 .bbsForm { width:90%; border: 3px lightgray solid; }	
 
-.cart_r { position: fixed; right:0px; top:110px; width: 0px; height: 100%; background-color: lightgrey; display: block; z-index:100; }
+.cart_r { position: fixed; right:0px; top:45px; width: 0px; height: 100%; background-color: lightgrey; display: block; z-index:100; }
 .cartList { width: 100%; margin-left:auto; margin-right:auto; }
 
 #cartBtn  .ir.wing-toggle {
