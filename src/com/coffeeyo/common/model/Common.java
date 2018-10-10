@@ -15,6 +15,7 @@ public class Common {
 	private long rnum;
 	private String nickName;
 	private String cateName;
+	private int optprice;
 	
 	public int getStatus() {
 		return status;
@@ -87,6 +88,12 @@ public class Common {
 	}
 	public void setCateName(String cateName) {
 		this.cateName = cateName;
+	}
+	public int getOptprice() {
+		return optprice;
+	}
+	public void setOptprice(int optprice) {
+		this.optprice = optprice;
 	}
 	
 }
