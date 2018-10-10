@@ -308,6 +308,7 @@ public class CartDao {
 		return cartList;
 	}
 	
+	// 주문에 넣을 readytm을 구하기 위한 메서드이다. 
 	public int getReadyTime(Cart cart) {
 		int tm = 0;
 		try {
@@ -349,4 +350,46 @@ public class CartDao {
 		}
 		return tm;
 	}
+	
+	// 주문에 넣을 total을 구하기 위한 메서드이다. 
+		public long getTotalPrice(Cart cart) {
+			long total = 0;
+			try {
+				conn = DBConnection.getConnection();
+				StringBuffer sql = new StringBuffer();
+				
+				if(cart.getUserid() != null) {
+					sql.append("SELECT	");
+					sql.append(" sum( ((C.PRICE+C.OPTPRICE )* C.AMOUNT) ) as total ");
+					sql.append("FROM CART C ");
+					sql.append("WHERE C.USERID=? ");
+					if(cart.getBuychk().equals("Y")) {
+						sql.append("AND C.BUYCHK='Y' ");
+					}
+					sql.append(" ORDER BY C.CIDX desc ");
+					
+					//pstmt = conn.prepareStatement(sql.toString());
+					pstmt = DBConnection.getPstmt(conn, sql.toString());
+					pstmt.setString(1, cart.getUserid());
+					
+					sql.delete(0, sql.toString().length());
+				}			
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				total=rs.getLong("total");
+				
+				//System.out.println("cartList="+cartList.size());
+				DBConnection.close(rs);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e.getMessage());
+			} finally {
+				DBConnection.close(pstmt);
+				DBConnection.close(conn);
+			}
+			return total;
+		}
+	
 }
