@@ -47,7 +47,7 @@
     <body>
     <c:set var="conPath" value="${pageContext.request.requestURI}"/>
     
-    <div class="navbar navbar-inverse" style="top:0; width:100%; background-color: #630141; border-color: #630141;">
+    <div class="navbar navbar-inverse" style="top:0; width:100%; background-color: #77563cf5; border-color: #77563cf5;">
     	<div class="container">
     		<div class="navbar-header " >
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -82,7 +82,7 @@
 							      <li><a href="#contact">주문조회</a></li>
 							      <li><a href="#contact">내글보기</a></li>
 							      <c:if test="${sessionScope.ulevel eq 10}">
-					              	<li><a href="/admin/memberListAction.yo">관리자</a></li>
+					              	<li><a href="/admin/productListAction.yo">관리자</a></li>
 					              </c:if>
 					              <c:if test="${sessionScope.userid ne null}">
 								  	<li><a href="/member/logOutAction.yo">로그아웃</a></li>

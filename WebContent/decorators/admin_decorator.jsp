@@ -30,7 +30,7 @@
     <body>
 	<c:set var="conPath" value="${pageContext.request.requestURI}"/>
 	
-    <div class="navbar navbar-inverse" style="background-color: #630141; border-color: #630141; width:100%;  height:190px; z-index:999;">
+    <div class="navbar navbar-inverse" style="background-color: #77563cf5; border-color: #77563cf5; width:100%;  height:190px; z-index:999;">
     	<div class="container">
     		<div class="navbar-header">
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
