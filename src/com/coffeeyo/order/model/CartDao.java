@@ -67,8 +67,8 @@ public class CartDao {
 			sql.append("(CIDX, USERID, PIDX, OPTIONS, ");
 			sql.append(" AMOUNT, PRICE, OPTPRICE, CREATEDT, BUYCHK) ");
 			sql.append(" VALUES(");
-			sql.append("?,?,?,?,?,");
-			sql.append("?,?,sysdate,?");
+			sql.append("?,?,?,?,");
+			sql.append("?,?,?,sysdate,?");
 			sql.append(" )");
 						
 			//pstmt = conn.prepareStatement(sql.toString());

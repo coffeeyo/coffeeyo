@@ -33,7 +33,12 @@ public class CartAddAction implements Action {
 		int amt = Integer.parseInt(request.getParameter("amt"));
 		int sum = Integer.parseInt(request.getParameter("sum_price"));
 		String opt = request.getParameter("opt");
-		int optPrice = Integer.parseInt(request.getParameter("optPrice"));
+		String strOptPrice = request.getParameter("optPrice");
+		int optPrice = 0;
+		
+		if(strOptPrice != null) {
+			optPrice = Integer.parseInt(strOptPrice);
+		}
 		
 		cart.setCidx(cartNum);
 		cart.setPidx(num);
