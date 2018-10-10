@@ -30,7 +30,7 @@
     <body>
 	<c:set var="conPath" value="${pageContext.request.requestURI}"/>
 	
-    <div class="navbar navbar-inverse" style="width:100%; z-index:999;">
+    <div class="navbar navbar-inverse" style="background-color: #630141; border-color: #630141; width:100%;  height:190px; z-index:999;">
     	<div class="container">
     		<div class="navbar-header">
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -39,7 +39,7 @@
 	              <span class="icon-bar"></span>
 	              <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="/">coffee YO!! logo</a>
+	            <a class="navbar-logo" href="/"><img src="/img/coffeeLogo.png" class="img-circle" style="width:150px; height:150px;" alt="coffee YO!! logo" title="coffee YO!! logo" /></a>
           	</div>
           	<div class="navbar-collapse collapse">
 	   			<ul class="nav navbar-nav navbar-right">

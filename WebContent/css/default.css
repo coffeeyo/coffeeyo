@@ -18,7 +18,22 @@
 	background  : darkred;
 	color		: white;
 	text-align		: center;
-	vertical-align:middle	
+	vertical-align:middle;
+	background-color: #630141;
+    border-color: #630141;
+}
+
+.navbar-logo {
+	float: left;
+    height: 150px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.nav  a {
+	color: white;
+	font-size: 14px;
 }
 
 .prod_sub01 {

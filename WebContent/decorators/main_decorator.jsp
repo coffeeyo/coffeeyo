@@ -47,7 +47,7 @@
     <body>
     <c:set var="conPath" value="${pageContext.request.requestURI}"/>
     
-    <div class="navbar navbar-inverse" style="top:0; width:100%;">
+    <div class="navbar navbar-inverse" style="top:0; width:100%; background-color: #630141; border-color: #630141;">
     	<div class="container">
     		<div class="navbar-header " >
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -56,7 +56,8 @@
 	              <span class="icon-bar"></span>
 	              <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="/">coffee YO!! logo</a>
+	            <a class="navbar-logo" href="/"><img src="/img/coffeeLogo.png" class="img-circle" style="width:150px; height:150px;" alt="coffee YO!! logo" title="coffee YO!! logo" /></a>
+	            
           	</div>
           	<div class="navbar-collapse collapse" style="float:right;">
           		<!-- https://www.w3schools.com/bootstrap/bootstrap_tabs_pills.asp 참고 -->
