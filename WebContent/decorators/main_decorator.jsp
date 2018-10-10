@@ -120,7 +120,7 @@
     <div id="viewCart" class="cart_r">
     	<div id="itemhead"><div id="cartBtn">
     		<c:if test="${sessionScope.userid ne null}">
-    		<button id="btnCartOpen" class="ir wing-toggle" onclick="setWingToggleHistory(this);">열기</button>
+    		<button id="btnCartOpen" class="ir wing-toggle btn-warning" onclick="setWingToggleHistory(this);">열기</button>
     		</c:if>
     	</div>
     	<div class="cartTitle">장바구니</div></div>
