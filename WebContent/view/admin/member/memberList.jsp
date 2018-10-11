@@ -41,7 +41,6 @@
 </head>
 <body>
 	<!-- 회원목록 위 부분-->
-	<br>
 	<div class="topBbs">
 		<h1>
 			회원 목록 [ 전체 회원수 : 

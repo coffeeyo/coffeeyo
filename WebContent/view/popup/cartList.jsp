@@ -77,7 +77,7 @@ body {
 						$('.cart_r').css('width','0px');
 						
 						
-						parent.location.href = '/order/orderFromAction.yo';
+						parent.location.href = "/order/orderFromAction.yo";
 					}
 					else {
 						result = false;

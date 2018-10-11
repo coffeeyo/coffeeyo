@@ -20,8 +20,10 @@
 		td{
 			border:1px solid black
 		}
-		
-		.updBtn {
+		.board  h1 {
+			text-align: center;
+		}
+		#updBtn {
 			float: right;
 		}
 		
@@ -57,7 +59,6 @@
 </head>
 <body>
 <div id="wrap">
-	<br><br>
 	<div class="board" >
 		<h1>회원정보 수정</h1>
 		<!-- 회원정보를 가져와 member 변수에 담는다. -->
