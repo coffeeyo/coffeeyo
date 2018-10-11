@@ -23,6 +23,11 @@
 	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	    <![endif]-->
+	    <style>
+	    	.navbar-inverse .navbar-nav>li>a {
+			    color: white;
+			}
+	    </style>
 	    
 	    <script src="/js/common.js"></script>
         <decorator:head />
@@ -41,8 +46,8 @@
 	            </button>
 	            <a class="navbar-logo" href="/"><img src="/img/coffeeLogo.png" class="img-circle" style="width:150px; height:150px;" alt="coffee YO!! logo" title="coffee YO!! logo" /></a>
           	</div>
-          	<div class="navbar-collapse collapse">
-	   			<ul class="nav navbar-nav navbar-right">
+          	<div class="navbar-collapse collapse" style="float:right;">
+	   			<ul class="nav navbar-nav " >
 	              <li <c:if test="${conPath eq '/admin/productListAction.yo' 
 	              					or conPath eq '/admin/productAddFrmAction.yo' 
 	              					or conPath eq '/admin/productUpdateFrmAction.yo'
