@@ -47,7 +47,7 @@
     <body>
     <c:set var="conPath" value="${pageContext.request.requestURI}"/>
     <!-- header 스타일 수정(20181010) -->
-    <div class="navbar navbar-inverse" style="top:0; width:100%; background-color: #77563cf5; border-color: #77563cf5;">
+    <div class="navbar navbar-inverse" style="top:0; width:100%; height:190px; background-color: #77563cf5; border-color: #77563cf5;">
     	<div class="container" style="width:90%">
     		<div class="navbar-header " >
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -64,6 +64,20 @@
 	   			<ul class="nav navbar-nav">
 	   				<li>
 	   					<ul class="nav nav-tabs">
+	   					<li class="dropdown">
+					      <a class="dropdown-toggle" data-toggle="dropdown" href="#">커피요<span class="caret"></span></a>
+					      <ul class="dropdown-menu">
+					        <c:if test="${fn:length(requestScope.cateList) > 0}">
+								<c:forEach var="cate" items="${requestScope.cateList}">
+									<li><a href="javascript:void(0);" onclick="goCateProduct('${cate.cidx}')">${cate.cname}</a></li>
+								</c:forEach>
+								<form id="cateFrm" name="cateFrm" action="/product/productListAction.yo" method="post">
+									<input type="hidden" id="cate"  name="cidx">
+								</form>
+					      	</c:if>                     
+					      </ul>
+					    </li>
+					    <li><a href="/board/boardBoardList.yo">커뮤니티</a></li>
 	   					<c:if test="${sessionScope.userid eq null}">
 						  <li <c:if test="${conPath eq '/member/loginFormAction.yo'}">class="active"</c:if>><a href="/member/loginFormAction.yo" >로그인</a></li>
 						  <li <c:if test="${conPath eq '/member/joinFormAction.yo'}">class="active"</c:if>><a href="/member/joinFormAction.yo">회원가입</a></li>
@@ -98,6 +112,7 @@
 	            </ul>
             </div>
    		</div>
+   		<!--
    		<div style="width: 200px; margin-left:auto; margin-right:auto;">
    			<ul class="nav nav-tabs">
 			    <li class="dropdown">
@@ -116,6 +131,7 @@
 			    <li><a href="/board/boardListAction.yo">커뮤니티</a></li>
 			  </ul>
 		</div>
+		-->
     </div>
     <div id="viewCart" class="cart_r">
     	<div id="itemhead"><div id="cartBtn">
