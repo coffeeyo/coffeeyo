@@ -17,6 +17,7 @@
 		
 		function memModify(id) {;
 			$('#userid').val(id);
+			$('#nowPage').val('${nowPage}');
 			$('#memFrm').attr('action', '/admin/memberUpdateFormAction.yo');
 			$('#memFrm').submit();
 		}
@@ -47,6 +48,19 @@
 			${requestScope.listCount}]
 			
 		</h1>
+		<!--  검색 부분 -->
+		<br>
+		<div class="bbsSearchForm">
+			<form action="/admin/memberListAction.yo" method="post">
+				<select name="opt">
+					<option value="0">성명</option>
+					<option value="1">아이디</option>
+				</select>
+				<input type="text" size="20" name="condition"/>&nbsp;
+				&nbsp;
+				<input type="submit" value="검색"/>
+			</form>	
+		</div>
 		<c:if test="${sessionScope.ulevel eq 10}">
 		<div class="bbs_link">
 			<input type="button" value="회원등록" onclick="memAdd()"/>
@@ -58,6 +72,7 @@
 	<br>
 	<form id="memFrm" name="memFrm" action="/admin/memberUpdateFormAction.yo" method="post">
 		<input type="hidden" id="userid" name="userid" />
+		<input type="hidden" id="nowPage" name="nowPage" />
 	</form>
 	<div class="board">
 	<table class="bbs">	
@@ -111,37 +126,24 @@
 	
 	<br>
 	<div class="bbsPageForm">
-	<c:if test="${fn:length(requestScope.memberList) > 0}">
-		<c:if test="${startPage != 1}">
-			<a href='/admin/memberListAction.yo?pageNum=${startPage-1}'>[ 이전 ]</a>
+	<c:if test="${fn:length(requestScope.memberList) ne 0}">
+		<c:if test="${PINFO.startPage ne 1}">
+			<a href='/admin/memberListAction.yo?nowPage=${PINFO.startPage-1}'>[ 이전 ]</a>
 		</c:if>
 		
-		<c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
-			<c:if test="${pageNum == spage}">
-				${pageNum}&nbsp;
+		<c:forEach var="page" begin="${PINFO.startPage}" end="${PINFO.endPage}">
+			<c:if test="${PINFO.startPage eq page}">
+				${page}&nbsp;
 			</c:if>
-			<c:if test="${pageNum != spage}">
-				<a href='/admin/memberListAction.yo?pageNum=${pageNum}'>${pageNum}&nbsp;</a>
+			<c:if test="${PINFO.startPage ne page}">
+				<a href='/admin/memberListAction.yo?nowPage=${page}'>${page}&nbsp;</a>
 			</c:if>
 		</c:forEach>
 		
-		<c:if test="${endPage != maxPage }">
-			<a href='/admin/memberListAction.yo?pageNum=${endPage+1 }'>[다음]</a>
+		<c:if test="${PINFO.endPage ne PINFO.totalPage }">
+			<a href='/admin/memberListAction.yo?nowPage=${PINFO.endPage+1}'>[다음]</a>
 		</c:if>
 	</c:if>
-	</div>
-	<!--  검색 부분 -->
-	<br>
-	<div class="bbsSearchForm">
-		<form>
-			<select name="opt">
-				<option value="0">성명</option>
-				<option value="1">아이디</option>
-			</select>
-			<input type="text" size="20" name="condition"/>&nbsp;
-			&nbsp;
-			<input type="submit" value="검색"/>
-		</form>	
 	</div>
 </body>
 </html>

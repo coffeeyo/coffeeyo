@@ -46,6 +46,11 @@
 				}
 				$('#updateFrm').submit();
 			});
+			
+			$('#btnList').click(function(){
+				var url = '/admin/memberListAction.yo?nowPage=${nowPage}'
+				$(location).attr('href', url);
+			});
 		});
 	</script>
 	
@@ -62,7 +67,8 @@
 		<!-- 값(파라미터) 전송은 POST 방식 -->
 		<form method="post" action="/admin/memberUpdateProcAction.yo" 
 				id="updateFrm" name="updateFrm" >
-		<input type="hidden" name="userid" value="${member.userid}"/>		
+		<input type="hidden" name="userid" value="${member.userid}"/>
+		<input type="hidden" name="nowPage" value="${nowPage}"/>
 			<table>
 				<tr>
 					<td id="title">아이디</td>
@@ -147,7 +153,7 @@
 			<br><br>
 			<div id="updBtn">
 			<input type="button" id="btnUpdate" value="저장"/>  
-			<input type="button" value="목록" onclick="javascript:window.location='/admin/memberListAction.yo'">
+			<input type="button" id="btnList" value="목록" />
 			</div>
 		</form>
 		</div>

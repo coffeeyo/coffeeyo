@@ -20,6 +20,7 @@ public class MemberUpdateAdmProcAction implements Action {
 		// 세션이 가지고있는 로그인한 ID 정보를 가져온다
 		HttpSession session = request.getSession();
 		String id = request.getParameter("userid");
+		String nowPage = request.getParameter("nowPage");
 		
 		// 수정할 정보를 자바빈에 세팅한다.
 		Member member = new Member();
@@ -35,11 +36,8 @@ public class MemberUpdateAdmProcAction implements Action {
 				
 		dao.updateMemberProc(member);		
 		
-   		// 회원정보 수정 성공 메시지를 세션에 담는다.
-		session.setAttribute("id", id);
-   		session.setAttribute("msg", "0");
-   		
-		response.sendRedirect("/admin/resultFormAction.yo");
+   		// 회원정보 수정 성공 메시지를 세션에 담는다.   		
+		response.sendRedirect("/admin/resultFormAction.yo?id="+id+"&msg=0&nowPage="+nowPage);
 		
 		return null;
 	}

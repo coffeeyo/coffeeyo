@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import com.coffeeyo.member.model.Member;
+
+import bcom.coffeeyo.board.util.PageUtil;
+
 import com.coffeeyo.common.util.DBConnection;
 
 import java.sql.Connection;
@@ -419,75 +422,86 @@ public class MemberDAO {
 		return result;
 	} // end getMemberListCount
 
-	public ArrayList<Member> getMemberList(HashMap<String, Object> listOpt) {
+	public ArrayList<Member> getMemberList(int nowPage, PageUtil pinfo, HashMap<String, Object> listOpt) {
 		ArrayList<Member> memberList = new ArrayList<Member>();
 
 		String opt = (String)listOpt.get("opt");
 		String condition = (String)listOpt.get("condition");
-		int start = (Integer)listOpt.get("start");
 		
 		try {
 			conn = DBConnection.getConnection();
 			StringBuffer sql = new StringBuffer();
 						
 			if(opt == null) {
-				sql.append("SELECT * FROM");
-				sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
-				sql.append("	(SELECT * ");
+				//sql.append("SELECT * FROM");
+				//sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
+				//sql.append("	(SELECT * ");
+				sql.append("SELECT * ");
 				sql.append("	FROM MEMBER ");
-				sql.append("	ORDER BY createdt desc)");              
-				sql.append(" data) ");
-				sql.append("WHERE rnum >= ? and rnum <= ?");
+				sql.append("	ORDER BY createdt desc");   
+				//sql.append("	ORDER BY createdt desc)");              
+				//sql.append(" data) ");
+				//sql.append("WHERE rnum >= ? and rnum <= ?");
 				
 				//pstmt = conn.prepareStatement(sql.toString());
 				pstmt = DBConnection.getPstmt(conn, sql.toString());
-				pstmt.setInt(1, start);
-				pstmt.setInt(2, start+9);
+				//pstmt.setInt(1, start);
+				//pstmt.setInt(2, start+9);
 				
 				// StringBuffer를 비운다.
 				sql.delete(0, sql.toString().length());
 			}
 			else if(opt.equals("0")) // 성명으로 검색
 			{
-				sql.append("SELECT * FROM");
-				sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
-				sql.append("	(SELECT * ");
+				//sql.append("SELECT * FROM");
+				//sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
+				//sql.append("	(SELECT * ");
+				sql.append("SELECT * ");
 				sql.append("	FROM MEMBER ");
 				sql.append(" 	WHERE UNAME like ?");
-				sql.append("	ORDER BY createdt desc)");              
-				sql.append(" data) ");
-				sql.append("WHERE rnum >= ? and rnum <= ?");
+				sql.append("	ORDER BY createdt desc");    
+				//sql.append("	ORDER BY createdt desc)");              
+				//sql.append(" data) ");
+				//sql.append("WHERE rnum >= ? and rnum <= ?");
 				
 				//pstmt = conn.prepareStatement(sql.toString());
 				pstmt = DBConnection.getPstmt(conn, sql.toString());
 				pstmt.setString(1, "%"+condition+"%");
-				pstmt.setInt(2, start);
-				pstmt.setInt(3, start+9);
+				//pstmt.setInt(2, start);
+				//pstmt.setInt(3, start+9);
 				
 				sql.delete(0, sql.toString().length());
 			}
 			else if(opt.equals("1")) // 아이디로 검색
 			{
-				sql.append("SELECT * FROM");
-				sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
-				sql.append("	(SELECT * ");
+				//sql.append("SELECT * FROM");
+				//sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
+				//sql.append("	(SELECT * ");
+				sql.append("SELECT * ");
 				sql.append("	FROM MEMBER ");
 				sql.append(" 	WHERE USERID like ?");
-				sql.append("	ORDER BY createdt desc)");              
-				sql.append(" data) ");
-				sql.append("WHERE rnum >= ? and rnum <= ?");
+				sql.append("	ORDER BY createdt desc");    
+				//sql.append("	ORDER BY createdt desc)");              
+				//sql.append(" data) ");
+				//sql.append("WHERE rnum >= ? and rnum <= ?");
 				
 				//pstmt = conn.prepareStatement(sql.toString());
 				pstmt = DBConnection.getPstmt(conn, sql.toString());
 				pstmt.setString(1, "%"+condition+"%");
-				pstmt.setInt(2, start);
-				pstmt.setInt(3, start+9);
+				//pstmt.setInt(2, start);
+				//pstmt.setInt(3, start+9);
 				
 				sql.delete(0, sql.toString().length());
 			}
 
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
+			int skip=((pinfo.getNowPage()-1)*pinfo.getListCount());
+			for(int i = 0; i < skip; i++) {
+				rs.next();
+				//데이터베이스 작업 포인터를 필요없는 데이터에서 내린다
+			}
+			
+			for(int i = 0; i < pinfo.getListCount() && rs.next(); i++) {
 				Member mb = new Member();
 				mb.setUserid(rs.getString("userid"));
 				mb.setUname(rs.getString("uname"));

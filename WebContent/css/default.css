@@ -89,6 +89,7 @@
 .topBbs{
 	width:90%; /*margin-top: 10%;*/ margin-left:auto; margin-right:auto;
 }
+.topBbs h1 { text-align:center; }
 .board, .comment {
 	width:90%; margin-left:auto; margin-right:auto; margin-top: 20px; z-index: 1;
 }
@@ -96,8 +97,12 @@
 	width:100%; border: 1px solid black; 
 	margin-left:auto; margin-right:auto;
 }
+.bbs tr, .bbs th, .bbs td {
+	border: 1px solid black; 
+	text-align: center;
+}
 .bbsPageForm, .bbsSearchForm {
-	width:90%; border: 1px solid black; 
+	width:100%; border: 1px solid white; 
 	margin-left:auto; margin-right:auto;
 	text-align:center;
 }

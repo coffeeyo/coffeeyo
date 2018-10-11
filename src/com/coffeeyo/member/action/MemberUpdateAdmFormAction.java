@@ -17,9 +17,10 @@ public class MemberUpdateAdmFormAction implements Action {
 		HttpSession session = request.getSession();
 		String ulevel = session.getAttribute("ulevel").toString();
 		String userid = request.getParameter("userid");
+		String nowPage = request.getParameter("nowPage");
 		
 		if(!ulevel.equals("10")) {
-			response.sendRedirect("/admin/memberListAction.yo");
+			response.sendRedirect("/admin/memberListAction.yo?nowPage="+nowPage);
 			return null;
 		}
 		
@@ -29,6 +30,7 @@ public class MemberUpdateAdmFormAction implements Action {
 		
 		// ModifyFrom.jsp에 회원정보를 전달하기 위해 request에 MemberBean을 세팅한다.
 		request.setAttribute("memberInfo", member);
+		request.setAttribute("nowPage", nowPage);
 				
 		return "/view/admin/member/memberUpdateForm.jsp";
 	}

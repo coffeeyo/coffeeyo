@@ -10,16 +10,23 @@ import com.coffeeyo.common.action.Action;
 import com.coffeeyo.member.model.Member;
 import com.coffeeyo.member.model.MemberDAO;
 
+import bcom.coffeeyo.board.util.PageUtil;
+
 public class MemberListAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
 		// 현재 페이지 번호 만들기
-		int spage = 1;
-		String pageNum = request.getParameter("pageNum");
+		String strPage = request.getParameter("nowPage");
 		
-		if(pageNum != null && !pageNum.equals(""))	spage = Integer.parseInt(pageNum);
+		int nowPage=0;
+		if(strPage==null || strPage.length()==0) {
+			//파라미터가 없다
+			nowPage=1;
+		}else {
+			nowPage=Integer.parseInt(strPage);					
+		}
 		
 		// 검색조건과 검색내용을 가져온다.
 		String opt = request.getParameter("opt");
@@ -29,40 +36,23 @@ public class MemberListAction implements Action {
 		HashMap<String, Object> listOpt = new HashMap<String, Object>();
 		listOpt.put("opt", opt);
 		listOpt.put("condition", condition);
-				
+		
+		//총 데이터개수 구하기
 		MemberDAO dao = MemberDAO.getInstance();
 		int listCount = dao.getMemberListCount(listOpt);
 		
 		
-		// 한 화면에 10개의 게시글을 보여지게함
-		// 페이지 번호는 총 5개, 이후로는 [다음]으로 표시
+		//페이지 정보를 만들어 놓자
+		//한 화면에서 10개의 게시물이 보이도록 하고
+		//한 화면에는 3개씩 페이지 이동 기능을 만들 예정
+		PageUtil pinfo=new PageUtil(nowPage,listCount,10,3);
 		
-		// 전체 페이지 수
-		int maxPage = (int)(listCount/10.0 + 0.9);
-		
-		// 만약 사용자가 주소창에서 페이지 번호를 maxPage 보다 높은 값을 입력시
-		// maxPage에 해당하는 목록을 보여준다.
-		if(spage > maxPage) spage = maxPage;
-		listOpt.put("start", spage*10-9);
-		
-		
-		ArrayList<Member> memberList = dao.getMemberList(listOpt);
-		
-		//시작 페이지 번호
-		int startPage = (int)(spage/5.0 + 0.8) * 5 - 4;
-		//마지막 페이지 번호
-		int endPage = startPage + 4;
-		if(endPage > maxPage)	endPage = maxPage;
+		ArrayList<Member> memberList = dao.getMemberList(nowPage, pinfo, listOpt);
 		
 		request.setAttribute("memberList", memberList);
-		request.setAttribute("pageNum", pageNum);
-		
-		// 4개 페이지번호 저장
-		request.setAttribute("spage", spage);
-		request.setAttribute("maxPage", maxPage);
-		request.setAttribute("startPage", startPage);
-		request.setAttribute("endPage", endPage);
+		request.setAttribute("PINFO", pinfo);
 		request.setAttribute("listCount", listCount);
+		request.setAttribute("nowPage", nowPage);
 		
 		return "/view/admin/member/memberList.jsp";
 	}

@@ -11,7 +11,15 @@ public class MemberProcResultAdmAction implements Action {
 			HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8"); // ÀÎÄÚµù
-   		
+		
+		String id = request.getParameter("userid");
+		String nowPage = request.getParameter("nowPage");
+		String msg = request.getParameter("msg");
+		
+		request.setAttribute("id", id);
+		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("msg", msg);
+		
 		return "/view/admin/member/resultForm.jsp";
 	}
 }
