@@ -77,7 +77,7 @@
 					      	</c:if>                     
 					      </ul>
 					    </li>
-					    <li><a href="/board/boardListAction.yo">커뮤니티</a></li>
+					    <li><a href="/board/boardBoardList.yo">커뮤니티</a></li>
 	   					<c:if test="${sessionScope.userid eq null}">
 						  <li <c:if test="${conPath eq '/member/loginFormAction.yo'}">class="active"</c:if>><a href="/member/loginFormAction.yo" >로그인</a></li>
 						  <li <c:if test="${conPath eq '/member/joinFormAction.yo'}">class="active"</c:if>><a href="/member/joinFormAction.yo">회원가입</a></li>
