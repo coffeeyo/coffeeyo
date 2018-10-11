@@ -16,6 +16,7 @@
 body {
  	overflow-y: auto;
  	overflow-x: hidden;
+ 	background-color:transparent;
 }
 </style>
 <script>
@@ -119,18 +120,18 @@ body {
 		<table class="cartList">
 		<c:if test="${fn:length(requestScope.cartList) eq 0}">
 			<tr>
-				<th><center>담긴 상품이 없습니다.</center></th>
+				<th align="center">담긴 상품이 없습니다.</th>
 			</tr>
 		</c:if>
 		<c:set var="sum" value="0"/>
 		<c:if test="${fn:length(requestScope.cartList) gt 0}">
 		  <c:forEach var="cart" items="${requestScope.cartList}" varStatus="status">
-		  <tr>	
-			  <td>
+		  <tr  style="border-bottom: 1px dashed black;">	
+			  <td style="width: 20px; text-align: right;">
 			  	<input type="checkbox" name="num" value="${cart.cidx}" />
 			  </td>
-			  <td>
-			    <div class="thumbnail">
+			  <td style="width:204px">
+			    <div class="thumb">
 			        <c:if test="${cart.image ne null}">
 						<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" style="cursor:pointer;"/>
 					</c:if>
@@ -138,20 +139,22 @@ body {
 			  </td>
 			  <td>
 			  ${cart.pname}<br/>
-			  ${cart.amount}<br/>
-			  ${cart.price * cart.amount} 원<br/>
+			  수량: ${cart.amount}<br/>
+			  옵션: ${cart.options}<br/>
+			  금액: ${(cart.price+cart.optprice) * cart.amount} 원<br/>
 			  </td>
 			  <td>
-			  <input type="button" value="삭제" onclick="deleteCart('${cart.cidx}');" />
+			  <input type="button" value="삭제" onclick="deleteCart('${cart.cidx}');"  class="btn-primary" />
 			  </td>
 		  </tr>
-		  <c:set var="sum" value="${sum + (cart.price * cart.amount)}"/>
+		  <c:set var="sum" value="${sum + ((cart.price+cart.optprice) * cart.amount)}"/>
 		  </c:forEach>
 		</c:if>
 		</table>
+		<p></p>
 		<div class="itemfooter">
 			<div>소계 : ${sum}</div>
-    		<input type="button" value="주문결제" id="orderSave" />
+    		<input type="button" value="주문결제" id="orderSave"  class="btn-success"  />
     	</div>
 	</form>
 </body>

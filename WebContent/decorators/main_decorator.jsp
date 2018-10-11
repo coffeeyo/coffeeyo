@@ -134,15 +134,21 @@
 		-->
     </div>
     <div id="viewCart" class="cart_r">
-    	<div id="itemhead"><div id="cartBtn">
-    		<c:if test="${sessionScope.userid ne null}">
-    		<button id="btnCartOpen" class="ir wing-toggle btn-warning" onclick="setWingToggleHistory(this);">열기</button>
-    		</c:if>
+    	<div id="itemhead">
+	    	<div id="cartBtn">
+	    		<c:if test="${sessionScope.userid ne null}">
+	    		<button id="btnCartOpen" class="ir wing-toggle btn-warning" onclick="setWingToggleHistory(this);">열기</button>
+	    		</c:if>
+	    	</div>
+	    	<div class="panel panel-default">
+	    		<div class="panel-heading"><h3>장바구니</h3></div>
+	    		<div id="panel-body">
+		    	<iframe src="/popup/cartListAction.yo" allowtransparency="true" style="border:none; width:100%; height: 89vh;" ></iframe>
+		    	</div>
+	    	</div>
+	    	
     	</div>
-    	<div class="cartTitle">장바구니</div></div>
-    	<div id="itemlst">
-    	<iframe src="/popup/cartListAction.yo" style="display:block; width:100%; height: 89vh"></iframe>
-    	</div>
+    	
     </div>
     
     <decorator:body />

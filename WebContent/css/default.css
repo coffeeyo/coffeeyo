@@ -4,6 +4,9 @@
 @import url(order.css);
 @import url(board.css);
 
+::-webkit-scrollbar {
+	display: none;
+}				
 .header {
 	position	: fixed;
 	top			: 0;
@@ -112,7 +115,7 @@
 .bbsForm { width:90%; border: 3px lightgray solid; }	
 
 .cart_r { position: fixed; right:0px; top:45px; width: 0px; height: 100%; background-color: lightgrey; display: block; z-index:100; }
-.cartList { width: 100%; margin-left:auto; margin-right:auto; }
+.cartList { width: 100%; margin-left:2px; margin-right:2px; }
 
 #cartBtn  .ir.wing-toggle {
     width: 26px;
@@ -127,3 +130,5 @@
 }
 .cartTitle { float: left; width:100%; margin-left:auto; margin-right:auto; text-align:center }
 .itemfooter { float: 298px; text-align:center; } 
+.thumb { width: 200px; }
+.thumb img { width: 198px; margin: 2px; }
