@@ -93,7 +93,7 @@
 							    <span class="caret"></span></a>
 							    <ul class="dropdown-menu">
 							      <li <c:if test="${conPath eq '/member/memberInfoFormAction.yo' or conPath eq '/member/memberUpdateFormAction.yo'}">class="active"</c:if>><a href="/member/memberInfoFormAction.yo">회원정보</a></li>
-							      <li><a href="#contact">주문조회</a></li>
+							      <li><a href="../order/orderHistoryListAction.yo">주문조회</a></li>
 							      <li><a href="#contact">내글보기</a></li>
 							      <c:if test="${sessionScope.ulevel eq 10}">
 					              	<li><a href="/admin/productListAction.yo">관리자</a></li>
