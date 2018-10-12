@@ -25,6 +25,9 @@
 		//location객체의 href속성이용
 		location.href="../board/boardWriteForm.yo"
 	}
+	function AllList(){
+		location.href="../board/boardBoardList.yo";
+	}
 	function MyList(){
 		location.href="../board/boardBoardList.yo?opt=4&condition=${sessionScope.userid}";
 	}
@@ -43,9 +46,11 @@
 					<option value="1">내용</option>
 					<option value="2">제목+내용</option>
 					<option value="3">글쓴이</option>
+					<!-- 내글보기는 <option value="4">의 기능을 가짐-->
 				</select>
 				<input type="text" size="20"  id="condition"  name="condition"/>&nbsp;
 				<input type="submit" value="검색"/>&nbsp;
+				<input type="button" value="전체보기" onclick="AllList()"/>
 				<c:if test="${not empty sessionScope.userid}">
 				<input type="button" value="내글보기" onclick="MyList()"/>
 				</c:if>
@@ -78,7 +83,7 @@
 				<td>${data.bidx}</td>
 				<td>${data.pname}</td>
 				<td>${data.nick}</td>
-				<td><a href="../board/boardBoardDetail.yo?oriNo=${data.bidx}&nowPage=${PINFO.nowPage}">${data.subject}</a></td>
+				<td><a href="../board/boardBoardDetail.yo?oriNo=${data.bidx}&nowPage=${PINFO.nowPage}">${data.getShortSubject()}</a></td>
 				<td>${data.readcnt}</td>
 				<td>${data.likecnt}</td>
 				<td>${data.createdt}</td>

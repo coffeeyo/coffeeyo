@@ -65,7 +65,7 @@
 <body>
 <h1>게시판 등록</h1>
 <form id="frm" name="frm" action="../board/boardWriteProc.yo" method="post" enctype="multipart/form-data">
-	<table border="1px solid black">
+	<table border="1" align="center" width="600">
 		<tr>
 			<th>상품분류</th>
 			<td>
@@ -95,7 +95,7 @@
 		</tr>
 		<tr>
 			<th>파일첨부</th>
-			<td><input type="file" name="file" id="file"></td>
+			<td><input type="file" name="file" id="file" ></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
