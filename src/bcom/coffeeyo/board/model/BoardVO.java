@@ -18,7 +18,15 @@ public class BoardVO {
 	private String pname;
 	private String nick;
 	private String cname;
+	private int bcidx;
+	private int status;
 	
+	public int getBcidx() {
+		return bcidx;
+	}
+	public void setBcidx(int bcidx) {
+		this.bcidx = bcidx;
+	}
 	public String getCname() {
 		return cname;
 	}
@@ -64,6 +72,13 @@ public class BoardVO {
 	public String getSubject() {
 		return subject;
 	}
+	public String getShortSubject() {
+		String temp=subject;
+		if(subject.length()>10) {			
+			temp=subject.substring(0,10)+"...";
+		}
+		return temp;
+	}
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
@@ -71,6 +86,13 @@ public class BoardVO {
 		String temp=comm;
 		if(temp!=null && temp.length()!=0) {
 			temp=temp.replaceAll("\n", "<br/>");
+		}
+		return temp;
+	}
+	public String getCommNbr() {
+		String temp=comm;
+		if(temp!=null && temp.length()!=0) {
+			temp=temp.replaceAll("<br/>","");
 		}
 		return temp;
 	}
@@ -112,6 +134,12 @@ public class BoardVO {
 	}
 	public void setUpdatedt(Date updatedt) {
 		this.updatedt = updatedt;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

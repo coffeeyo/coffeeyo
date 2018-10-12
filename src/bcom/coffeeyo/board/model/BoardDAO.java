@@ -23,6 +23,115 @@ public class BoardDAO
 	}
 	
 	//함수 추가
+	
+	//댓글 삭제하기
+	public void deleteComment(int reNo, int oriNo) {
+		
+	}
+	//댓글 수정하기
+	public void updateComment(int reNo, int oriNo, String comm) {
+		String sql=BoardSql.getSQL(BoardSql.UPDATE_COMMENT);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		try {
+			stmt.setString(1, comm);
+			stmt.setInt(2, reNo);
+			stmt.setInt(3, oriNo);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("댓글 수정 중 오류발생");
+		}
+		db.close(stmt);
+	}
+	
+	//게시글 삭제하기
+	public void deleteBoard(int oriNo) {
+		String sql=BoardSql.getSQL(BoardSql.DELETE_BOARD);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		try {
+			stmt.setInt(1, oriNo);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시글 status=2(안보이게) 처리중 에러발생="+e);
+		}
+		db.close(stmt);
+	}
+	
+	//게시글 수정하기
+	public void updateBoard(int test, int oriNo, BoardVO vo) {
+		String sql="";
+		PreparedStatement stmt=null;
+		if(test==1) {//파일선택시
+			sql=BoardSql.getSQL(BoardSql.UPDATE_BOARD);	
+			try {
+				stmt=db.getSTMT(con, sql);
+				stmt.setInt(1, vo.getCidx());
+				stmt.setInt(2, vo.getPidx());
+				stmt.setString(3, vo.getSubject());
+				stmt.setString(4, vo.getComm());
+				stmt.setString(5, vo.getImage());
+				stmt.setInt(6, oriNo);
+				stmt.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("파일선택한 게시글 수정중 오류발생="+e);
+			}
+		}
+		else {//파일선택안할시
+			sql=BoardSql.getSQL(BoardSql.UPDATE_BOARDN);
+			try {
+				stmt=db.getSTMT(con, sql);
+				stmt.setInt(1, vo.getCidx());
+				stmt.setInt(2, vo.getPidx());
+				stmt.setString(3, vo.getSubject());
+				stmt.setString(4, vo.getComm());
+				stmt.setInt(5, oriNo);
+				stmt.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("파일선택안한 게시글 수정중 오류발생="+e);
+			}	
+		}
+		db.close(stmt);
+	}
+	
+	//댓글 불러오기
+	public ArrayList selectComment(int oriNo) {
+		String sql=BoardSql.getSQL(BoardSql.SELECT_COMMENT);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		ArrayList list=new ArrayList();
+		try {
+			stmt.setInt(1, oriNo);
+			ResultSet rs=stmt.executeQuery();
+			while(rs.next()) {
+				BoardVO vo=new BoardVO();
+				vo.setBidx(rs.getInt("BIDX"));
+				vo.setBcidx(rs.getInt("BCIDX"));
+				vo.setUserid(rs.getString("USERID"));
+				vo.setNick(rs.getString("NICK"));
+				vo.setComm(rs.getString("COMM"));
+				vo.setCreatedt(rs.getDate("CREATEDT"));
+				list.add(vo);
+			}
+			db.close(rs);
+		} catch (Exception e) {
+			System.out.println("댓글 불러오는 중 에러발생="+e);
+		}
+		db.close(stmt);
+		return list;
+	}
+	//댓글 작성하기
+	public void insertComment(int bcidx, int oriNo, String userid, String comm) {
+		String sql=BoardSql.getSQL(BoardSql.INSERT_COMMENT);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		try {
+			stmt.setInt(1, bcidx);
+			stmt.setInt(2, oriNo);
+			stmt.setString(3, userid);
+			stmt.setString(4, comm);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("댓글 작성중 에러발생="+e);
+		}
+		db.close(stmt);
+	}
 	//게시물 상세보기
 	public BoardVO selectDetail(int oriNo) {
 		String sql=BoardSql.getSQL(BoardSql.SELECT_DETAIL);
@@ -34,11 +143,14 @@ public class BoardDAO
 			rs=stmt.executeQuery();
 			rs.next();
 			vo.setUserid(rs.getString("USERID"));
+			vo.setPidx(rs.getInt("PIDX"));
+			vo.setCidx(rs.getInt("CIDX"));
 			vo.setCname(rs.getString("CNAME"));
 			vo.setPname(rs.getString("PNAME"));
 			vo.setNick(rs.getString("NICK"));
 			vo.setSubject(rs.getString("SUBJECT"));
 			vo.setComm(rs.getString("COMM"));
+			vo.setImage(rs.getString("IMAGE"));
 			vo.setLikecnt(rs.getInt("LIKECNT"));
 			vo.setReadcnt(rs.getInt("READCNT"));
 			vo.setCreatedt(rs.getDate("CREATEDT"));
@@ -49,6 +161,7 @@ public class BoardDAO
 		db.close(stmt);
 		return vo;
 	}
+
 	//게시판 목록보기
 	public ArrayList selectList(int nowPage, PageUtil pinfo, HashMap<String,Object> listOpt) {
 		String opt = (String)listOpt.get("opt");
@@ -72,7 +185,7 @@ public class BoardDAO
 			System.out.println("제목sql="+sql);
 			stmt=db.getSTMT(con, sql);
 			try {
-				stmt.setString(1, condition);
+				stmt.setString(1, "%"+condition+"%");
 			} catch (Exception e) {
 				System.out.println("제목기준 글목록 조회 중 에러발생="+e);
 			}
@@ -83,7 +196,7 @@ public class BoardDAO
 			System.out.println("내용sql="+sql);
 			stmt=db.getSTMT(con, sql);
 			try {
-				stmt.setString(1, condition);
+				stmt.setString(1, "%"+condition+"%");
 			} catch (Exception e) {
 				System.out.println("내용기준 글목록 조회 중 에러발생="+e);
 			}
@@ -94,8 +207,8 @@ public class BoardDAO
 			System.out.println("제목+내용sql="+sql);
 			stmt=db.getSTMT(con, sql);
 			try {
-				stmt.setString(1, condition);
-				stmt.setString(2, condition);
+				stmt.setString(1, "%"+condition+"%");
+				stmt.setString(2, "%"+condition+"%");
 			} catch (Exception e) {
 				System.out.println("제목 및 내용기준 글목록 조회 중 에러발생="+e);
 			}
@@ -106,7 +219,7 @@ public class BoardDAO
 			System.out.println("닉네임sql="+sql);
 			stmt=db.getSTMT(con, sql);
 			try {
-				stmt.setString(1, condition);
+				stmt.setString(1, "%"+condition+"%");
 			} catch (Exception e) {
 				System.out.println("닉네임기준 글목록 조회 중 에러발생="+e);
 			}
@@ -175,32 +288,32 @@ public class BoardDAO
 			}
 			//제목으로 검색한 글의 개수 구하기
 			else if(opt.equals("0")) {
-				sql="select count(*) as cnt from BOARD where SUBJECT like ?";
+				sql="select count(*) as cnt from BOARD where SUBJECT like ? and status=1";
 				pstmt=db.getSTMT(con, sql);
 				pstmt.setString(1, '%'+condition+'%');
 			}
 			//내용으로 검색한 글의 개수 구하기
 			else if(opt.equals("1")) {
-				sql="select count(*) as cnt from BOARD where COMM like ?";
+				sql="select count(*) as cnt from BOARD where COMM like ? and status=1";
 				pstmt=db.getSTMT(con, sql);
 				pstmt.setString(1, '%'+condition+'%');
 			}
 			//제목+내용으로 검색한 글의 개수 구하기
 			else if(opt.equals("2")) {
-				sql="select count(*) as cnt from BOARD where SUBJECT like ? or COMM like ?";
+				sql="select count(*) as cnt from BOARD where (SUBJECT like ? or COMM like ?)  and status=1";
 				pstmt=db.getSTMT(con, sql);
 				pstmt.setString(1, '%'+condition+'%');
 				pstmt.setString(2, '%'+condition+'%');
 			}
 			//닉네임으로 검색한 글의 개수 구하기
 			else if(opt.equals("3")) {
-				sql="select count(*) as cnt from BOARD b, member m where b.userid=m.userid and m.nick like ?";
+				sql="select count(*) as cnt from BOARD b, member m where b.userid=m.userid and m.nick like ? and b.status=1";
 				pstmt=db.getSTMT(con, sql);
 				pstmt.setString(1, '%'+condition+'%');
 			}
 			//내글보기로 검색한 글의 개수 구하기
 			else if(opt.equals("4")) {
-				sql="select count(*) as cnt from BOARD where userid=?";
+				sql="select count(*) as cnt from BOARD where userid=? and status=1";
 				pstmt=db.getSTMT(con, sql);
 				pstmt.setString(1, condition);
 			}
@@ -356,6 +469,22 @@ public class BoardDAO
 		return result;
 	}
 	
+	//댓글번호 시퀀스 값 가져오기
+	public int getCSeq() {
+		int result=1;
+		String sql="SELECT BOARDCOMM_SEQ.NEXTVAL FROM DUAL";
+		Statement stmt=db.getSTMT(con);
+		try {
+			ResultSet rs=stmt.executeQuery(sql);
+			rs.next();
+			result=rs.getInt(1);
+			db.close(rs);
+		} catch (SQLException e) {
+			System.out.println("시퀀스 값 가져오는 중 발생한 에러="+e);
+		}
+		db.close(stmt);
+		return result;
+	}	
 	//게시글 작성하기
 	public void insertBoard(BoardVO vo) {
 		String sql=BoardSql.getSQL(BoardSql.INSERT_BOARD);
