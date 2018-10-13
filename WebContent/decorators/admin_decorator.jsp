@@ -54,7 +54,7 @@
 	              					or conPath eq '/admin/productUpdateProcAction.y'}">class="active"</c:if>><a href="../admin/productListAction.yo">상품관리</a></li>
 	              <li <c:if test="${conPath eq '/admin/orderManage.yo'}">class="active"</c:if>><a href="../admin/orderHistoryListAction.yo">주문관리</a></li>
 	              <li <c:if test="${conPath eq '/admin/memberListAction.yo'}">class="active"</c:if>><a href="/admin/memberListAction.yo">회원관리</a></li>
-	              <li <c:if test="${conPath eq '/admin/boardBoardList.yo'}">class="active"</c:if>><a href="/admin/boardBoardList.yo">커뮤니티관리</a></li>
+	              <li <c:if test="${conPath eq '/admin/boardBoardList.yo'}">class="active"</c:if>><a href="../admin/boardBoardList.yo">커뮤니티관리</a></li>
 	              <li><a href="/">홈페이지</a></li>
 	              <li><a href="/member/logOutAction.yo">로그아웃</a></li>
 	            </ul>
