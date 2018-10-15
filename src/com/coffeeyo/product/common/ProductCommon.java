@@ -142,9 +142,8 @@ public class ProductCommon {
 		ProductCommDao commentDAO = ProductCommDao.getInstance();
 		// 현재 페이지 번호 만들기
 		int spg = 1;
-		String pNum = request.getParameter("pNum");
-		
-		if(pNum != null && !pNum.equals(""))	spg = Integer.parseInt(pNum);
+				
+		if(pageNum != null && !pageNum.equals(""))	spg = Integer.parseInt(pageNum);
 		
 		// 한 화면에 10개의 게시글을 보여지게함
 		// 페이지 번호는 총 5개, 이후로는 [다음]으로 표시

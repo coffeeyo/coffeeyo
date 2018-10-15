@@ -83,7 +83,7 @@ li{float:left;padding:10px;}
 					<li>
 						<div class="result">
 							<c:if test="${pdlist.image ne null}">
-								<a href="../product/productDetailAction.yo?pid=${pdlist.pidx}&cid=${pdlist.cidx}">
+								<a href="../product/productDetailAction.yo?pid=${pdlist.pidx}&cid=${pdlist.cidx}&pageNum=${spage}">
 								<img src="../view/upload/product/${pdlist.image}" border="0" title="${po.pname}" alt="${po.pname}" width="230px" height="230px" />
 								</a>
 							</c:if>

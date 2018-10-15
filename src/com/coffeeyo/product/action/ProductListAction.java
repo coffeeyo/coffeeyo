@@ -26,6 +26,8 @@ public class ProductListAction implements Action{
 		String pageNum = request.getParameter("pageNum");
 		
 		if(pageNum != null && !pageNum.equals(""))	spage = Integer.parseInt(pageNum);
+	
+		
 		
 		// 검색조건과 검색내용을 가져온다.
 		String opt = request.getParameter("opt");
@@ -55,7 +57,7 @@ public class ProductListAction implements Action{
 		prodList = dao.memProductList(listOpt);
 		
 						
-		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("spage", spage);
 		request.setAttribute("listCount", listCount);	
 		request.setAttribute("cateList", cateList);
 		request.setAttribute("prodList", prodList);

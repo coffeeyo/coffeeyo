@@ -78,7 +78,7 @@
 				}
 			});
 		}
-	}*/
+	}
 	
 	
 	// 댓글 삭제창
@@ -151,16 +151,28 @@
 	
 	function prodComm(pNum) {
 		
-	}
-	
+	}*/
+
+	//장바구니 담기 함수
 	function addCart() {
 		var direct = 'N';
-		var num = $('#num').val();
-		var sum = $('#sum_price').val();
-		var amt = $('#amt').val();
-		var opt = $('#opt').val();
-        
-        var param = 'num='+num+'&amt='+amt+'&sum_price='+sum+'&opt'+opt+'&direct='+direct;
+		var pdNum = $('#pdNum').val();
+		var price = $("#basicPrice").val();
+		//수량 옵션 값
+		var pdCount=$("#pdCount").val();
+		//컵사이즈 옵션 값
+		var cupSize = document.getElementById("cupSize");	
+		var cupSizeVal= cupSize.options[cupSize.selectedIndex].value;
+		//시럽 옵션 값	
+		var syrub = document.getElementById("syrubAdd");	
+		var syrubVal= syrub.options[syrub.selectedIndex].value;
+		//얼음 옵션 값	
+		var ice = document.getElementById("iceAdd");	
+		var iceVal= ice.options[ice.selectedIndex].value;
+		//샷 옵션 값
+		var shotCount=$("#shotAdd").val();
+		//alert("pdNum="+pdNum+"&pdCount="+pdCount+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount);
+        var param = "pdNum="+pdNum+"&pdCount="+pdCount+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount;
         //alert(param);
         //return;
         $.ajax({
@@ -186,15 +198,28 @@
 		
 		return;
 	}
-	
+	//바로구매 함수
 	function direcBuy() {		
 		var direct = 'Y';
-		var num = $('#num').val();
-		var sum = $('#sum_price').val();
-		var amt = $('#amt').val();
-		var opt = $('#opt').val();
+		var pdNum = $('#pdNum').val();
+		var price = $("#basicPrice").val();
+		//수량 옵션 값
+		var pdCount=$("#pdCount").val();
+		//컵사이즈 옵션 값
+		var cupSize = document.getElementById("cupSize");	
+		var cupSizeVal= cupSize.options[cupSize.selectedIndex].value;
+		//시럽 옵션 값	
+		var syrub = document.getElementById("syrubAdd");	
+		var syrubVal= syrub.options[syrub.selectedIndex].value;
+		//얼음 옵션 값	
+		var ice = document.getElementById("iceAdd");	
+		var iceVal= ice.options[ice.selectedIndex].value;
+		//샷 옵션 값
+		var shotCount=$("#shotAdd").val();
+		
+		//alert("pdCount="+pdCount+"price="+price+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount);
         
-        var param = 'num='+num+'&amt='+amt+'&sum_price='+sum+'&opt'+opt+'&direct='+direct;
+        var param = "pdNum="+pdNum+"&pdCount="+pdCount+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount;
         //alert(param);
         //return;
         $.ajax({
@@ -217,13 +242,116 @@
 			error:function(){
 			}
 		});
-		
+
+   	
 		return;
 	}
+
+	function sumPrice() {
+		//기본가격 값
+		var basicPrice=${po.price};
+		numBasicPrice = parseInt(basicPrice); 
+		
+		//수량 옵션 값
+		var pdCount=$("#pdCount").val();
+		var numPdCn=parseInt(pdCount);
+		
+		//컵사이즈 옵션 값
+		var cupSize = document.getElementById("cupSize");	
+		var cupSizeVal= cupSize.options[cupSize.selectedIndex].value;
+		
+		if(cupSizeVal=="medium"){
+			cupSizeVal=0;
+		}
+		else if(cupSizeVal=="large"){
+			cupSizeVal=500;
+		}
+		else if(cupSizeVal=="Grande"){
+			cupSizeVal=1000;
+		}
+	
+		//시럽 옵션 값	
+		var syrubAdd = document.getElementById("syrubAdd");	
+		var syrubVal= syrubAdd.options[syrubAdd.selectedIndex].value;
+		if(syrubVal=="basic"){
+			syrubVal=0;
+		}
+		else{
+			syrubVal=500;
+		}
+		//얼음 옵션 값	
+		var ice = document.getElementById("iceAdd");	
+		var iceVal= ice.options[ice.selectedIndex].value;
+		if(iceVal=="hot"){
+			iceVal=0;
+		}
+		else{
+			iceVal=600;
+		}
+				
+		//샷 옵션 값
+		var shotCount=$("#shotAdd").val();
+		var numShCn=parseInt(shotCount)*600;
+		var priceSum=numBasicPrice*numPdCn+cupSizeVal+syrubVal+iceVal+numShCn;
+		$("#priceSum").attr("value",priceSum);
+		
+	}	
+
+//옵션에 대한 기능 
+ $(function(){
+	 $("#plusPd").click(function(){
+		 var pdCount=$("#pdCount").attr("value");
+		 if(pdCount==10){
+			 alert("수량은 10개 까지 추가할 수 있습니다.");
+			 $("#pdCount").attr("value",10);
+		 }
+		 else{
+			 var num_count=parseInt(pdCount)+1;
+			 $("#pdCount").attr("value",num_count);
+		 }
+	 });
+	 $("#minusPd").click(function(){
+		 var pdCount=$("#pdCount").attr("value");
+		 if(pdCount==1){
+			 $("#pdCount").attr("value",1);
+		 }
+		 else{
+			 var num_count=parseInt(pdCount)-1;
+			 $("#pdCount").attr("value",num_count);
+		 }
+	 });
+	 	 
+	 $("#plusShot").click(function(){
+		 var shotplus=$("#shotAdd").attr("value");
+		 if(shotplus==4){
+			 alert("Shot은 4번까지 추가할 수 있습니다.");
+			 $("#shotAdd").attr("value",4);
+		 }
+		 else{
+			 var numshot=parseInt(shotplus)+1;
+			 $("#shotAdd").attr("value",numshot)
+		 }
+	 });
+	
+	 $("#minusShot").click(function(){
+		 var shotplus=$("#shotAdd").attr("value");
+		 if(shotplus==0){
+				$("#shotAdd").attr("value",0);
+		 }
+		 else{
+			 var numshot=parseInt(shotplus)-1;
+			 $("#shotAdd").attr("value",numshot);
+		 }
+
+	 });
+	
+});
+
+
+	
 </script>
 </head>
 <body>
-<!-- 상품 -->
 <div class="top_title" >
 		<p>${po.cateName} 상품 주문하기</p>
 </div>
@@ -237,56 +365,59 @@
 				<p id="ptitle">${po.pname}</p>
 				<p>기본가격:&nbsp;&nbsp;<span id="price">${po.price} 원</span></p>
 				
-				<p> 수량: <input type="button" name="minus_btn" id="minus_btn" value="-" />
-                           	<input type="text" name="count" id="pd_count" size="3" value="1"/>
-                            <input type="button" name="plus_btn" id="plus_btn" value="+"/></p>
+				<p> 수량: <input type="button" name="minus_btn" id="minusPd" value="-" />
+                           	<input type="text" name="count" id="pdCount" size="3" value="1" readonly />
+                            <input type="button" name="plus_btn" id="plusPd" value="+" /></p>
 				<br/>
 			
 					<div class="in_subcontent">
 						<p>옵션 선택</p>
 							<ul>
                                 <li class="cup"><p>
-                                        컵사이즈: <select name="cup_size" class="select">
+                                        컵사이즈: <select name="cup_size" class="select" id="cupSize" >
                                         				<option value="medium">Medium</option>	<%--기본사이즈 --%>	
                                         				<option value="large">Large</option>			<%--+500원 --%>
-                                        				<option value="Grande	">Grande</option>		<%--+1000원 --%>
+                                        				<option value="Grande">Grande</option>		<%--+1000원 --%>
                                         			</select></p>
+                                        			
                                   </li>
                                   <li class="syrup">
                                   		<p>시럽추가: 
-                                        			<select name="syrub_add" class="select">
+                                        			<select name="syrub_add" class="select" id="syrubAdd">
                                         				<option value="basic">시럽없음</option>					<%--기본시럽 --%>
                                         				<option value="vanilla">바닐라 시럽</option>			<%--+500원 --%>
                                         				<option value="Hazelnut">헤이즐넛 시럽</option>		<%--+500원 --%>
                                         				<option value="Caramel">캬라멜 시럽</option>			<%--+500원 --%>
-                                        			</select>                                                          
-                                        			</p>
+                                        			</select></p>
                                   </li>
-                                  <li class="shot">
-                                  <p>샷추가: <input type="button" name="minus_btn" id="minus_btn" value="-"/>
-                                                <input type="text" name="shot_add" id="count_box" size="3"  value="0"/>
-                                                <input type="button" name="plus_btn" id="plus_btn" value="+"/></p>
-                                  </li> 
-                                   <li class="ice">
-                                   		<p>얼음: <select name="ice_add" class="select">
+                                  <li class="ice">
+                                   		<p>얼음: <select name="ice_add" class="select" id="iceAdd">
                                         				<option value="hot">HOT</option>				<%--기본사이즈 --%>	
                                         				<option value="usually">보통</option>			<%--600원 --%>	
                                         				<option value="less">적게</option>				<%--600원 --%>	
                                         				<option value="more">많게</option>				<%--600원 --%>		
                                         			</select></p>
-                                  </li>         	
-                                                
+                                  </li>   
+                                  <li class="shot">
+                                  <p>샷추가: <input type="button" name="minus_btn" id="minusShot" value="-" />
+                                                <input type="text" name="shot_add" id="shotAdd" size="3" value="0" readonly/>
+                                                <input type="button" name="plus_btn" id="plusShot" value="+" /></p>
+                                  </li>       	
+                                  
                            </ul>
+                           <input type="hidden" id="pdNum" value="${po.pidx}"/>  
+                                     
                     </div>
    
             <div class="in_subcontent" id="sum">
-				총합계: <span id="price_sum" >${po.price} 원</span>
+				총합계: <input type="text" id="priceSum" value="${po.price}" style="text-align:right" readonly/>  원
 			</div>
 		</div>
 	</div>
 	<div class="in_subcontent" id="page_action">
-		<input type="button" name="cart" id="cart" value="장바구니 담기" onclick="addCart()"/>
-		<input type="button" name="buy" id="buy" value="바로구매" onclick="direcBuy()"/>
+		<input type="button" name="cart" id="cartBtn" value="장바구니 담기" onclick="addCart();"/>
+		<input type="button" name="buy" id="buyBtn" value="바로구매" onclick="direcBuy();"/>
+		<input type="button" name="buy" id="sumBtn" value="합계" onclick="sumPrice();"/>
 	</div>	
 	
 	<div class="Reviews">
