@@ -75,8 +75,8 @@ public class BoardVO {
 	}
 	public String getShortSubject() {
 		String temp=subject;
-		if(subject.length()>10) {			
-			temp=subject.substring(0,10)+"...";
+		if(subject.length()>15) {			
+			temp=subject.substring(0,15)+"...";
 		}
 		return temp;
 	}

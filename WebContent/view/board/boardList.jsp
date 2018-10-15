@@ -11,11 +11,49 @@
 		border-collapse:collapse;
 	}
 	th {
-		background-color:lightblue;
+		border-bottom:1px solid #7C5D44;
+		background-color:#7C5D44;
+		font-weight:lighter;
+		color:white;
+		text-align:center;
 	}
 	td {
 		text-align:center;
 	}
+	.style1 tr {
+		border-bottom:1px solid #EFE4B0;
+	}
+	.style1 tr:hover { 
+		background-color: #EFE4B0; 
+	} 
+	h3 {
+		color:#7C5D44;
+	}
+	a {
+		color:black;
+	}
+	a:hover {
+		font-weight:bold;
+		color:#7C5D44;
+	}
+	.button {
+    width:80px;
+    background-color: #7C5D44;
+    border: none;
+    color:white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius:5px;
+	}
+	.button:hover {
+	    background-color: #EFE4B0;
+	    color:black;
+	}
+	
 </style>
 <script>
 	function WriteForm(){
@@ -34,11 +72,16 @@
 </script>
 </head>
 <body>
-<h1>게시판 목록</h1>
-게시물 개수 : ${COUNT}
+<table align="center" width="70%">
+	<tr>
+		<td>
+			<h3 align="left">게시판 목록</h3><h5 align="left">게시물 개수 : ${COUNT}</h5>
+		</td>
+	</tr>
+</table>
 <%-- 검색부분 --%>
 <form action="../board/boardBoardList.yo" method="post">
-	<table border="1" align="center" width="600">
+	<table border="1" align="center" width="70%"  height="50px">
 		<tr>
 			<td>
 				<select id="opt" name="opt">
@@ -48,40 +91,45 @@
 					<option value="3">글쓴이</option>
 					<!-- 내글보기는 <option value="4">의 기능을 가짐-->
 				</select>
-				<input type="text" size="20"  id="condition"  name="condition"/>&nbsp;
-				<input type="submit" value="검색"/>&nbsp;
-				<input type="button" value="전체보기" onclick="AllList()"/>
+				&nbsp;
+				<input type="text" size="20"  id="condition"  name="condition"/>
+				&nbsp;
+				<input type="submit" value="검색" class="button"/>
+				&nbsp;
+				<input type="button" value="전체보기" onclick="AllList()" class="button"/>
 				<c:if test="${not empty sessionScope.userid}">
-				<input type="button" value="내글보기" onclick="MyList()"/>
+				&nbsp;
+				<input type="button" value="내글보기" onclick="MyList()" class="button"/>
 				</c:if>
 			</td>
 		</tr>
 	</table>
 </form>	
+<br>
 <%-- 1. 목록을 출력 --%>
 <%-- 목록보기에서 필요한 다른 기능(글쓰기)을 처리하도록 한다 --%>
-	<table align="center" width="600">
+	<table align="center" width="70%">
 		<tr>
 			<td style="text-align:right;">
-				<input type="button" id="wbtn" value="글쓰기" onclick="WriteForm()">
+				<input type="button" id="wbtn" value="글쓰기" onclick="WriteForm()" class="button"/>
 			</td>
 		</tr>
 	</table>
 <%-- 4번 방식으로 넘어온 모델을 꺼내보자 --%>
-	<table border="1" align="center" width="600">
-		<tr>
-			<th>글번호</th>
-			<th>상품명</th>
-			<th>닉네임</th>
-			<th>제목</th>
-			<th>조회수</th>
-			<th>추천수</th>
-			<th>작성일</th>
+	<table align="center" width="70%" class="style1">
+		<tr height="30px">
+			<th width="10%">글번호</th>
+			<th width="25%">상품명</th>
+			<th width="15%">닉네임</th>
+			<th width="25%">제목</th>
+			<th width="5%">조회수</th>
+			<th width="5%">추천수</th>
+			<th width="15%">작성일</th>
 		</tr> 
 		<c:forEach var="data" items="${LIST}">
-			<tr>
+			<tr height="30px">
 				<c:if test="${data.notiyn eq 'Y' }">
-					<td>공지사항</td>
+					<td><b>공지사항</b></td>
 				</c:if>
 				<c:if test="${data.notiyn eq 'N' }">
 					<td>${data.bidx}</td>
@@ -94,10 +142,10 @@
 				<td>${data.createdt}</td>
 			</tr>
 		</c:forEach>
-		
 	</table>
+<br>
 <%-- 2. 페이지 이동 기능을 추가  [이전][1][2][3][다음]--%>
-	<table border="1" align="center" width="600">	
+	<table align="center" width="70%">	
 		
 		<tr>
 			<td>
