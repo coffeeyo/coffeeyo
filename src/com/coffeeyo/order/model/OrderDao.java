@@ -595,6 +595,54 @@ public class OrderDao {
 		public int getOrderCount(HashMap<String, Object> listOpt) {
 			String startDay = (String)listOpt.get("startDay");
 			String endDay = (String)listOpt.get("endDay");
+			String userId = (String)listOpt.get("userId");
+			
+			int count = 0;
+			try {
+				conn = DBConnection.getConnection();
+				StringBuffer sql = new StringBuffer();
+				
+				sql.append("SELECT	");
+				sql.append(" NVL(count(*),0) as cnt ");
+				sql.append("FROM ORDERS ");
+				sql.append("WHERE  ");
+				sql.append(" userid = ?  ");
+				
+				if(startDay != null && endDay != null) {
+					sql.append("AND TO_CHAR(ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ? ");
+				}
+				
+				pstmt = DBConnection.getPstmt(conn, sql.toString());
+				System.out.println("getCountStatus(Order order)ÀÇ pstmt = "+pstmt);
+				
+				pstmt.setString(1, userId);
+				
+				if(startDay != null && endDay != null) {
+					pstmt.setString(2, startDay);
+					pstmt.setString(3, endDay);
+				}
+				sql.delete(0, sql.toString().length());
+				
+				rs = pstmt.executeQuery();
+				
+				rs.next();
+				count=rs.getInt("cnt");
+				
+				DBConnection.close(rs);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e.getMessage());
+			} finally {
+				DBConnection.close(pstmt);
+				DBConnection.close(conn);
+			}
+			return count;
+		}
+		
+		public int getOrderAdmCount(HashMap<String, Object> listOpt) {
+			String startDay = (String)listOpt.get("startDay");
+			String endDay = (String)listOpt.get("endDay");
 			
 			int count = 0;
 			try {
@@ -607,11 +655,12 @@ public class OrderDao {
 				
 				if(startDay != null && endDay != null) {
 					sql.append("WHERE  ");
-					sql.append("TO_CHAR(ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ?");
+					sql.append("TO_CHAR(ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ? ");
 				}
 				
 				pstmt = DBConnection.getPstmt(conn, sql.toString());
 				System.out.println("getCountStatus(Order order)ÀÇ pstmt = "+pstmt);
+								
 				if(startDay != null && endDay != null) {
 					pstmt.setString(1, startDay);
 					pstmt.setString(2, endDay);

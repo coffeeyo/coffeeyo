@@ -75,7 +75,7 @@ public class OrderHistoryListAdmAction implements Action {
 
 		OrderDao dao = OrderDao.getInstance();
 		
-		int listCount = dao.getOrderCount(listOpt);
+		int listCount = dao.getOrderAdmCount(listOpt);
 		
 		Order ord = new Order();
 		
