@@ -14,7 +14,7 @@
 		td, th{padding:5px 10px;}
 		.top_title{width:1000px; margin:auto; font-size: 30px; font-weight: bold;}
 		.top_tab{border: 1px solid gray; border-collapse:collapse; width:1000px; margin:auto;}
-		.firstrow{text-align:center;background-color:lightgray;font-weight:bold;border: 1px solid gray;}
+		.firstrow{text-align:center;background-color:#af9885f5;font-weight:bold; border: 1px solid gray;}
 		.contentrow{text-align:center;valign:middle;height:30px;border: 1px solid gray;}
 		.top_b{text-align:right;width:1000px; margin:auto;margin-top:10px;}
 		.lname{font-weight:bold; padding-right:10px; padding-left:20px;}
@@ -125,13 +125,13 @@
 					<c:if test="${member.status eq 2}">탈퇴</c:if>
 				</td>
 				<td>
-					<input type="button" id="memModify" value="수정" onclick="memModify('${member.userid}');" />
+					<input type="button" id="memModify" value="수정" class="btn btn-success" onclick="memModify('${member.userid}');" />
 					<c:if test="${member.ulevel ne '10'}">
 						<c:if test="${member.status eq 1}">
-							<input type="button" id="memLeave" value="탈퇴" onclick="memLeave('${member.userid}');"/>
+							<input type="button" id="memLeave" value="탈퇴" class="btn btn-danger" onclick="memLeave('${member.userid}');"/>
 						</c:if>
 						<c:if test="${member.status eq 2}">
-							<input type="button" id="memLeave" value="복원" onclick="memRestore('${member.userid}');"/>
+							<input type="button" id="memLeave" value="복원" class="btn btn-success"  onclick="memRestore('${member.userid}');"/>
 						</c:if>
 					</c:if>
 				 </td>

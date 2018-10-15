@@ -9,7 +9,7 @@
 		td, th{padding:5px 10px; border:1px solid gray;}
 		.inner_tr {border:1px solid gray;}
 		.inner_tb {margin:auto;width:1000px;}
-		.item_col {background:lightgray; font-weight:bold; text-align:center;}
+		.item_col {background-color:#af9885f5; font-weight:bold; text-align:center;}
 	</style>
 
 	<script type="text/javascript">
@@ -125,8 +125,8 @@
 	<form method="post" action="/member/joinProcAction.yo" 
 			name="userInfo" onsubmit="return checkValue()">
 		<table class="inner_tb">
-			<tr>
-				<td class="inner_tr">아이디</td>
+			<tr class="inner_tr">
+				<td class="item_col">아이디</td>
 				<td>
 					<input type="text" name="userid" maxlength="50" onkeydown="inputIdChk()">
 					<input type="button" value="중복확인" class="btn btn-info"  onclick="openIdChk()">	
@@ -134,29 +134,29 @@
 				</td>
 			</tr>
 					
-			<tr>
-				<td id="title">비밀번호</td>
+			<tr class="inner_tr">
+				<td class="item_col">비밀번호</td>
 				<td>
 					<input type="password" name="passwd" maxlength="50">
 				</td>
 			</tr>
 			
-			<tr>
-				<td id="title">비밀번호 확인</td>
+			<tr class="inner_tr">
+				<td class="item_col">비밀번호 확인</td>
 				<td>
 					<input type="password" name="passwordcheck" maxlength="50">
 				</td>
 			</tr>
 				
-			<tr>
-				<td id="title">이름</td>
+			<tr class="inner_tr">
+				<td class="item_col">이름</td>
 				<td>
 					<input type="text" name="uname" maxlength="50">
 				</td>
 			</tr>
 			
-			<tr>
-				<td id="title">닉네임</td>
+			<tr class="inner_tr">
+				<td class="item_col">닉네임</td>
 				<td>
 					<input type="text" name="nick" maxlength="50" onkeydown="inputNickChk()">
 					<input type="button" value="중복확인" class="btn btn-info"  onclick="openNickChk()">	
@@ -164,16 +164,16 @@
 				</td>
 			</tr>
 				
-			<tr>
-				<td id="title">성별</td>
+			<tr class="inner_tr">
+				<td class="item_col">성별</td>
 				<td>
 					<input type="radio" name="gender" value="1" checked>남
 					<input type="radio" name="gender" value="2" >여
 				</td>
 			</tr>
 				
-			<tr>
-				<td id="title">휴대전화</td>
+			<tr class="inner_tr">
+				<td class="item_col">휴대전화</td>
 				<td>
 					<input type="text" name="hp"/>
 				</td>

@@ -14,7 +14,7 @@
 		td, th{padding:5px 10px; border:1px solid gray;}
 		.inner_tr {border:1px solid gray;}
 		.inner_tb {margin:auto;width:1000px;}
-		.item_col {background:lightgray; font-weight:bold; text-align:center;}
+		.item_col {background-color:#af9885f5; font-weight:bold; text-align:center;}
 	</style>
 	
 	<script type="text/javascript">
@@ -58,53 +58,53 @@
 	<input type="hidden" name="nowPage" value="${nowPage}"/>
 		<table class="inner_tb">
 			<tr class="inner_tr">
-				<td id="item_col">아이디</td>
+				<td class="item_col">아이디</td>
 				<td>${member.userid}</td>
 			</tr>
-			<tr>
-				<td id="item_col">비밀번호</td>
+			<tr class="inner_tr">
+				<td class="item_col">비밀번호</td>
 				<td>
 					<input type="password" id="passwd"  name="passwd" maxlength="50" />
 				</td>
 			</tr>
-			<tr>
-				<td id="item_col">비밀번호 확인</td>
+			<tr class="inner_tr">
+				<td class="item_col">비밀번호 확인</td>
 				<td>
 					<input type="password" id="passwdChk"  name="passwdChk" maxlength="50" />
 				</td>
 			</tr>
 
-			<tr>
-				<td id="item_col">이름</td>
+			<tr class="inner_tr">
+				<td class="item_col">이름</td>
 				<td>${member.uname}</td>
 			</tr>
 			
-			<tr>
-				<td id="item_col">닉네임</td>
+			<tr class="inner_tr">
+				<td class="item_col">닉네임</td>
 				<td>${member.nick}</td>
 			</tr>
-			<tr>
-				<td id="item_col">핸드폰번호</td>
+			<tr class="inner_tr">
+				<td class="item_col">핸드폰번호</td>
 				<td>
 					<input type="text" name="hp" value="${member.hp}"/>
 				</td>
 			</tr>
-			<tr>
-				<td id="item_col">성별</td>
+			<tr class="inner_tr">
+				<td class="item_col">성별</td>
 				<td>
 				<input type="radio" name="gender" value="1" <c:if test="${member.gender eq 1}">checked</c:if> />남자&nbsp;&nbsp;
 				<input type="radio" name="gender" value="2" <c:if test="${member.gender eq 2}">checked</c:if> />여자
 				</td>
 			</tr>
 			
-			<tr>
-				<td id="item_col">생년월일</td>
+			<tr class="inner_tr">
+				<td class="item_col">생년월일</td>
 				<td>
 					<input type="date" name="birthday" value="${member.birthday}"/>
 				</td>
 			</tr>
-			<tr>
-				<td id="item_col">직업</td>
+			<tr class="inner_tr">
+				<td class="item_col">직업</td>
 				<td>
 					<select name="job">
 						<option value="0" <c:if test="${member.job eq 0}">selected</c:if>>선택</option>
@@ -116,8 +116,8 @@
 				
 				</td>
 			</tr>
-			<tr>
-				<td id="item_col">등급</td>
+			<tr class="inner_tr">
+				<td class="item_col">등급</td>
 				<td>
 					<select name="ulevel">
 						<c:if test="${member.ulevel ne 10}">
@@ -127,8 +127,8 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td id="item_col">상태</td>
+			<tr class="inner_tr">
+				<td class="item_col">상태</td>
 				<td>
 					<select name="status">
 						<option value="1" <c:if test="${member.status eq 1}">selected</c:if>>정상</option>
@@ -138,8 +138,8 @@
 			</tr>
 			<tr align="center" valign="middle" >
 				<td colspan="2" >
-					<input type="button" id="btnUpdate" value="저장"/>  
-					<input type="button" id="btnList" value="목록" />
+					<input type="button" id="btnUpdate" value="저장" class="btn btn-success" />  
+					<input type="button" id="btnList" value="목록" class="btn btn-default" />
 				</td>
 			</tr>
 		</table>
