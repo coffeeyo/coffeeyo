@@ -13,14 +13,14 @@
 		td, th{padding:5px 10px; border:1px solid gray;}
 		.inner_tr {border:1px solid gray;}
 		.inner_tb {margin:auto;width:1000px;}
-		.item_col {background:lightgray; font-weight:bold; text-align:center;}
+		.item_col {background:#af9885f5; width: 30%;font-weight:bold; text-align:center;}
 	</style>
 	
 	<script type="text/javascript">
 	
 		function changeForm(val){
 			if(val == "-1"){
-				location.href="/";
+				history.back();
 			}else if(val == "0"){
 				location.href="../member/memberUpdateFormAction.yo";
 			}else if(val == "1"){
@@ -42,43 +42,43 @@
 	
 	<!-- 가져온 회원정보를 출력한다. -->
 	<table border="1" class="inner_tb">
-		<tr>
-			<td id="item_col">아이디</td>
+		<tr class="inner_tr">
+			<td class="item_col">아이디</td>
 			<td>${member.userid}</td>
 		</tr>
 					
-		<tr>
-			<td id="item_col">비밀번호</td>
+		<tr class="inner_tr">
+			<td class="item_col">비밀번호</td>
 			<td>${member.passwd}</td>
 		</tr>
 				
-		<tr>
-			<td id="item_col">성명</td>
+		<tr class="inner_tr">
+			<td class="item_col">성명</td>
 			<td>${member.uname}</td>
 		</tr>
-		<tr>
-			<td id="item_col">닉네임</td>
+		<tr class="inner_tr">
+			<td class="item_col">닉네임</td>
 			<td>${member.nick}</td>
 		</tr>
-		<tr>
-			<td id="item_col">핸드폰번호</td>
+		<tr class="inner_tr">
+			<td class="item_col">핸드폰번호</td>
 			<td>${member.hp}</td>
 		</tr>
-		<tr>
-			<td id="item_col">성별</td>
+		<tr class="inner_tr">
+			<td class="item_col">성별</td>
 			<td>
 				<input type="radio" name="gender" value="1" <c:if test="${member.gender eq 1}">checked</c:if> />남자&nbsp;&nbsp;
 				<input type="radio" name="gender" value="2" <c:if test="${member.gender eq 2}">checked</c:if> />여자
 			</td>
 		</tr>
-		<tr>
-			<td id="item_col">생년월일</td>
+		<tr class="inner_tr">
+			<td class="item_col">생년월일</td>
 			<td>
 				${member.birthday}
 			</td>
 		</tr>
-		<tr>
-			<td id="item_col">직업</td>
+		<tr class="inner_tr">
+			<td class="item_col">직업</td>
 			<td>
 				<select name="job" disabled>
 					<option value="0" <c:if test="${member.job eq 0}">selected</c:if>>선택</option>

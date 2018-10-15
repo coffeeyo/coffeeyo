@@ -14,7 +14,7 @@
 		td, th{padding:5px 10px; border:1px solid gray;}
 		.inner_tr {border:1px solid gray;}
 		.inner_tb {margin:auto;width:1000px;}
-		.item_col {background:lightgray; font-weight:bold; text-align:center;}
+		.item_col {background:#af9885f5;width: 30%; font-weight:bold; text-align:center;}
 	</style>
 	
 	<script type="text/javascript">
@@ -51,50 +51,50 @@
 			
 		<table border="1" class="inner_tb">
 			<tr>
-				<td id="item_col">아이디</td>
+				<td class="item_col">아이디</td>
 				<td>${member.userid}</td>
 			</tr>
 			<tr>
-				<td id="item_col">비밀번호</td>
+				<td class="item_col">비밀번호</td>
 				<td>
 					<input type="password"  id="passwd" name="passwd" maxlength="50" />
 				</td>
 			</tr>
 			<tr>
-				<td id="item_col">비밀번호 확인</td>
+				<td class="item_col">비밀번호 확인</td>
 				<td>
 					<input type="password" id="passwdChk"  name="passwdChk" maxlength="50" />
 				</td>
 			</tr>
 			<tr>
-				<td id="item_col">성명</td>
+				<td class="item_col">성명</td>
 				<td>${member.uname}</td>
 			</tr>
 			<tr>
-				<td id="item_col">닉네임</td>
+				<td class="item_col">닉네임</td>
 				<td>${member.nick}</td>
 			</tr>
 			<tr>
-				<td id="item_col">핸드폰번호</td>
+				<td class="item_col">핸드폰번호</td>
 				<td>
 					<input type="text" name="hp" value="${member.hp}"/>
 				</td>
 			</tr>
 			<tr>
-				<td id="item_col">성별</td>
+				<td class="item_col">성별</td>
 				<td>
 				<input type="radio" name="gender" value="1" <c:if test="${member.gender eq 1}">checked</c:if> />남자&nbsp;&nbsp;
 				<input type="radio" name="gender" value="2" <c:if test="${member.gender eq 2}">checked</c:if> />여자
 				</td>
 			</tr>
 			<tr>
-				<td id="item_col">생년월일</td>
+				<td class="item_col">생년월일</td>
 				<td>
 					<input type="date" name="birthday" value="${member.birthday}"/>
 				</td>
 			</tr>
 			<tr>
-				<td id="item_col">직업</td>
+				<td class="item_col">직업</td>
 				<td>
 					<select name="job">
 						<option value="0" <c:if test="${member.job eq 0}">selected</c:if>>선택</option>
@@ -107,7 +107,7 @@
 			</tr>
 			<tr align="center" valign="middle" >
 				<td colspan="2" >
-					<input type="button" value="취소" class="btn btn-default" onclick="javascript:window.location='/'">
+					<input type="button" value="취소" class="btn btn-default" onclick="javascript:history.back();">
 					<input type="button" id="btnUpdate" value="수정" class="btn btn-success" />  
 				</td>
 			</tr>

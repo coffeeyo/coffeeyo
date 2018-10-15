@@ -18,6 +18,9 @@ body {
  	overflow-x: hidden;
  	background-color:transparent;
 }
+.cartImg {
+	cursor:pointer;
+}
 </style>
 <script>
 	$(function(){
@@ -86,10 +89,7 @@ body {
 				error:function(){
 					result = false;
 				}
-			});
-			
-			
-			
+			});			
 		});
 	});
 	
@@ -133,7 +133,7 @@ body {
 			  <td style="width:204px">
 			    <div class="thumb">
 			        <c:if test="${cart.image ne null}">
-						<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" style="cursor:pointer;"/>
+						<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" class="cartImg" />
 					</c:if>
 			    </div>
 			  </td>

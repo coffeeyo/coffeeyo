@@ -14,7 +14,7 @@
 		td, th{padding:5px 10px;}
 		.top_title{width:1000px; margin:auto; font-size: 30px; font-weight: bold;}
 		.top_tab{border: 1px solid gray; border-collapse:collapse; width:1000px; margin:auto;}
-		.firstrow{text-align:center;background-color:lightgray;font-weight:bold;border: 1px solid gray;}
+		.firstrow{text-align:center;background-color:#af9885f5;font-weight:bold; border: 1px solid gray;}
 		.contentrow{text-align:center;valign:middle;height:30px;border: 1px solid gray;}
 		.top_b{text-align:right;width:1000px; margin:auto;margin-top:10px;}
 		.lname{font-weight:bold; padding-right:10px; padding-left:20px;}
@@ -93,15 +93,15 @@
 	</form>
 	<table class="listup">	
 		<tr class="firstrow">
-			<th>아이디</th>
-			<th>이름</th>
-			<th>성별</th>
-			<th>생년월일</th>
-			<th>연락처</th>
-			<th>가입일</th>
-			<th>등급</th>
-			<th>상태</th>
-			<th>수정/삭제</th>
+			<td>아이디</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>생년월일</td>
+			<td>연락처</td>
+			<td>가입일</td>
+			<td>등급</td>
+			<td>상태</td>
+			<td>수정/삭제</td>
 		</tr>
 
 		<c:forEach var="member" items="${requestScope.memberList}">
@@ -125,13 +125,13 @@
 					<c:if test="${member.status eq 2}">탈퇴</c:if>
 				</td>
 				<td>
-					<input type="button" id="memModify" value="수정" onclick="memModify('${member.userid}');" />
+					<input type="button" id="memModify" value="수정" class="btn btn-success" onclick="memModify('${member.userid}');" />
 					<c:if test="${member.ulevel ne '10'}">
 						<c:if test="${member.status eq 1}">
-							<input type="button" id="memLeave" value="탈퇴" onclick="memLeave('${member.userid}');"/>
+							<input type="button" id="memLeave" value="탈퇴" class="btn btn-danger" onclick="memLeave('${member.userid}');"/>
 						</c:if>
 						<c:if test="${member.status eq 2}">
-							<input type="button" id="memLeave" value="복원" onclick="memRestore('${member.userid}');"/>
+							<input type="button" id="memLeave" value="복원" class="btn btn-success"  onclick="memRestore('${member.userid}');"/>
 						</c:if>
 					</c:if>
 				 </td>
