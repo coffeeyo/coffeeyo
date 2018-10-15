@@ -15,6 +15,6 @@ public class ProductDetailAction implements Action {
 		
 		request = ProductCommon.ProductDetail(request);
 		
-		return "../view/product/productDetail.jsp";
+		return "../view/product/productDetailMem.jsp";
 	}
 }

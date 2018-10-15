@@ -68,7 +68,7 @@ public class ProductUpdateFormAction implements Action {
 			request.setAttribute("num", num);
 			request.setAttribute("pageNum", pageNum);
 
-			return "../view/admin/product/productUpdate.jsp";
+			return "../view/admin/product/productUpdateAdmin.jsp";
 		}
 	}
 }

@@ -23,6 +23,6 @@ public class ProductAddFormAction implements Action {
 		
 		request.setAttribute("cateList", cateList);
 		
-		return "../view/admin/product/productAdd.jsp";
+		return "../view/admin/product/productWrite.jsp";
 	}
 }

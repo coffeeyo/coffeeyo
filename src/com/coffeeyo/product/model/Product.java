@@ -31,6 +31,9 @@ public class Product extends Common {
 	public String getPname() {
 		return pname;
 	}
+	public String getPnameShort() {
+		return pname.substring(0,10)+"...";
+	}
 	public void setPname(String pname) {
 		this.pname = pname;
 	}

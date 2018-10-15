@@ -50,7 +50,7 @@ public class ProductCommon {
 		
 		ProductDao dao = ProductDao.getInstance();
 		int listCount = dao.getProductListCount(listOpt);
-		
+	
 		CategoryDao cateDao = CategoryDao.getInstance();
 		List<Category> cateList = null;
 		cateList = cateDao.getAllCategory();
