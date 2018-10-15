@@ -147,20 +147,20 @@
 <div class="bbsPageForm">
 	<c:if test="${fn:length(requestScope.orderList) ne 0}">
 		<c:if test="${PINFO.startPage ne 1}">
-			<a href='/order/orderHistoryListAction.yo?nowPage=${PINFO.startPage-1}'>[ 이전 ]</a>
+			<a href='/order/orderHistoryListAction.yo?nowPage=${PINFO.nowPage-1}'>[ 이전 ]</a>
 		</c:if>
 		
 		<c:forEach var="page" begin="${PINFO.startPage}" end="${PINFO.endPage}">
-			<c:if test="${PINFO.startPage eq page}">
+			<c:if test="${PINFO.nowPage eq page}">
 				${page}&nbsp;
 			</c:if>
-			<c:if test="${PINFO.startPage ne page}">
+			<c:if test="${PINFO.nowPage ne page}">
 				<a href='/order/orderHistoryListAction.yo?nowPage=${page}'>${page}&nbsp;</a>
 			</c:if>
 		</c:forEach>
 		
 		<c:if test="${PINFO.endPage ne PINFO.totalPage }">
-			<a href='/order/orderHistoryListAction.yo?nowPage=${PINFO.endPage+1}'>[다음]</a>
+			<a href='/order/orderHistoryListAction.yo?nowPage=${PINFO.nowPage+1}'>[다음]</a>
 		</c:if>
 	</c:if>
 </div>

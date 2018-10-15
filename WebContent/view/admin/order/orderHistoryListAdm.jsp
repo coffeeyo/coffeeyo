@@ -154,10 +154,10 @@
 		</c:if>
 		
 		<c:forEach var="page" begin="${PINFO.startPage}" end="${PINFO.endPage}">
-			<c:if test="${PINFO.startPage eq page}">
+			<c:if test="${PINFO.nowPage eq page}">
 				${page}&nbsp;
 			</c:if>
-			<c:if test="${PINFO.startPage ne page}">
+			<c:if test="${PINFO.nowPage ne page}">
 				<a href='/admin/orderHistoryListAction.yo?nowPage=${page}'>${page}&nbsp;</a>
 			</c:if>
 		</c:forEach>
