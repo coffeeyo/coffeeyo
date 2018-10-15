@@ -45,6 +45,7 @@
 	              <span class="icon-bar"></span>
 	            </button>
 	            <a class="navbar-logo" href="/"><img src="/img/coffeeLogo.png" class="img-circle" style="width:150px; height:150px;" alt="coffee YO!! logo" title="coffee YO!! logo" /></a>
+	            <a class="navbar-logo" href="/" ><img src="/img/coffeeLogo4.png" alt="coffee YO!! logo2" title="coffee YO!! logo2"/></a>
           	</div>
           	<div class="navbar-collapse collapse" style="float:right;">
 	   			<ul class="nav navbar-nav " >
