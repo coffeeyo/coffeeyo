@@ -8,17 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.coffeeyo.board.model.Board;
-import com.coffeeyo.board.model.BoardDAO;
 import com.coffeeyo.common.util.DBConnection;
 import com.coffeeyo.member.model.Member;
-import com.coffeeyo.product.model.Category;
-import com.coffeeyo.product.model.CategoryDao;
-
 import bcom.coffeeyo.board.util.POOLUtil;
 import bcom.coffeeyo.board.util.PageUtil;
 
