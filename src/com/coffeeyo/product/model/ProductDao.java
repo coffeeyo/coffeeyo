@@ -7,7 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.naming.NamingException;
+
 import com.coffeeyo.common.util.DBConnection;
+import com.coffeeyo.common.util.PageUtil;
+import com.coffeeyo.product.common.PdpageUtil;
+
 
 public class ProductDao {
 	private Connection conn;
@@ -222,7 +227,7 @@ public class ProductDao {
 					pstmt = DBConnection.getPstmt(conn, sql.toString());
 					pstmt.setLong(1, cidx);
 					pstmt.setInt(2, start);
-					pstmt.setInt(3, start+9);
+					pstmt.setInt(3, start+100);
 					
 					sql.delete(0, sql.toString().length());
 				}
@@ -508,8 +513,6 @@ public class ProductDao {
 					pstmt = DBConnection.getPstmt(conn, sql.toString());
 					pstmt.setString(1, '%'+condition+'%');
 				}
-				
-				
 				sql.delete(0, sql.toString().length());
 			}
 			
@@ -754,5 +757,69 @@ public class ProductDao {
 			DBConnection.close(conn);
 		}
 		return cnt;		
+	}
+	public ArrayList memProductList(HashMap<String,Object> listOpt) {
+		String opt = (String)listOpt.get("opt");
+		String condition = (String)listOpt.get("condition");
+		int start = (Integer)listOpt.get("start");
+		ArrayList<Product> prodList = null;
+		int cidx=0;
+		try {
+			if(opt==null) {
+	
+				conn = DBConnection.getConnection();
+				StringBuffer sql = new StringBuffer();
+				prodList = new ArrayList<Product>();
+				cidx = (Integer)listOpt.get("cidx");
+				
+				sql.append("SELECT * FROM");
+				sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
+				sql.append("(SELECT");
+				sql.append(" PIDX, c.CNAME, PNAME, IMAGE, ");
+				sql.append(" PRICE, MAKETM, RECOMM, P.CIDX, ");
+				sql.append(" p.STATUS, p.CREATEDT ");
+				sql.append("FROM PRODUCT p ");
+				sql.append("left join CATEGORY c ");
+				sql.append("on p.cidx = c.cidx ");
+				sql.append("WHERE p.cidx=? and p.status = 1 ");
+				sql.append(" ORDER BY PIDX desc ");
+				sql.append(") ");
+				sql.append(" data) ");
+				sql.append("WHERE rnum >=? and rnum <=?");
+	
+				pstmt = DBConnection.getPstmt(conn, sql.toString());
+				pstmt.setLong(1, cidx);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, start+100);
+				sql.delete(0, sql.toString().length());
+			}
+		
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) 
+			{
+				Product prod = new Product();
+				prod.setPidx(rs.getLong("PIDX"));
+				prod.setCidx(rs.getLong("CIDX"));
+				prod.setCateName(rs.getString("CNAME"));
+				prod.setPname(rs.getString("PNAME"));
+				prod.setImage(rs.getString("IMAGE"));
+				prod.setPrice(rs.getInt("PRICE"));
+				prod.setMaketm(rs.getInt("MAKETM"));
+				prod.setRecomm(rs.getInt("RECOMM"));
+				prod.setStatus(rs.getInt("STATUS"));
+				prod.setCreatedt(rs.getDate("CREATEDT"));
+				prodList.add(prod);
+			}
+			DBConnection.close(rs);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			DBConnection.close(pstmt);
+			DBConnection.close(conn);
+		}
+		return prodList;
 	}
 }

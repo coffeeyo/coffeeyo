@@ -15,7 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class ProductDeleteProcAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("BoardDeleteProcAction execute()");	
+		System.out.println("ProductDeleteProcAction execute()");	
 		
 		// 업로드 파일 사이즈
 		int fileSize= 5*1024*1024;

@@ -16,6 +16,6 @@ public class ProductListAdmAction implements Action {
 		
 		request = ProductCommon.productList(request);
 
-		return "../view/admin/product/productList.jsp";
+		return "../view/admin/product/productListAdmin.jsp";
 	}
 }

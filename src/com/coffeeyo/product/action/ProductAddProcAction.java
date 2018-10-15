@@ -19,10 +19,7 @@ public class ProductAddProcAction implements Action {
 		System.out.println("ContentAction execute()");
 		//request.setCharacterEncoding("UTF-8");
 		
-		// 업로드 파일 사이즈
-		int fileSize= 5*1024*1024;
-		// 업로드될 폴더 절대경로
-		String uploadPath = null;
+
 		
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("userid");
@@ -56,6 +53,11 @@ public class ProductAddProcAction implements Action {
 		
 		int seq = dao.getSeq();
 		
+		
+		// 업로드 파일 사이즈
+		int fileSize= 5*1024*1024;
+		// 업로드될 폴더 절대경로
+		String uploadPath = null;
 		// 파일업로드 
 		uploadPath = request.getServletContext().getRealPath("/view/upload/product");
 		

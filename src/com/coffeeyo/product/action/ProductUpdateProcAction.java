@@ -32,14 +32,13 @@ public class ProductUpdateProcAction implements Action {
 				(request, uploadPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 
 		String pageNum = (String)multi.getParameter("pageNum");
-		//System.out.println("pageNum="+pageNum);
-		
-		
+		System.out.println("pageNum= "+pageNum);		
+			
 		if(pageNum==null){
 			response.sendRedirect("../admin/productListAction.yo");
 			return null;
 		}
-		
+	
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("userid");
 		
@@ -82,6 +81,7 @@ public class ProductUpdateProcAction implements Action {
 		po.setPidx(Integer.parseInt(multi.getParameter("num")));
 		System.out.println("num="+po.getPidx());
 		po.setCidx(Integer.parseInt(multi.getParameter("cidx")));
+		
 		//po.setUserid(id);
 		po.setPname(multi.getParameter("pname"));
 		po.setComm(multi.getParameter("comm"));
@@ -94,7 +94,7 @@ public class ProductUpdateProcAction implements Action {
 		boolean check = dao.updateProduct(po);
 		
 		if (check == true) {
-			response.sendRedirect("../admin/productListAction.yo");
+			response.sendRedirect("../admin/productListAction.yo?pageNum="+pageNum);
 			return null;
 
 		} else if (check == false) {
@@ -118,4 +118,5 @@ public class ProductUpdateProcAction implements Action {
 			return null;
 		}
 	}
+	
 }

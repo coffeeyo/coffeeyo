@@ -17,7 +17,7 @@ public class ProductListAllAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("BoardListAction execute()");
+		System.out.println("ProductListAllAction execute()");
 
 		response.setContentType("application/json; charset=UTF-8");
 		JSONObject jsonobj = new JSONObject();
