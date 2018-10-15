@@ -59,8 +59,7 @@ public class OrderHistoryDetailAction implements Action {
 				
 				oitem.setOrderno(orderno);
 				System.out.println("orderno detail="+orderno);
-				ArrayList<Order> orderList = null;
-				orderList = dao.getAllOrder(ord);
+
 				//System.out.println("CartListFormAction cartList : " + cartList);
 				// ¸ðµ¨
 				dao.getOrderConfirm(ord);

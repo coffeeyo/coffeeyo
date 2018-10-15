@@ -20,6 +20,7 @@ import com.coffeeyo.product.model.Category;
 import com.coffeeyo.product.model.CategoryDao;
 
 import bcom.coffeeyo.board.util.POOLUtil;
+import bcom.coffeeyo.board.util.PageUtil;
 
 public class OrderDao {
 	private Connection conn;
@@ -145,8 +146,10 @@ public class OrderDao {
 	}	// end of select order 결제 후 뿌리는 것
 	
 	//ArrayList<Order> 
-	public ArrayList<Order> getAllOrder(Order order) {
+	public ArrayList<Order> getAllOrder(Order order, PageUtil pinfo, HashMap<String, Object> listOpt) {
 		ArrayList<Order> orderList = null;
+		String startDay = (String)listOpt.get("startDay");
+		String endDay = (String)listOpt.get("endDay");
 		try {
 			conn = DBConnection.getConnection();
 			StringBuffer sql = new StringBuffer();
@@ -164,18 +167,29 @@ public class OrderDao {
 				sql.append("LEFT JOIN PRODUCT P ");
 				sql.append("	ON ORI.PIDX=P.PIDX ");
 				sql.append("WHERE ORD.USERID=? ");
+				if(startDay != null && endDay != null) {
+					sql.append(" AND TO_CHAR(ORD.ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ? ");
+				}
 				sql.append(" ORDER BY ORD.ORDNO desc ");
 				
 				System.out.println("select orderlist="+sql.toString());
 				//pstmt = conn.prepareStatement(sql.toString());
 				pstmt = DBConnection.getPstmt(conn, sql.toString());
 				pstmt.setString(1, order.getUserid());
-				
+				if(startDay != null && endDay != null) {
+					pstmt.setString(2, startDay);
+					pstmt.setString(3, endDay);
+				}
 				sql.delete(0, sql.toString().length());
 			}			
 			
 			rs = pstmt.executeQuery();
-			while(rs.next()) 
+			int skip=((pinfo.getNowPage()-1)*pinfo.getListCount());
+			for(int i = 0; i < skip; i++) {
+				rs.next();
+				//데이터베이스 작업 포인터를 필요없는 데이터에서 내린다
+			}
+			for(int i = 0; i < pinfo.getListCount() && rs.next(); i++) 
 			{
 				Order ord = new Order();
 				/*sql.append(" ORD.ORDNO as ORDERNO, ORD.USERID as USERID, TOTAL, PAYYN, ");
@@ -353,8 +367,10 @@ public class OrderDao {
 	}
 	
 	//ArrayList<Order> 관리자용 주문조회용 쿼리문
-		public ArrayList<Order> getAllOrderAdm(Order order) {
+		public ArrayList<Order> getAllOrderAdm(Order order, PageUtil pinfo, HashMap<String, Object> listOpt) {
 			ArrayList<Order> orderList = null;
+			String startDay = (String)listOpt.get("startDay");
+			String endDay = (String)listOpt.get("endDay");
 			try {
 				conn = DBConnection.getConnection();
 				StringBuffer sql = new StringBuffer();
@@ -371,17 +387,29 @@ public class OrderDao {
 					sql.append("	ON ORD.ORDNO=ORI.ORDNO ");
 					sql.append("LEFT JOIN PRODUCT P ");
 					sql.append("	ON ORI.PIDX=P.PIDX ");
+					if(startDay != null && endDay != null) {
+						sql.append("WHERE  ");
+						sql.append("TO_CHAR(ORD.ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ? ");
+					}
 					sql.append(" ORDER BY ORD.ORDNO desc ");
 					
 					System.out.println("select orderlist="+sql.toString());
 					//pstmt = conn.prepareStatement(sql.toString());
 					pstmt = DBConnection.getPstmt(conn, sql.toString());
-					
+					if(startDay != null && endDay != null) {
+						pstmt.setString(1, startDay);
+						pstmt.setString(2, endDay);
+					}
 					sql.delete(0, sql.toString().length());
 				}			
 				
 				rs = pstmt.executeQuery();
-				while(rs.next()) 
+				int skip=((pinfo.getNowPage()-1)*pinfo.getListCount());
+				for(int i = 0; i < skip; i++) {
+					rs.next();
+					//데이터베이스 작업 포인터를 필요없는 데이터에서 내린다
+				}
+				for(int i = 0; i < pinfo.getListCount() && rs.next(); i++) 
 				{
 					Order ord = new Order();
 					/*sql.append(" ORD.ORDNO as ORDERNO, ORD.USERID as USERID, TOTAL, PAYYN, ");
@@ -443,8 +471,6 @@ public class OrderDao {
 				rs = pstmt.executeQuery();
 				while(rs.next()) 
 				{
-					
-					
 					orderConfirm.setOrderno(rs.getString("ORDNO"));
 					orderConfirm.setUserid(rs.getString("USERID"));
 					orderConfirm.setTotal(rs.getLong("TOTAL"));
@@ -452,7 +478,6 @@ public class OrderDao {
 					orderConfirm.setReadytm(rs.getString("READYTM"));
 					orderConfirm.setOrddt(rs.getDate("ORDDT"));
 					orderConfirm.setStatus(rs.getInt("STATUS"));
-					
 				}
 				DBConnection.close(rs);
 			}
@@ -492,8 +517,6 @@ public class OrderDao {
 				rs = pstmt.executeQuery();
 				while(rs.next()) 
 				{
-					
-					
 					selMember.setUserid(rs.getString("USERID"));
 					selMember.setUname(rs.getString("UNAME"));
 					selMember.setNickName(rs.getString("NICK"));
@@ -569,26 +592,37 @@ public class OrderDao {
 		}
 		
 		//---------------------------------------------페이징처리
-		public int getOrderCount(Order order) {
+		public int getOrderCount(HashMap<String, Object> listOpt) {
+			String startDay = (String)listOpt.get("startDay");
+			String endDay = (String)listOpt.get("endDay");
 			
 			int count = 0;
 			try {
 				conn = DBConnection.getConnection();
 				StringBuffer sql = new StringBuffer();
 				
-					sql.append("SELECT	");
-					sql.append(" NVL(count(*),0) as cnt ");
-					sql.append("FROM ORDERS ");
-					
-					//pstmt = conn.prepareStatement(sql.toString());
-					pstmt = DBConnection.getPstmt(conn, sql.toString());
-					System.out.println("getCountStatus(Order order)의 pstmt = "+pstmt);
-					sql.delete(0, sql.toString().length());
+				sql.append("SELECT	");
+				sql.append(" NVL(count(*),0) as cnt ");
+				sql.append("FROM ORDERS ");
+				
+				if(startDay != null && endDay != null) {
+					sql.append("WHERE  ");
+					sql.append("TO_CHAR(ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ?");
+				}
+				
+				pstmt = DBConnection.getPstmt(conn, sql.toString());
+				System.out.println("getCountStatus(Order order)의 pstmt = "+pstmt);
+				if(startDay != null && endDay != null) {
+					pstmt.setString(1, startDay);
+					pstmt.setString(2, endDay);
+				}
+				sql.delete(0, sql.toString().length());
+				
 				rs = pstmt.executeQuery();
 				
 				rs.next();
-				count=rs.getInt("count");
-				//System.out.println("cartList="+cartList.size());
+				count=rs.getInt("cnt");
+				
 				DBConnection.close(rs);
 			}
 			catch(Exception e) {
