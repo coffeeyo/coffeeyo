@@ -758,29 +758,33 @@ public class ProductDao {
 		}
 		return cnt;		
 	}
-	public ArrayList memProductList(HashMap<String,Object> listOpt) {
+	public ArrayList<Product> memProductList(HashMap<String,Object> listOpt) {
+		ArrayList<Product> prodList = null;
 		String opt = (String)listOpt.get("opt");
 		String condition = (String)listOpt.get("condition");
+		
 		int start = (Integer)listOpt.get("start");
-		ArrayList<Product> prodList = null;
-		int cidx=0;
+		
 		try {
-			if(opt==null) {
-	
+				
+			if(opt == null) {
 				conn = DBConnection.getConnection();
 				StringBuffer sql = new StringBuffer();
 				prodList = new ArrayList<Product>();
-				cidx = (Integer)listOpt.get("cidx");
+				int cidx = (Integer)listOpt.get("cidx");
 				
-				sql.append("SELECT * FROM");
-				sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
-				sql.append("(SELECT");
-				sql.append(" PIDX, c.CNAME, PNAME, IMAGE, ");
-				sql.append(" PRICE, MAKETM, RECOMM, P.CIDX, ");
-				sql.append(" p.STATUS, p.CREATEDT ");
+				sql.append("SELECT * FROM ");
+				sql.append("(SELECT  ROWNUM AS rnum, data.* FROM ");
+				sql.append("(SELECT ");
+				sql.append("p.PIDX, c.CNAME, PNAME, IMAGE, ");
+				sql.append("PRICE, MAKETM, RECOMM, P.CIDX, ");
+				sql.append("p.STATUS, p.CREATEDT, ");
+				sql.append("(select nvl((sum(pc.pcpoint)/count(*)),0) from PRODCOMM) as pavg ");
 				sql.append("FROM PRODUCT p ");
 				sql.append("left join CATEGORY c ");
 				sql.append("on p.cidx = c.cidx ");
+				sql.append("left join PRODCOMM pc ");
+				sql.append("on p.pidx=pc.pidx ");
 				sql.append("WHERE p.cidx=? and p.status = 1 ");
 				sql.append(" ORDER BY PIDX desc ");
 				sql.append(") ");
@@ -793,8 +797,7 @@ public class ProductDao {
 				pstmt.setInt(3, start+100);
 				sql.delete(0, sql.toString().length());
 			}
-		
-			
+				
 			rs = pstmt.executeQuery();
 			while(rs.next()) 
 			{
@@ -809,6 +812,7 @@ public class ProductDao {
 				prod.setRecomm(rs.getInt("RECOMM"));
 				prod.setStatus(rs.getInt("STATUS"));
 				prod.setCreatedt(rs.getDate("CREATEDT"));
+				prod.setPcPointAvg(rs.getLong("PAVG"));
 				prodList.add(prod);
 			}
 			DBConnection.close(rs);

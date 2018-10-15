@@ -90,7 +90,7 @@ li{float:left;padding:10px;}
 						</div>
 							<div><span class="result" id="pname">${pdlist.pname}</span></div>
 							<div>가격:<span class="result">${pdlist.price}&nbsp;원</span></div>
-							<div>별점:<span class="result">★★★★★</span>
+							<div>별점:<span class="result">${pdlist.pcPointAvg}</span>
 						</div>
 					</li>
 				</c:forEach>

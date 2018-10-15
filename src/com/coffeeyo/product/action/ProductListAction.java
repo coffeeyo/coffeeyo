@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.coffeeyo.common.action.Action;
-
+import com.coffeeyo.product.comment.model.ProductComm;
+import com.coffeeyo.product.comment.model.ProductCommDao;
 import com.coffeeyo.product.model.Category;
 import com.coffeeyo.product.model.CategoryDao;
 import com.coffeeyo.product.model.Product;
@@ -20,6 +21,7 @@ public class ProductListAction implements Action{
 		System.out.println("ProductListAction execute()");
 		request.setCharacterEncoding("UTF-8");
 		//request = ProductCommon.productList(request);
+
 		int spage = 1;
 		String pageNum = request.getParameter("pageNum");
 		
@@ -39,42 +41,27 @@ public class ProductListAction implements Action{
 		listOpt.put("cidx", cidx);
 		
 		ProductDao dao = ProductDao.getInstance();
+		
 		int listCount = dao.getProductListCount(listOpt);
 	
 		CategoryDao cateDao = CategoryDao.getInstance();
 		List<Category> cateList = null;
 		cateList = cateDao.getAllCategory();
-		
-		// 한 화면에 10개의 게시글을 보여지게함
-		// 페이지 번호는 총 5개, 이후로는 [다음]으로 표시
-		
-		// 전체 페이지 수
-		//int maxPage = (int)(listCount/10.0 + 0.9);
-		
-		// 만약 사용자가 주소창에서 페이지 번호를 maxPage 보다 높은 값을 입력시
-		// maxPage에 해당하는 목록을 보여준다.
-		//if(spage > maxPage) spage = maxPage;
+			
 		listOpt.put("start", spage*10-9);
 		
 		List<Product> prodList = null;
-		prodList = dao.getAllProduct(listOpt);
-				
-		//시작 페이지 번호
-		//int startPage = (int)(spage/5.0 + 0.8) * 5 - 4;
-		//마지막 페이지 번호
-		//int endPage = startPage + 4;
-		//if(endPage > maxPage)	endPage = maxPage;
+		//prodList = dao.memProductList(listOpt);
+		prodList = dao.memProductList(listOpt);
 		
-		request.setAttribute("prodList", prodList);
+						
 		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("cateList", cateList);
 		request.setAttribute("listCount", listCount);	
-
-		// 4개 페이지번호 저장
-		//request.setAttribute("spage", spage);
-		//request.setAttribute("maxPage", maxPage);
-		//request.setAttribute("startPage", startPage);
-		//request.setAttribute("endPage", endPage);
+		request.setAttribute("cateList", cateList);
+		request.setAttribute("prodList", prodList);
+		
+	
+		
 	
 
 		return "../view/product/productListMem.jsp";
