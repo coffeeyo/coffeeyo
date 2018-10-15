@@ -43,7 +43,7 @@
 		function memRestore(id) {
 			if(confirm('복원처리 하겠습니까?')){
 				$('#userid').val(id);
-				$('#memFrm').attr('action', '/admin/memberRestoreAction.do');
+				$('#memFrm').attr('action', '/admin/memberRestoreAction.yo');
 				$('#memFrm').submit();
 			}
 		}
