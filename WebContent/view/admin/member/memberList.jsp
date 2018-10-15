@@ -93,15 +93,15 @@
 	</form>
 	<table class="listup">	
 		<tr class="firstrow">
-			<th>아이디</th>
-			<th>이름</th>
-			<th>성별</th>
-			<th>생년월일</th>
-			<th>연락처</th>
-			<th>가입일</th>
-			<th>등급</th>
-			<th>상태</th>
-			<th>수정/삭제</th>
+			<td>아이디</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>생년월일</td>
+			<td>연락처</td>
+			<td>가입일</td>
+			<td>등급</td>
+			<td>상태</td>
+			<td>수정/삭제</td>
 		</tr>
 
 		<c:forEach var="member" items="${requestScope.memberList}">
