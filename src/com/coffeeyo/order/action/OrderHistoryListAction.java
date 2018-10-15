@@ -9,19 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.coffeeyo.common.action.Action;
-import com.coffeeyo.order.model.Cart;
-import com.coffeeyo.order.model.CartDao;
 import com.coffeeyo.order.model.Order;
 import com.coffeeyo.order.model.OrderDao;
-import com.coffeeyo.order.model.OrderItem;
 import com.coffeeyo.product.model.Category;
 import com.coffeeyo.product.model.CategoryDao;
 
-public class OrderFormAction implements Action {
+public class OrderHistoryListAction implements Action {
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("OrderFormAction execute()");
-
+		//할일
+		// 선배님코드 따서 만든거------------------------------시작
+		
+		
+		//	선배님코드 따서 만든거------------------------------끝
+		
+		// 파라미터 받고
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession();
@@ -45,41 +48,31 @@ public class OrderFormAction implements Action {
 			out.close();
 			return null;
 		}
+		// 비즈니스로직
+
+		OrderDao dao = OrderDao.getInstance();
+		Order ord = new Order();
+		ord.setUserid(id);
 		
-		CartDao dao = CartDao.getInstance();
-		Cart cart = new Cart();
-		cart.setUserid(id);
-		cart.setBuychk("Y");
-		//
-		//	tm은 카트에서 제조소요시간을 불러와서 담은 변수이다.
-		int tm	=	dao.getReadyTime(cart);
-		
-		// 주문을 생성하고
-		Order ord	= new Order();
-		OrderDao orddao	= OrderDao.getInstance();
-		// orddao에서 주문번호를 만든 것을 담는다
-		String orderno =orddao.getSeq();
-		// Order의 VO에 orderno를 넣는다
-		ord.setOrderno(orderno);
-		
-		// 카트리스트를 기준으로 orderItem을 생성한다.
-		ArrayList<Cart> cartList = dao.getAllCart(cart);
-		
+		ArrayList<Order> orderList = null;
+		orderList = dao.getAllOrder(ord);		//페이징 실패시 다시 원상복구
+
 		//System.out.println("CartListFormAction cartList : " + cartList);
-		for(int i=0; i<cartList.size(); i++) {
-			OrderItem oitem	= new OrderItem();
-			oitem.setOrderno(orderno);
-			
-			
-		}
+		// 모델
+		
+		//-----------------------------페이징 검색 처리 못하겠다
+		//-------------------------------페이징 검색 처리 끝
+		
+		
 		CategoryDao cateDao = CategoryDao.getInstance();
 		List<Category> cateList = null;
 		cateList = cateDao.getAllCategory();
-		
-		
-		request.setAttribute("buyChkList", cartList);
-		request.setAttribute("cateList", cateList);
 
-		return "../view/order/orderForm.jsp";
+		request.setAttribute("cateList", cateList);
+		request.setAttribute("orderList", orderList);
+		// 뷰
+				
+		return "../view/order/orderHistoryList.jsp";
 	}
+
 }

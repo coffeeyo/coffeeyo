@@ -252,6 +252,7 @@ public class CartDao {
 	} // end deleteCart
 	
 	
+	// 
 	public ArrayList<Cart> getAllCart(Cart cart) {
 		ArrayList<Cart> cartList = null;
 		try {

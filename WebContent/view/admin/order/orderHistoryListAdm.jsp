@@ -11,7 +11,7 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 <meta charset="UTF-8">
-    <title>orderHistoryList</title>
+<title>orderHistoryListAdm.jsp</title>
     <script src="jquery-3.3.1.min.js"></script>
     <script>
     function f1(){}
@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<div align="left">주문내역 목록 </div> <section align="right">네비게이션바</section>
+<span>주문현황 목록</span> <span>네비게이션바</span>
 <hr>
 <form>
     <table border="1" width="70%" align="center">
@@ -45,15 +45,15 @@
     </table>
     <table border="1" width="70%" align="center">
         <tr>
-            <td colspan="2" align="center"><h4>상품정보</h4></td>
-            <td>결제금액</td>
-            <td>주문일시</td>
-            <td>상품상세보기 및 상품평보기</td>
+            <td colspan="2" align="center">상품정보</td>
+            <td align="center">결제금액</td>
+            <td align="center">주문일시</td>
+            <td align="center">처리상태</td>
         </tr>
         <c:forEach var="data" items="${orderList}">
         <tr>
             <td align="center">
-                <a href="../order/orderHistoryDetailAction.yo?orderno=${data.orderno}">
+                <a href="../admin/orderHistoryDetailAction.yo?orderno=${data.orderno}&userid=${data.userid}">
                     <img src="../view/upload/product/${data.image}" width="150px" height="150px"/>
                     주문내역상세보기
                 </a>
@@ -65,15 +65,19 @@
            			옵	션: ${data.options}<br/>
            			옵션가격: ${data.optprice}원<br/>
            			수	량: ${data.amount}개<br/>
+           			주문자아이디: ${data.userid}
             </td>
-            <td>결제금액: ${(data.price+data.optprice)*data.amount}원  <%-- ${data.optprice} --%></td>
-            <td>주문일시: ${data.orddt} </td>
+            <td align="center">결제금액: ${(data.price+data.optprice)*data.amount}원  <%-- 추가로 넣어줘야한다 ${data.optprice} --%></td>
+            <td align="center">주문일시: ${data.orddt} </td>
             <td align="center">
-                <input type="button" value="바로가기" onlick="location.href='#'">	<%-- #상품명 넣을 곳 --%>
+               		처리상태: ${data.status} <br/>
+               		1: 처리중 2: 처리완료
             </td>
         </tr>
+        
         </c:forEach>
     </table>
 </form>
+
 </body>
 </html>
