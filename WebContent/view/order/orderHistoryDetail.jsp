@@ -12,6 +12,12 @@
 <link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 <meta charset="UTF-8">
     <title>orderHistoryDetail.jsp</title>
+    <style>
+    	.width70{
+    		width:70%;
+    		border-bottom: 2px solid #77563c;
+    	}
+    </style>
     <script src="jquery-3.3.1.min.js"></script>
     <script>
     function f1(){}
@@ -21,17 +27,18 @@
     </script>
 </head>
 <body>
-<span>주문서내역상세</span> <span>네비게이션바</span>
+<table width="70%" align="center" ><tr><td><h2>주문서 상세내역</h2></td></tr></table>
 <hr>
 <form id="order_detail_form" name="order_detail_form" >
-    <table border="1" width="70%" align="center">
-    		<tr>
-    			<td colspan="2" align="center"> 상품정보</td>
-    			<td  align="center">상품소계</td>
+    <table class="width70" align="center"  style="border-bottom: 2px solid #77563c;">
+    		<tr style="border-bottom: 2px solid #77563c;">
+    			<td><h4>상품이미지</h4></td>
+            	<td><h4>상품정보</h4></td>
+            	<td><h4>상품소계</h4></td>
     		</tr>
 		<c:forEach var="data" items="${oitemList}">
-	        <tr>
-	            <td align="center">
+	        <tr style="border-bottom: 2px solid #77563c;">
+	            <td>
 	            	<img src="../view/upload/product/${data.image}" width="150px" height="150px"/>
             	</td>
 	            <td>
@@ -52,7 +59,7 @@
 					<h2>${ORD.total}원</h2>
 	            </td>
 	        </tr>
-	        <tr>
+	        <tr style="border-bottom: 2px solid #77563c;">
 	            <td colspan="3" align="right">
 					<h2>상품수령 예상시간  :	${ORD.readytm}</h2>
 	            </td>
