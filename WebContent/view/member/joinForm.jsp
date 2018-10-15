@@ -5,19 +5,11 @@
 	<title>회원가입 화면</title>
 
 	<style type="text/css">
-		table{
-			margin-left:auto; 
-			margin-right:auto;
-			border:3px solid;
-		}
-		
-		td{
-			border:1px solid
-		}
-		
-		#title{
-			
-		}
+		.top_title {width:1000px; text-align:left; margin:auto; font-size: 30px; font-weight: bold;}
+		td, th{padding:5px 10px; border:1px solid gray;}
+		.inner_tr {border:1px solid gray;}
+		.inner_tb {margin:auto;width:1000px;}
+		.item_col {background:lightgray; font-weight:bold; text-align:center;}
 	</style>
 
 	<script type="text/javascript">
@@ -125,74 +117,74 @@
 	
 </head>
 <body>
-<div class="joinFrm">
-		<b><font size="6" color="gray">회원가입</font></b>
-		<br><br><br>
-		
-		
-		<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
-		<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
-		<form method="post" action="/member/joinProcAction.yo" 
-				name="userInfo" onsubmit="return checkValue()">
-			<table width="100%">
-				<tr>
-					<td id="title">아이디</td>
-					<td>
-						<input type="text" name="userid" maxlength="50" onkeydown="inputIdChk()">
-						<input type="button" value="중복확인" class="btn btn-info"  onclick="openIdChk()">	
-						<input type="hidden" name="idDuplication" value="idUncheck" >
-					</td>
-				</tr>
-						
-				<tr>
-					<td id="title">비밀번호</td>
-					<td>
-						<input type="password" name="passwd" maxlength="50">
-					</td>
-				</tr>
+	<div class="top_title" >
+		<p>회원가입</p>
+	</div>
+	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
+	<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
+	<form method="post" action="/member/joinProcAction.yo" 
+			name="userInfo" onsubmit="return checkValue()">
+		<table class="inner_tb">
+			<tr>
+				<td class="inner_tr">아이디</td>
+				<td>
+					<input type="text" name="userid" maxlength="50" onkeydown="inputIdChk()">
+					<input type="button" value="중복확인" class="btn btn-info"  onclick="openIdChk()">	
+					<input type="hidden" name="idDuplication" value="idUncheck" >
+				</td>
+			</tr>
+					
+			<tr>
+				<td id="title">비밀번호</td>
+				<td>
+					<input type="password" name="passwd" maxlength="50">
+				</td>
+			</tr>
+			
+			<tr>
+				<td id="title">비밀번호 확인</td>
+				<td>
+					<input type="password" name="passwordcheck" maxlength="50">
+				</td>
+			</tr>
 				
-				<tr>
-					<td id="title">비밀번호 확인</td>
-					<td>
-						<input type="password" name="passwordcheck" maxlength="50">
-					</td>
-				</tr>
-					
-				<tr>
-					<td id="title">이름</td>
-					<td>
-						<input type="text" name="uname" maxlength="50">
-					</td>
-				</tr>
+			<tr>
+				<td id="title">이름</td>
+				<td>
+					<input type="text" name="uname" maxlength="50">
+				</td>
+			</tr>
+			
+			<tr>
+				<td id="title">닉네임</td>
+				<td>
+					<input type="text" name="nick" maxlength="50" onkeydown="inputNickChk()">
+					<input type="button" value="중복확인" class="btn btn-info"  onclick="openNickChk()">	
+					<input type="hidden" name="nickDuplication" value="nickUncheck" >
+				</td>
+			</tr>
 				
-				<tr>
-					<td id="title">닉네임</td>
-					<td>
-						<input type="text" name="nick" maxlength="50" onkeydown="inputNickChk()">
-						<input type="button" value="중복확인" class="btn btn-info"  onclick="openNickChk()">	
-						<input type="hidden" name="nickDuplication" value="nickUncheck" >
-					</td>
-				</tr>
-					
-				<tr>
-					<td id="title">성별</td>
-					<td>
-						<input type="radio" name="gender" value="1" checked>남
-						<input type="radio" name="gender" value="2" >여
-					</td>
-				</tr>
-					
-				<tr>
-					<td id="title">휴대전화</td>
-					<td>
-						<input type="text" name="hp"/>
-					</td>
-				</tr>
-			</table>
-			<br>
-			<input type="submit" value="가입" class="btn btn-success" />  
-			<input type="button" value="취소"  class="btn btn-default" onclick="goFirstForm()">
-		</form>
-</div>
+			<tr>
+				<td id="title">성별</td>
+				<td>
+					<input type="radio" name="gender" value="1" checked>남
+					<input type="radio" name="gender" value="2" >여
+				</td>
+			</tr>
+				
+			<tr>
+				<td id="title">휴대전화</td>
+				<td>
+					<input type="text" name="hp"/>
+				</td>
+			</tr>
+			<tr align="center" valign="middle" >
+				<td colspan="2" >
+					<input type="button" value="취소"  class="btn btn-default" onclick="goFirstForm()">
+					<input type="submit" value="가입" class="btn btn-success" />  
+				</td>
+			</tr>
+		</table>		
+	</form>
 </body>
 </html>

@@ -10,6 +10,16 @@
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 	<meta charset="UTF-8">
+	<style>
+		td, th{padding:5px 10px;}
+		.top_title{width:1000px; margin:auto; font-size: 30px; font-weight: bold;}
+		.top_tab{border: 1px solid gray; border-collapse:collapse; width:1000px; margin:auto;}
+		.firstrow{text-align:center;background-color:lightgray;font-weight:bold;border: 1px solid gray;}
+		.contentrow{text-align:center;valign:middle;height:30px;border: 1px solid gray;}
+		.top_b{text-align:right;width:1000px; margin:auto;margin-top:10px;}
+		.lname{font-weight:bold; padding-right:10px; padding-left:20px;}
+		.listup{width:1000px; margin:auto;}
+	</style>
 	<script>
 		function memAdd() {
 			alert('준비중! 개발 후순위~');
@@ -41,41 +51,48 @@
 </head>
 <body>
 	<!-- 회원목록 위 부분-->
-	<div class="topBbs">
-		<h1>
-			회원 목록 [ 전체 회원수 : 
-			${requestScope.listCount}]
-			
-		</h1>
-		<!--  검색 부분 -->
-		<br>
-		<div class="bbsSearchForm">
+	<div class="top_title" >
+		<p>회원 목록</p>
+	</div>
+	<table class="top_tab" border="1">
+	<tr>
+		<td>
+		<div class="lookup">
 			<form action="/admin/memberListAction.yo" method="post">
+			<span class="lname">검색옵션</span>
+			<span class="input">
 				<select name="opt">
 					<option value="0">성명</option>
 					<option value="1">아이디</option>
 				</select>
-				<input type="text" size="20" name="condition"/>&nbsp;
-				&nbsp;
-				<input type="submit" value="검색"/>
-			</form>	
+			</span>
+			<span class="input"><input type="text" name="condition" size="50px"/></span>
+			<span class="btn"><input type="submit"  class="inbtn" name="search" value="조회" /></span>
+			</form>
 		</div>
-		<c:if test="${sessionScope.ulevel eq 10}">
-		<div class="bbs_link">
-			<input type="button" value="회원등록" onclick="memAdd()"/>
-		</div>
-		</c:if>
-	</div>
-
+		</td>
+	</tr>
+	</table>
+	<table class="top_b">
+		<tr>
+			<td align="left">[ 전체 회원 수 :	${requestScope.listCount}]</td>
+			<td>	
+				<%--	
+				<c:if test="${sessionScope.ulevel eq 10}">
+					<p><input type="button" class="outbtn" id="pd_create" value="회원등록" /></p>
+				</c:if>
+				--%>
+			</td>
+		</tr>
+	</table>
+	
 	<!-- 회원 목록 부분 -->
-	<br>
 	<form id="memFrm" name="memFrm" action="/admin/memberUpdateFormAction.yo" method="post">
 		<input type="hidden" id="userid" name="userid" />
 		<input type="hidden" id="nowPage" name="nowPage" />
 	</form>
-	<div class="board">
-	<table class="bbs">	
-		<tr>
+	<table class="listup">	
+		<tr class="firstrow">
 			<th>아이디</th>
 			<th>이름</th>
 			<th>성별</th>
@@ -88,7 +105,7 @@
 		</tr>
 
 		<c:forEach var="member" items="${requestScope.memberList}">
-			<tr>
+			<tr class="contentrow">
 				<td>${member.userid}</td>
 				<td>${member.uname}</td>
 				<td>
@@ -121,7 +138,6 @@
 			</tr>
 		</c:forEach>	
 	</table>
-	</div>
 	
 	<br>
 	<div class="bbsPageForm">
