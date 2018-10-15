@@ -1,5 +1,7 @@
 package com.coffeeyo.order.model;
 
+
+
 import java.sql.Date;
 
 import com.coffeeyo.common.model.Common;

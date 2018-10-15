@@ -15,49 +15,75 @@
 </script>
 </head>
 <body>
+<span>주문서</span> <span>네비게이션바</span>
 
-	<!-- 장바구니 목록 부분 -->
-	<br>
-	<div class="board">
-		<table class="cartList">
-		<c:if test="${fn:length(requestScope.buyChkList) eq 0}">
-			<tr>
-				<th></th>
-			</tr>
-		</c:if>
-		<c:set var="sum" value="0"/>
-		<c:if test="${fn:length(requestScope.buyChkList) gt 0}">
-		  <c:forEach var="cart" items="${requestScope.buyChkList}" varStatus="status">
-		  <tr>	
-			  <td>
-			    <div class="thumbnail">
-			        <c:if test="${cart.image ne null}">
-						<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" style="cursor:pointer;"/>
-					</c:if>
-			    </div>
-			  </td>
-			  <td>
-				  ${cart.pname}<br/>
-				  ${cart.amount}<br/>
-				  ${cart.price * cart.amount} 원<br/>
-			  </td>
-		  </tr>
-		  <c:set var="sum" value="${sum + (cart.price * cart.amount)}"/>
-		  </c:forEach>
-		</c:if>
-		</table>
-		<div class="itemfooter">
-			<div>소계 : ${sum}원</div>
-    	</div>
-	</div>
-	<div>
+
+	
+	
+	
+	
+	
+<hr>
+<div class="board">
+	<form action="../order/orderProcAction.yo " method="post" id="order_form" name="order_form" >
+	    <table border="1" width="70%" align="center"  class="cartList">
+	        <tr>
+	            <th colspan="2" width="50%">상품정보</th>
+	            <th width="20%">상품 구매금액</th>
+	        </tr>
+	        <c:if test="${fn:length(requestScope.buyChkList) eq 0}">
+				<tr>
+					<th></th>
+				</tr>
+			</c:if>
+			<c:set var="sum" value="0"/>
+			<c:if test="${fn:length(requestScope.buyChkList) gt 0}">
+			  <c:forEach var="cart" items="${requestScope.buyChkList}" varStatus="status">
+			  <tr>	
+				  <th>
+				    <div class="thumbnail">
+				        <c:if test="${cart.image ne null}">
+							<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" style="cursor:pointer;" width="150px" height="150px"/>
+						</c:if>
+				    </div>
+				  </th>
+				  <td>
+					  상품명: ${cart.pname}<br/>
+					  수량: ${cart.amount}<br/>
+				  </td>
+				  <td>
+					  ${cart.price * cart.amount} 원<br/>
+				  </td>
+			  </tr>
+			  <c:set var="sum" value="${sum + (cart.price * cart.amount)}"/>
+			  </c:forEach>
+			</c:if>
+	        <tr>
+	        	<div class="itemfooter">
+			
+    	
+	            <td colspan="3" align="right">
+	                최종결제금액<br/>
+	               <div>총계 : ${sum}원</div>
+	            </td>
+	            </div>
+	        </tr>
+	        <tr>
+	            <th colspan="3">
+	                <input type="submit" value="결제하기">
+	            </th>
+	        </tr>
+	    </table>
+	</form>	
+</div>	
+	
 	
 	여기 안쪽은 주문서 작성 폼 입니다.
 	<%--
 	1. 주문서 작성 폼을 작성할때 필수값
 	<input type="hidden" name="price" value="${sum}"/>
 	
-	2. 주문서 작성 폼은 현재페이지를 호출하고 있는 컨트롤로어세 session 정보 즁 userid를 이용해서 닉네임 만 뿌려주고
+	2. 주문서 작성 폼은 현재페이지를 호출하고 있는 컨트롤러에서 session 정보 즁 userid를 이용해서 닉네임 만 뿌려주고
 	실제 주문 처리시에는 서블릿에서 구해지는 userid를 이용할 계혹이므로 사용자 주문서 작성폼은 간결하게 작성할것.
 	
 	3. 예상 소요 시간의 계산은 장바구니에 들어있는 상품중 BUYCHK = 'Y' 이것 기준으로
@@ -115,6 +141,42 @@
 	
 	</div>
 
+<%-- 선배님 작성 부분
+ <!-- 장바구니 목록 부분 -->
+	<br>
+	<div class="board">
+		<table class="cartList">
+		<c:if test="${fn:length(requestScope.buyChkList) eq 0}">
+			<tr>
+				<th></th>
+			</tr>
+		</c:if>
+		<c:set var="sum" value="0"/>
+		<c:if test="${fn:length(requestScope.buyChkList) gt 0}">
+		  <c:forEach var="cart" items="${requestScope.buyChkList}" varStatus="status">
+		  <tr>	
+			  <td>
+			    <div class="thumbnail">
+			        <c:if test="${cart.image ne null}">
+						<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" style="cursor:pointer;"/>
+					</c:if>
+			    </div>
+			  </td>
+			  <td>
+				  ${cart.pname}<br/>
+				  ${cart.amount}<br/>
+				  ${cart.price * cart.amount} 원<br/>
+			  </td>
+		  </tr>
+		  <c:set var="sum" value="${sum + (cart.price * cart.amount)}"/>
+		  </c:forEach>
+		</c:if>
+		</table>
+		<div class="itemfooter">
+			<div>소계 : ${sum}원</div>
+    	</div>
+	</div>
+	<div> --%>
 
 </body>
 </html>
