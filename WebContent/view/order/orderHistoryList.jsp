@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<div align="left">주문내역 목록 </div> <section align="right">네비게이션바</section>
+<div align="left"><table width="70%" align="center"><tr><td><h3>주문내역 목록</h3></td></tr></table> </div>
 <hr>
 <form>
     <table border="1" width="70%" align="center">
