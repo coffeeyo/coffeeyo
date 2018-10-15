@@ -35,7 +35,7 @@
 			</script>
 		</c:when>
 		<c:when test="${msg!=null && msg=='1'}">
-			<font size='6'>회원가입을 축하드립니다.</font>
+			<font size='6'>${sessionScope.nick} 님 가입을 환영합니다.</font>
 			<c:remove var="msg" scope="session"></c:remove>
 			<script>
 				$(function(){
