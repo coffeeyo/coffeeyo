@@ -186,12 +186,13 @@
 		<th>첨부파일</th>
 		<td colspan="3" align="center">
 			<c:if test="${DATA.image ne null}">
-				<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}"  class="brdImage img-rounded"/></a>
+				<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}"  class="brdImage"/></a>
 			</c:if>
 			<c:if test="${DATA.image eq null}">
 				첨부파일 없음
 			</c:if>
 		</td>
+		
 	</tr>
 	<c:if test="${sessionScope.userid eq DATA.userid}">
 	<tr>
