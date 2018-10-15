@@ -128,14 +128,11 @@
             </td>
             <td>
 					주문번호:${data.orderno}<br/>
-        			상품명: ${data.pname} <br/>
-        			상품가격: ${data.price}원<br/>
-           			옵	션: ${data.options}<br/>
-           			옵션가격: ${data.optprice}원<br/>
-           			수	량: ${data.amount}개<br/>
-           			주문자아이디: ${data.userid}
+           			주문자아이디: ${data.userid}	<br/>
+        			상품명: ${data.pname} 
+        			<c:if test="${data.amount gt 1 }"> 외 ${data.amount - 1} 건</c:if>        			
             </td>
-            <td align="center">결제금액: ${(data.price+data.optprice)*data.amount}원  <%-- 추가로 넣어줘야한다 ${data.optprice} --%></td>
+            <td align="center">결제금액: ${data.total}원  <%-- 추가로 넣어줘야한다 ${data.optprice} --%></td>
             <td align="center">주문일시: ${data.orddt} </td>
             <td align="center">
                		처리상태: ${data.status} <br/>

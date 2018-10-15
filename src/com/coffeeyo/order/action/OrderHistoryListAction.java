@@ -93,8 +93,8 @@ public class OrderHistoryListAction implements Action {
 
 		//System.out.println("CartListFormAction cartList : " + cartList);
 		// 葛胆
-		//-------------------------------其捞隆 八祸 贸府 场
 		
+		//-------------------------------其捞隆 八祸 贸府 场
 		
 		CategoryDao cateDao = CategoryDao.getInstance();
 		List<Category> cateList = null;

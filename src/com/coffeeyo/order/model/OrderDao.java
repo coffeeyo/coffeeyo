@@ -159,13 +159,17 @@ public class OrderDao {
 			if(order.getUserid() != null) {
 				sql.append("SELECT");
 				sql.append(" ORD.ORDNO as ORDERNO, ORD.USERID as USERID, TOTAL, PAYYN, ");
-				sql.append(" ORD.READYTM as READYTM, ORD.ORDDT as ORDDT, ORD.STATUS as STATUS,  ORI.OPTIONS as OPTIONS, ORI.AMOUNT as AMOUNT, ");
-				sql.append(" ORI.PRICE as PRICE, ORI.OPTPRICE as OPTPRICE ,  P.PNAME as PNAME, P.IMAGE as IMAGE, P.MAKETM as MAKETM ");
+				sql.append(" ORD.READYTM as READYTM, ORD.ORDDT as ORDDT, ORD.STATUS as STATUS,  ");
+				sql.append(" (SELECT PNAME FROM PRODUCT WHERE PIDX = ( ");
+				sql.append(" 			SELECT PIDX FROM ORDERITEM WHERE ORDNO = ORD.ORDNO AND ROWNUM = 1  ");
+				sql.append(" 		) ");
+				sql.append(" ) PNAME, ");
+				sql.append(" (SELECT IMAGE FROM PRODUCT WHERE PIDX = (  ");
+				sql.append(" 			SELECT PIDX FROM ORDERITEM WHERE ORDNO = ORD.ORDNO AND ROWNUM = 1 ");
+				sql.append(" 		) ");
+				sql.append(" ) IMAGE,  ");
+				sql.append(" (SELECT COUNT(*) cnt FROM ORDERITEM WHERE ORDNO = ORD.ORDNO) AMOUNT  ");
 				sql.append("FROM ORDERS ORD ");
-				sql.append("LEFT JOIN ORDERITEM ORI ");
-				sql.append("	ON ORD.ORDNO=ORI.ORDNO ");
-				sql.append("LEFT JOIN PRODUCT P ");
-				sql.append("	ON ORI.PIDX=P.PIDX ");
 				sql.append("WHERE ORD.USERID=? ");
 				if(startDay != null && endDay != null) {
 					sql.append(" AND TO_CHAR(ORD.ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ? ");
@@ -205,10 +209,7 @@ public class OrderDao {
 				ord.setStatus(rs.getInt("STATUS"));
 				ord.setPname(rs.getString("PNAME"));
 				ord.setImage(rs.getString("IMAGE"));
-				ord.setOptions(rs.getString("OPTIONS"));
 				ord.setAmount(rs.getInt("AMOUNT"));
-				ord.setPrice(rs.getLong("PRICE"));
-				ord.setOptprice(rs.getInt("OPTPRICE"));
 				
 				orderList.add(ord);
 			}
@@ -378,15 +379,19 @@ public class OrderDao {
 				
 				//	이것은  select 해서 orders와 orderItem과 product를 구한 것이다.
 				if(order.getUserid() != null) {
-					sql.append("SELECT");
-					sql.append(" ORD.ORDNO as ORDERNO, ORD.USERID as USERID, TOTAL, PAYYN, ");
-					sql.append(" ORD.READYTM as READYTM, ORD.ORDDT as ORDDT, ORD.STATUS as STATUS,  ORI.OPTIONS as OPTIONS, ORI.AMOUNT as AMOUNT, ");
-					sql.append(" ORI.PRICE as PRICE, ORI.OPTPRICE as OPTPRICE ,  P.PNAME as PNAME, P.IMAGE as IMAGE, P.MAKETM as MAKETM ");
+					sql.append("SELECT  ");
+					sql.append("  ORD.ORDNO as ORDERNO, ORD.USERID as USERID, TOTAL, PAYYN, ");
+					sql.append(" ORD.READYTM as READYTM, ORD.ORDDT as ORDDT, ORD.STATUS as STATUS, ");
+					sql.append(" (SELECT PNAME FROM PRODUCT WHERE PIDX = ( ");
+					sql.append(" 			SELECT PIDX FROM ORDERITEM WHERE ORDNO = ORD.ORDNO AND ROWNUM = 1  ");
+					sql.append(" 		) ");
+					sql.append(" ) PNAME, ");
+					sql.append(" (SELECT IMAGE FROM PRODUCT WHERE PIDX = (  ");
+					sql.append(" 			SELECT PIDX FROM ORDERITEM WHERE ORDNO = ORD.ORDNO AND ROWNUM = 1 ");
+					sql.append(" 		) ");
+					sql.append(" ) IMAGE,  ");
+					sql.append(" (SELECT COUNT(*) cnt FROM ORDERITEM WHERE ORDNO = ORD.ORDNO) AMOUNT  ");
 					sql.append("FROM ORDERS ORD ");
-					sql.append("LEFT JOIN ORDERITEM ORI ");
-					sql.append("	ON ORD.ORDNO=ORI.ORDNO ");
-					sql.append("LEFT JOIN PRODUCT P ");
-					sql.append("	ON ORI.PIDX=P.PIDX ");
 					if(startDay != null && endDay != null) {
 						sql.append("WHERE  ");
 						sql.append("TO_CHAR(ORD.ORDDT, 'YYYY-MM-DD') BETWEEN ? AND ? ");
@@ -425,10 +430,7 @@ public class OrderDao {
 					ord.setStatus(rs.getInt("STATUS"));
 					ord.setPname(rs.getString("PNAME"));
 					ord.setImage(rs.getString("IMAGE"));
-					ord.setOptions(rs.getString("OPTIONS"));
 					ord.setAmount(rs.getInt("AMOUNT"));
-					ord.setPrice(rs.getLong("PRICE"));
-					ord.setOptprice(rs.getInt("OPTPRICE"));
 					
 					orderList.add(ord);
 				}
