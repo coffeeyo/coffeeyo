@@ -1,19 +1,16 @@
 package bcom.coffeeyo.board.action;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.coffeeyo.common.action.Action;
-import com.coffeeyo.product.model.Category;
-import com.coffeeyo.product.model.CategoryDao;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 import bcom.coffeeyo.board.model.BoardVO;
 
-public class UpdateForm implements Action {
+public class AdmUpdateForm implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -35,12 +32,6 @@ public class UpdateForm implements Action {
 		ArrayList plist2=dao.selectEspresso();
 		ArrayList plist3=dao.selectFrappuccino();
 		
-		CategoryDao cateDao = CategoryDao.getInstance();
-		List<Category> cateList = null;
-		cateList = cateDao.getAllCategory();
-
-		request.setAttribute("cateList", cateList);
-		
 		//¸ðµ¨
 		request.setAttribute("DATA", vo);
 		request.setAttribute("CLIST", clist);
@@ -51,6 +42,6 @@ public class UpdateForm implements Action {
 		request.setAttribute("nowPage", nowPage);
 		
 		//ºä
-		return "../view/board/boardUpdateForm.jsp";
+		return "../view/board/boardAdmUpdateForm.jsp";
 	}
 }

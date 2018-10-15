@@ -41,8 +41,23 @@
 			var form=button.parents("form");
 			$(form).submit();
 		})
+		//댓글 수정취소하기
+		$(".bCBtn").click(function(){
+			var button=$(this);
+			var table=button.parents("table");
+			var id=table.attr("id");
+			$(location).attr("href","../board/boardBoardDetail.yo?reNo="+id+"&oriNo=${oriNo}&nowPage=${nowPage}");
+		})
 		//댓글 삭제하기
-	
+		$(".dCBtn").click(function(){
+			if(confirm("정말로 삭제하시겠습니까?")){
+				var button=$(this);
+				var table=button.parents("table");
+				var id=table.attr("id");
+				$(location).attr("href","../board/commentDelete.yo?reNo="+id+"&oriNo=${oriNo}&nowPage=${nowPage}");
+			}
+		})	
+		
 	})
 
 </script>
@@ -98,11 +113,19 @@
 		</td>
 	</tr>
 </table>
-<table border="1" align="center" width="600">
-	<tr align="center">
-		<td><input type="button" id="bBtn" value="목록보기" onclick="location.href='/board/boardBoardList.yo?oriNo=${oriNo}&nowPage=${nowPage }'"></td>
-	</tr>
-</table>
+<%-- 좋아요체크를 위한 form --%>
+<c:if test="${not empty sessionScope.userid}">
+	<form id="LCheckfrm" action="../board/boardAddLike.yo" method="post">
+		<input type="hidden" name="oriNo" value="${oriNo}">
+		<input type="hidden" name="nowPage" value="${nowPage}">
+		<input type="hidden" name="userid" value="${sessionScope.userid}">
+		<table border="1" align="center" width="600">
+			<tr align="center">
+				<td><input type="submit" id="LBtn" value="추천하기/추천취소" ></td>
+			</tr>
+		</table>
+	</form>
+</c:if>
 <%-- 댓글작성테이블 --%>
 <c:if test="${not empty sessionScope.userid}">
 	<form id="wrfrm" name="wrfrm" action="../board/commentWrite.yo" method="post">
@@ -111,9 +134,7 @@
 		<table width="600" border="1" align="center">
 			<tr>
 				<td><textarea name="comm" id="comm" placeholder="댓글 작성란"></textarea></td>
-				<td align="center">
-					<input type="button" id="wrBtn" value="글등록" >
-				</td>
+				<td align="center"><input type="button" id="wrBtn" value="글등록" ></td>
 			</tr>
 		</table>
 	</form>
@@ -175,16 +196,10 @@
 		</form>
 	</c:forEach>
 </c:if>
-<!--   
-
-<%-- 댓글을 삭제하기 위한 임시폼을 만들어 놓는다 --%>
-<form id="tempReFrm" action="../REBoard/ReplyDelete.re" method="post" > 
-	<input type="hidden" name="reNo"  id="tempReNo"/>
-	<input type="hidden" name="pw"  id="tempRePw"/>
-	<input type="hidden" name="oriNo" id="tempReOriNo"/>
-	<input type="hidden" name="nowPage"  id="tempReNowPage"/>
-</form>
--->
-
+<table border="1" align="center" width="600">
+	<tr align="center">
+		<td><input type="button" id="bBtn" value="목록보기" onclick="location.href='/board/boardBoardList.yo?oriNo=${oriNo}&nowPage=${nowPage }'"></td>
+	</tr>
+</table>
 </body>
 </html>

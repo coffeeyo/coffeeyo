@@ -8,7 +8,7 @@ import com.coffeeyo.common.action.Action;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 
-public class CommentDelete implements Action {
+public class AdmCommentDelete implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -33,7 +33,7 @@ public class CommentDelete implements Action {
 		request.setAttribute("nowPage", nowPage);
 		
 		//ºä
-		return "../view/board/toBoardDetail.jsp";
+		return "../view/board/toBoardAdmDetail.jsp";
 	}
 
 }

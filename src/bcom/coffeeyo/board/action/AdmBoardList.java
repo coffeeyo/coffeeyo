@@ -2,23 +2,19 @@ package bcom.coffeeyo.board.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.coffeeyo.common.action.Action;
-import com.coffeeyo.product.model.Category;
-import com.coffeeyo.product.model.CategoryDao;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 import bcom.coffeeyo.board.util.PageUtil;
 
-public class BoardList implements Action {
+public class AdmBoardList implements Action {
 
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("BoardList컨트롤러다");
-		
+		System.out.println("AdmBoardList컨트롤러다");
 		
 		//할일
 		//보고싶은 페이지를 알아낸다
@@ -57,18 +53,12 @@ public class BoardList implements Action {
 		//다음 작업에서 커넥션을 사용할 수 있다
 		dao.close();
 		
-		CategoryDao cateDao = CategoryDao.getInstance();
-		List<Category> cateList = null;
-		cateList = cateDao.getAllCategory();
-
-		req.setAttribute("cateList", cateList);
-		
 		//모델..뷰에게 MODEL을 전달한다라고 표현
 		req.setAttribute("LIST",list);
 		req.setAttribute("PINFO", pinfo);
 		req.setAttribute("COUNT", totalCount);
 	
 		//뷰에서는 이 데이터를 이용해서 목록을 출력한다
-		return "../view/board/boardList.jsp";
+		return "../view/board/boardAdmList.jsp";
 	}
 }

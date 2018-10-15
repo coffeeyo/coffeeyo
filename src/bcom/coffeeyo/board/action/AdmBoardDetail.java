@@ -3,20 +3,17 @@ package bcom.coffeeyo.board.action;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.coffeeyo.common.action.Action;
-import com.coffeeyo.product.model.Category;
-import com.coffeeyo.product.model.CategoryDao;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 import bcom.coffeeyo.board.model.BoardVO;
 
-public class BoardDetail implements Action {
+public class AdmBoardDetail implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -68,18 +65,12 @@ public class BoardDetail implements Action {
 		ArrayList list=dao.selectComment(oriNo);
 		
 		dao.close();
-		
-		CategoryDao cateDao = CategoryDao.getInstance();
-		List<Category> cateList = null;
-		cateList = cateDao.getAllCategory();
-
-		request.setAttribute("cateList", cateList);
-		
+				
 		//모델에 넘기기
 		request.setAttribute("oriNo", oriNo);
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("DATA", vo);
 		request.setAttribute("COMM", list);
-		return "../view/board/boardDetail.jsp";
+		return "../view/board/boardAdmDetail.jsp";
 	}
 }

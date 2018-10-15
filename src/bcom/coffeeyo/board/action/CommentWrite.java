@@ -27,10 +27,11 @@ public class CommentWrite implements Action {
 		dao.close();
 		
 		//¸ðµ¨
+		request.setAttribute("userid", userid);
 		request.setAttribute("oriNo", oriNo);
 		request.setAttribute("nowPage", nowPage);
 		//ºä
-		return "../view/board/commentWrite.jsp";
+		return "../view/board/toBoardDetail.jsp";
 	}
 
 }

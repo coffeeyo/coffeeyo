@@ -1,32 +1,32 @@
 package bcom.coffeeyo.board.action;
 
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.coffeeyo.common.action.Action;
-import com.coffeeyo.product.model.Category;
-import com.coffeeyo.product.model.CategoryDao;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 import bcom.coffeeyo.board.model.BoardVO;
 
-public class UpdateProc implements Action {
+public class AdmWriteProc implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("update proc입니다");
-		
+		System.out.println("자바파일로 넘어옴");
 		// 업로드 파일 사이즈
 		int fileSize= 5*1024*1024;
 		// 업로드될 폴더 절대경로
 		String uploadPath = null;
+		
 		// 파일업로드 
-		uploadPath = request.getServletContext().getRealPath("/view/upload/board");	
+		
+		uploadPath = request.getServletContext().getRealPath("/view/upload/board");
+		
 		MultipartRequest multi = new MultipartRequest
 				(request, uploadPath, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
@@ -39,55 +39,44 @@ public class UpdateProc implements Action {
 			fileName = multi.getFilesystemName(name);
 		}
 		
-		//파라미터받기
+		//파라미터 받기
+		
 		String cname=multi.getParameter("cname");
 		int cidx=Integer.parseInt(cname);
 		String pname=multi.getParameter("pname");
 		int pidx=Integer.parseInt(pname);
-		String strNo=multi.getParameter("oriNo");
-		int oriNo=Integer.parseInt(strNo);
-		String nowPage=multi.getParameter("nowPage");
 		String subject=multi.getParameter("subject");
 		String comm=multi.getParameter("comm");
-		String notiyn=multi.getParameter("notiyn");
+		String notiyn="N";
+		HttpSession session=request.getSession();
+		String userid=(String)session.getAttribute("userid");
 		
-		//공지선택을 하지 않았을 경우
-		if(notiyn==null) {
-			notiyn="N";
+		if(userid.equals("admin")) {
+			notiyn=multi.getParameter("notiyn");
 		}
 		
 		//비지니스 로직 수행
 		BoardDAO dao=new BoardDAO();
+		int bidx=dao.getSeq();
 		BoardVO vo=new BoardVO();
+		vo.setBidx(bidx);
+		vo.setUserid(userid);
 		vo.setCidx(cidx);
 		vo.setPidx(pidx);
 		vo.setSubject(subject);
 		vo.setComm(comm);
 		vo.setImage(fileName);
 		vo.setNotiyn(notiyn);
-		
-		if(fileName!=null) {
-			//파일선택할때
-			System.out.println("파일선택");
-			dao.updateBoard(1, oriNo, vo);			
-		}else{
-			System.out.println("파일선택X");
-			//파일선택안할때
-			dao.updateBoard(2, oriNo, vo);
-		}
+	
+		dao.insertBoard(vo);
 		dao.close();
-		
-		CategoryDao cateDao = CategoryDao.getInstance();
-		List<Category> cateList = null;
-		cateList = cateDao.getAllCategory();
 
-		request.setAttribute("cateList", cateList);
-		
-		//모델
-		request.setAttribute("oriNo", oriNo);
-		request.setAttribute("nowPage", nowPage);
+		System.out.println("bidx="+bidx);
+		System.out.println("cidx="+cidx+"pidx="+pidx);
+		System.out.println(fileName+','+notiyn);
+		System.out.println(subject+','+comm+','+userid);
 		//뷰
-		return "../view/board/boardUpdateProc.jsp";
+		return "../view/board/boardAdmWriteProc.jsp";
 	}
 
 }

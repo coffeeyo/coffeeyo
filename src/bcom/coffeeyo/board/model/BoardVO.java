@@ -20,6 +20,7 @@ public class BoardVO {
 	private String cname;
 	private int bcidx;
 	private int status;
+	private int likeidx;
 	
 	public int getBcidx() {
 		return bcidx;
@@ -140,6 +141,12 @@ public class BoardVO {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public int getLikeidx() {
+		return likeidx;
+	}
+	public void setLikeidx(int likeidx) {
+		this.likeidx = likeidx;
 	}
 	
 }

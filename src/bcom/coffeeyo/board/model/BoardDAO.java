@@ -24,9 +24,122 @@ public class BoardDAO
 	
 	//함수 추가
 	
+	//조회수 증가 처리
+	public void updateBoardReadCnt(int oriNo) {
+		String sql="UPDATE board SET readcnt=readcnt+1 WHERE bidx=?";
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		try {
+			stmt.setInt(1, oriNo);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("조회수 증가 처리중 에러발생="+e);
+		}
+		db.close(stmt);
+	}
+	//게시판의 좋아요 개수 처리
+	public void updateBoardLikeCount(int status, int oriNo) {
+		String sql="";
+		if (status==1) {//좋아요 감소
+			sql="UPDATE board SET likecnt=likecnt-1 WHERE bidx=? ";
+		}
+		else {//좋아요 증가
+			sql="UPDATE board SET likecnt=likecnt+1 WHERE bidx=? ";
+		}
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		ResultSet rs=null;
+		try {
+			stmt.setInt(1, oriNo);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시글 좋아요 증가 처리 도중 에러발생="+e);
+		}
+		db.close(stmt);
+	}
+	//좋아요 개수 구하기
+	public int selectLikeCount(int oriNo) {
+		
+		int likeCount=0;
+		String sql=BoardSql.getSQL(BoardSql.SELECT_TOTALLIKECHECK);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		ResultSet rs=null;
+		try {
+			stmt.setInt(1, oriNo);
+			rs=stmt.executeQuery();
+			rs.next();
+			likeCount=rs.getInt("CNT");
+			db.close(rs);
+		} catch (SQLException e) {
+			System.out.println("좋아요 개수 구하는 도중 에러발생="+e);
+		}
+		db.close(stmt);
+		return likeCount;
+	}
+	//좋아요 체크 상태값 변경
+	public void updateLikeCheck(int status, int likeidx) {
+		String sql="";
+		if(status==1) {//(추천함1->추천안함0)
+			sql="UPDATE likecheck SET status=0 WHERE likeidx=?";
+		}
+		else {//(추천안함0->추천함1)
+			sql="UPDATE likecheck SET status=1 WHERE likeidx=?";
+		}
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		try {
+			stmt.setInt(1, likeidx);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("좋아요 체크 상태값 변경 중 에러발생="+e);
+		}
+		db.close(stmt);
+	}
+	//좋아요 체크 테이블 검색
+	public BoardVO selectLikeCheck(int oriNo, String userid) {
+		String sql=BoardSql.getSQL(BoardSql.SELECT_LIKECHECK);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		BoardVO vo=new BoardVO();
+		try {
+			stmt.setInt(1, oriNo);
+			stmt.setString(2, userid);
+			ResultSet rs=stmt.executeQuery();
+			while(rs.next()) {
+				vo.setLikeidx(rs.getInt("LIKEIDX"));
+				vo.setBidx(rs.getInt("BIDX"));
+				vo.setUserid(rs.getString("USERID"));
+				vo.setStatus(rs.getInt("STATUS"));	
+			}
+			db.close(rs);		
+		} catch (Exception e) {
+			System.out.println("좋아요 체크 테이블 검색 중 오류발생="+e);
+		}
+		db.close(stmt);
+		return vo;
+	}
+	//좋아요 체크 테이블에 추가
+	public void insertLikeCheck(int seq, int oriNo, String userid) {
+		String sql=BoardSql.getSQL(BoardSql.INSERT_LIKECHECK);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		try {
+			stmt.setInt(1, seq);
+			stmt.setInt(2, oriNo);
+			stmt.setString(3, userid);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("좋아요 체크 테이블 추가 중 오류발생="+e);
+		}
+		db.close(stmt);
+	}
 	//댓글 삭제하기
 	public void deleteComment(int reNo, int oriNo) {
-		
+		String sql=BoardSql.getSQL(BoardSql.DELETE_COMMENT);
+		PreparedStatement stmt=db.getSTMT(con, sql);
+		try {
+			stmt.setInt(1, reNo);
+			stmt.setInt(2, oriNo);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("댓글 삭제처리 중 오류발생");
+		}
+		db.close(stmt);
 	}
 	//댓글 수정하기
 	public void updateComment(int reNo, int oriNo, String comm) {
@@ -69,7 +182,8 @@ public class BoardDAO
 				stmt.setString(3, vo.getSubject());
 				stmt.setString(4, vo.getComm());
 				stmt.setString(5, vo.getImage());
-				stmt.setInt(6, oriNo);
+				stmt.setString(6, vo.getNotiyn());
+				stmt.setInt(7, oriNo);
 				stmt.executeUpdate();
 			} catch (Exception e) {
 				System.out.println("파일선택한 게시글 수정중 오류발생="+e);
@@ -83,7 +197,8 @@ public class BoardDAO
 				stmt.setInt(2, vo.getPidx());
 				stmt.setString(3, vo.getSubject());
 				stmt.setString(4, vo.getComm());
-				stmt.setInt(5, oriNo);
+				stmt.setString(5, vo.getNotiyn());
+				stmt.setInt(6, oriNo);
 				stmt.executeUpdate();
 			} catch (Exception e) {
 				System.out.println("파일선택안한 게시글 수정중 오류발생="+e);
@@ -142,6 +257,7 @@ public class BoardDAO
 			stmt.setInt(1, oriNo);
 			rs=stmt.executeQuery();
 			rs.next();
+			vo.setNotiyn(rs.getString("NOTIYN"));
 			vo.setUserid(rs.getString("USERID"));
 			vo.setPidx(rs.getInt("PIDX"));
 			vo.setCidx(rs.getInt("CIDX"));
@@ -249,6 +365,7 @@ public class BoardDAO
 
 				//글번호, 상품명, 닉네임, 제목, 조회수, 추천수, 작성일
 				BoardVO vo=new BoardVO();
+				vo.setNotiyn(rs.getString("NOTIYN"));
 				vo.setBidx(rs.getInt("BIDX"));
 				vo.setPname(rs.getString("PNAME"));
 				vo.setNick(rs.getString("NICK"));
@@ -328,30 +445,9 @@ public class BoardDAO
 		return totalCount;
 	}
 	
-	//분류정보 가져오기(사용자)
+	//분류정보 가져오기
 	public ArrayList selectCategory() {
 		String sql="select cidx, cname from category where status=1 order by cname";
-		Statement stmt=db.getSTMT(con);
-		ArrayList list=new ArrayList();
-		try {
-			ResultSet rs=stmt.executeQuery(sql);
-			while(rs.next()) {
-				BoardVO vo=new BoardVO();
-				vo.setCidx(rs.getInt("CIDX"));
-				vo.setCname(rs.getString("CNAME"));
-				list.add(vo);
-			}
-			db.close(rs);
-		} catch (Exception e) {
-			System.out.println("분류정보 가져오는 중 발생한 에러="+e);
-		}
-		db.close(stmt);
-		return list;	
-	}
-	
-	//분류정보 가져오기(관리자)
-	public ArrayList selectAdmCategory() {
-		String sql="select cidx, cname from category order by cname";
 		Statement stmt=db.getSTMT(con);
 		ArrayList list=new ArrayList();
 		try {
@@ -509,4 +605,5 @@ public class BoardDAO
 	public void close() {
 		db.close(con);
 	}
+
 }

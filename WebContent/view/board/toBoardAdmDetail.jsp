@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:redirect url="../admin/boardBoardList.yo">
+<c:redirect url="../admin/boardBoardDetail.yo">
+	<c:param name="oriNo" value="${oriNo}" />
+	<c:param name="nowPage" value="${nowPage}" />
 </c:redirect>
 </body>
 </html>

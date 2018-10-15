@@ -23,13 +23,13 @@
 		//글쓰기 폼을 요청
 		//자바스크립트에서의 문서이동
 		//location객체의 href속성이용
-		location.href="../board/boardWriteForm.yo"
+		location.href="../admin/boardWriteForm.yo"
 	}
 	function AllList(){
-		location.href="../board/boardBoardList.yo";
+		location.href="../admin/boardBoardList.yo";
 	}
 	function MyList(){
-		location.href="../board/boardBoardList.yo?opt=4&condition=${sessionScope.userid}";
+		location.href="../admin/boardBoardList.yo?opt=4&condition=${sessionScope.userid}";
 	}
 </script>
 </head>
@@ -37,7 +37,7 @@
 <h1>게시판 목록</h1>
 게시물 개수 : ${COUNT}
 <%-- 검색부분 --%>
-<form action="../board/boardBoardList.yo" method="post">
+<form action="../admin/boardBoardList.yo" method="post">
 	<table border="1" align="center" width="600">
 		<tr>
 			<td>
@@ -88,7 +88,7 @@
 				</c:if>
 				<td>${data.pname}</td>
 				<td>${data.nick}</td>
-				<td><a href="../board/boardBoardDetail.yo?oriNo=${data.bidx}&nowPage=${PINFO.nowPage}">${data.getShortSubject()}</a></td>
+				<td><a href="../admin/boardBoardDetail.yo?oriNo=${data.bidx}&nowPage=${PINFO.nowPage}">${data.getShortSubject()}</a></td>
 				<td>${data.readcnt}</td>
 				<td>${data.likecnt}</td>
 				<td>${data.createdt}</td>
@@ -107,12 +107,12 @@
 			</c:if>
 			<c:if test="${PINFO.startPage ne 1}">
 				<%-- 링크는 목록보기를 요청 + 원하는 페이지를 알려주면 된다 --%>
-				<a href="../board/boardBoardList.yo?nowPage=${PINFO.startPage-1}">[이전]</a>		
+				<a href="../admin/boardBoardList.yo?nowPage=${PINFO.startPage-1}">[이전]</a>		
 			</c:if>
 			
 			<%-- [1][2][3]만들기 --%>
 			<c:forEach var="page" begin="${PINFO.startPage}"  end="${PINFO.endPage }">
-				<a href="../board/boardBoardList.yo?nowPage=${page}">[${page}]</a>
+				<a href="../admin/boardBoardList.yo?nowPage=${page}">[${page}]</a>
 			</c:forEach>
 	
 			<%-- 다음링크만들기 --%>
@@ -120,7 +120,7 @@
 				[다음]
 			</c:if>
 			<c:if test="${PINFO.endPage ne PINFO.totalPage}">
-				<a href="../board/boardBoardList.yo?nowPage=${PINFO.endPage+1}">[다음]</a>
+				<a href="../admin/boardBoardList.yo?nowPage=${PINFO.endPage+1}">[다음]</a>
 			</c:if>
 			</td>
 		</tr>

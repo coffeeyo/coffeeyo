@@ -40,6 +40,7 @@ public class WriteProc implements Action {
 		}
 		
 		//파라미터 받기
+		
 		String cname=multi.getParameter("cname");
 		int cidx=Integer.parseInt(cname);
 		String pname=multi.getParameter("pname");
@@ -50,6 +51,9 @@ public class WriteProc implements Action {
 		HttpSession session=request.getSession();
 		String userid=(String)session.getAttribute("userid");
 		
+		if(userid.equals("admin")) {
+			notiyn=multi.getParameter("notiyn");
+		}
 		
 		//비지니스 로직 수행
 		BoardDAO dao=new BoardDAO();

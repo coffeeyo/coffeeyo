@@ -8,32 +8,32 @@ import com.coffeeyo.common.action.Action;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 
-public class CommentDelete implements Action {
+public class AdmCommentUpdate implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		//파라미터받기
 		String reNo=request.getParameter("reNo");
 		int bcidx=Integer.parseInt(reNo);
 		String oriNo=request.getParameter("oriNo");
 		int bidx=Integer.parseInt(oriNo);
 		String nowPage=request.getParameter("nowPage");
+		String comm=request.getParameter("comm");
 		HttpSession session=request.getSession();
 		String userid=(String)session.getAttribute("userid");
-		
-		//비지니스로직수행
+
+		//비지니스로직
 		BoardDAO dao=new BoardDAO();
-		dao.deleteComment(bcidx, bidx);
+		dao.updateComment(bcidx, bidx,comm);
 		dao.close();
 		
 		//모델
 		request.setAttribute("userid", userid);
-		request.setAttribute("oriNo", oriNo);
+		request.setAttribute("oriNo", bidx);
 		request.setAttribute("nowPage", nowPage);
 		
 		//뷰
-		return "../view/board/toBoardDetail.jsp";
+		return "../view/board/toBoardAdmDetail.jsp";
 	}
 
 }

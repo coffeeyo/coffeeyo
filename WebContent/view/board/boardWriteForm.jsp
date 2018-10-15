@@ -41,6 +41,7 @@
 			var cidx=$(this).val();
 			if(cidx==0){
 				var option='<option>선택하세요</option>'
+				option+='<option id="없음" value="0">없음</option>';
 				$("select[name='pname']").html(option)
 			}
 			if(cidx==1){
@@ -66,11 +67,23 @@
 <h1>게시판 등록</h1>
 <form id="frm" name="frm" action="../board/boardWriteProc.yo" method="post" enctype="multipart/form-data">
 	<table border="1" align="center" width="600">
+		<c:if test="${sessionScope.userid eq 'admin' }">
+		<tr>
+			<th>공지유무</th>
+			<td>
+				<select id="notiyn" name="notiyn">
+					<option value="N" selected>NO</option>
+					<option value="Y">YES</option>
+				</select>
+			</td>
+		</tr>
+		</c:if>
 		<tr>
 			<th>상품분류</th>
 			<td>
 				<select id="cname" name="cname">
-					<option value="0">선택하세요</option>
+					<option>선택하세요</option>
+					<option value="0">없음</option>
 					<c:forEach var="data" items="${CLIST}">
 						<option id="${data.cname }"  value="${data.cidx }">${data.cname }</option>
 					</c:forEach> 	

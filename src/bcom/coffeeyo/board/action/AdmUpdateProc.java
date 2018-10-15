@@ -1,21 +1,18 @@
 package bcom.coffeeyo.board.action;
 
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.coffeeyo.common.action.Action;
-import com.coffeeyo.product.model.Category;
-import com.coffeeyo.product.model.CategoryDao;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 import bcom.coffeeyo.board.model.BoardVO;
 
-public class UpdateProc implements Action {
+public class AdmUpdateProc implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -77,17 +74,11 @@ public class UpdateProc implements Action {
 		}
 		dao.close();
 		
-		CategoryDao cateDao = CategoryDao.getInstance();
-		List<Category> cateList = null;
-		cateList = cateDao.getAllCategory();
-
-		request.setAttribute("cateList", cateList);
-		
 		//¸ðµ¨
 		request.setAttribute("oriNo", oriNo);
 		request.setAttribute("nowPage", nowPage);
 		//ºä
-		return "../view/board/boardUpdateProc.jsp";
+		return "../view/board/boardAdmUpdateProc.jsp";
 	}
 
 }

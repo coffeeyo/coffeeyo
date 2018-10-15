@@ -9,14 +9,19 @@
 <script src="../js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function(){
+		//공지 초기값 지정
+		$("#notiyn option[id='${DATA.notiyn}']").attr("selected", true);
+	
 		//분류명 초기값 지정
 		$("#cname option[id='${DATA.cname}']").attr("selected", true);
+		
 		//분류 변경될 때마다 상품목록 새로 불러오기
 		$("select[name='cname']").change(function(){
 			var cidx=$(this).val();
 			$("#pname").html();
 			if(cidx==0){
 				var option='<option>선택하세요</option>'
+				option+='<option id="없음" value="0">없음</option>';
 				$("select[name='pname']").html(option)
 			}
 			if(cidx==1){
@@ -71,11 +76,23 @@
 	<input type="hidden" id="nowPage" name="nowPage" value="${nowPage}">
 	
 	<table border="1" align="center" width="600">
+		<c:if test="${sessionScope.userid eq 'admin' }"> 
+		<tr>
+			<th>공지유무</th>
+			<td>
+				<select id="notiyn" name="notiyn">
+					<option id="N" value="N" >NO</option>
+					<option id="Y" value="Y">YES</option>
+				</select>
+			</td>
+		</tr>
+		</c:if>
 		<tr>
 			<th>상품분류</th>
 			<td>
 				<select id="cname" name="cname">
-					<option value="0">선택하세요</option>
+					<option>선택하세요</option>
+					<option id="없음" value="0">없음</option>
 					<c:forEach var="data" items="${CLIST}">
 						<option id="${data.cname }"  value="${data.cidx }">${data.cname }</option>
 					</c:forEach> 	

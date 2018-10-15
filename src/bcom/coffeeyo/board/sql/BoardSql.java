@@ -31,14 +31,20 @@ public class BoardSql {
 	public static final int SELECT_BOARDLIST_SC=11;
 	//닉네임으로 게시물 목록 검색
 	public static final int SELECT_BOARDLIST_N=12;
-	//닉네임으로 게시물 목록 검색
+	//아이디로 게시물 목록 검색
 	public static final int SELECT_BOARDLIST_ID=13;
 	//댓글 등록하기 질의
 	public static final int INSERT_COMMENT=14;
 	//댓글 수정하기 질의
 	public static final int UPDATE_COMMENT=16;
 	//댓글 삭제하기 질의
-	public static final int DELETE_COMMENT=17;	
+	public static final int DELETE_COMMENT=17;
+	//좋아요체크 게시물 생성질의
+	public static final int INSERT_LIKECHECK=18;
+	//좋아요체크 게시물 검색
+	public static final int SELECT_LIKECHECK=19;
+	//좋아요체크 수 검색
+	public static final int SELECT_TOTALLIKECHECK=20;
 	
 	//질의명령을 달라고 요구하면 질의명령을 주는 함수
 	public static String getSQL(int code) {
@@ -46,13 +52,44 @@ public class BoardSql {
 		StringBuffer buff = new StringBuffer();
 	
 		switch(code) {
+		case 20://SELECT_TOTALLIKECHECK
+			buff.append("SELECT ");
+			buff.append("    count(*) AS cnt ");
+			buff.append("FROM ");
+			buff.append("    likecheck ");
+			buff.append("WHERE ");
+			buff.append("    bidx=? ");
+			buff.append("AND ");
+			buff.append("    status=1 ");
+			break;
+		case 19://SELECT_LIKECHECK
+			buff.append("SELECT ");
+			buff.append("    likeidx, bidx, userid, status ");
+			buff.append("FROM ");
+			buff.append("    likecheck ");
+			buff.append("WHERE ");
+			buff.append("    bidx=? ");
+			buff.append("AND ");
+			buff.append("    userid=? ");
+			buff.append("ORDER BY ");
+			buff.append("    bidx ASC ");
+			break;
+		case 18://INSERT_LIKECHECK
+			buff.append("INSERT INTO ");
+			buff.append("    likecheck ");
+			buff.append("    (likeidx, bidx, userid) ");
+			buff.append("VALUES ");
+			buff.append("    (?,?,?)");
+			break;
 		case 17://DELETE_COMMENT
-			buff.append("");
-			buff.append("");
-			buff.append("");
-			buff.append("");
-			buff.append("");
-			buff.append("");
+			buff.append("UPDATE ");
+			buff.append("    boardcomm ");
+			buff.append("SET ");
+			buff.append("    status=2 ");
+			buff.append("WHERE ");
+			buff.append("    bcidx=? ");
+			buff.append("AND ");
+			buff.append("    bidx=? ");
 			break;
 		case 16://UPDATE_COMMENT
 			buff.append("UPDATE ");
@@ -73,6 +110,7 @@ public class BoardSql {
 			buff.append("    pidx=?, ");
 			buff.append("    subject=?, ");
 			buff.append("    comm=?, ");
+			buff.append("    notiyn=? ,");
 			buff.append("    updatedt=SYSDATE ");
 			buff.append("WHERE ");
 			buff.append("    bidx=?");
@@ -84,49 +122,49 @@ public class BoardSql {
 			buff.append("    (?,?,?,?,SYSDATE,1)");
 			break;
 		case 13://SELECT_BOARDLIST_ID
-			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt ");
+			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt, notiyn ");
 			buff.append("    FROM board b, product p, member m ");
 			buff.append("    WHERE b.pidx=p.pidx ");
 			buff.append("        AND m.userid=b.userid ");
 			buff.append("        AND b.userid=? ");
 			buff.append("        AND b.status=1 ");
-			buff.append("            ORDER BY notiyn ASC, bidx DESC ");
+			buff.append("            ORDER BY notiyn DESC, bidx DESC ");
 			break;
 		case 12://SELECT_BOARDLIST_N
-			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt ");
+			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt, notiyn ");
 			buff.append("    FROM board b, product p, member m ");
 			buff.append("    WHERE b.pidx=p.pidx ");
 			buff.append("        AND m.userid=b.userid ");
 			buff.append("        AND nick like ? ");
 			buff.append("        AND b.status=1 ");
-			buff.append("            ORDER BY notiyn ASC, bidx DESC ");
+			buff.append("            ORDER BY notiyn DESC, bidx DESC ");
 			break;
 		case 11://SELECT_BOARDLIST_SC
-			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt ");
+			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt, notiyn ");
 			buff.append("    FROM board b, product p, member m ");
 			buff.append("    WHERE b.pidx=p.pidx ");
 			buff.append("        AND m.userid=b.userid ");
 			buff.append("        AND (subject like ? OR b.comm like ?) ");
 			buff.append("        AND b.status=1 ");
-			buff.append("            ORDER BY notiyn ASC, bidx DESC ");
+			buff.append("            ORDER BY notiyn DESC, bidx DESC ");
 			break;
 		case 10://SELECT_BOARDLIST_C
-			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt ");
+			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt, notiyn ");
 			buff.append("    FROM board b, product p, member m ");
 			buff.append("    WHERE b.pidx=p.pidx ");
 			buff.append("        AND m.userid=b.userid ");
 			buff.append("        AND b.comm like ? ");
 			buff.append("        AND b.status=1 ");
-			buff.append("            ORDER BY notiyn ASC, bidx DESC ");
+			buff.append("            ORDER BY notiyn DESC, bidx DESC ");
 			break;
 		case 9://SELECT_BOARDLIST_S
-			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt ");
+			buff.append("SELECT bidx, pname, nick, subject, readcnt, likecnt, b.createdt, notiyn ");
 			buff.append("    FROM board b, product p, member m ");
 			buff.append("    WHERE b.pidx=p.pidx ");
 			buff.append("        AND m.userid=b.userid ");
 			buff.append("        AND subject like ? ");
 			buff.append("        AND b.status=1 ");
-			buff.append("            ORDER BY notiyn ASC, bidx DESC ");
+			buff.append("            ORDER BY notiyn DESC, bidx DESC ");
 			break;
 			
 		case 8://DELETE_BOARD
@@ -147,6 +185,7 @@ public class BoardSql {
 			buff.append("    subject=?, ");
 			buff.append("    comm=?, ");
 			buff.append("    image=? ,");
+			buff.append("    notiyn=? ,");
 			buff.append("    updatedt=SYSDATE ");
 			buff.append("WHERE ");
 			buff.append("    bidx=?");
@@ -168,7 +207,7 @@ public class BoardSql {
 			break;
 			
 		case 5://SELECT_DETAIL
-			buff.append("SELECT b.userid, p.pidx, c.cidx, cname, pname, nick, subject, b.comm, b.image, likecnt, readcnt, b.createdt ");
+			buff.append("SELECT b.userid, p.pidx, c.cidx, cname, pname, nick, subject, b.comm, b.image, likecnt, readcnt, b.createdt, notiyn ");
 			buff.append("    FROM board b, category c, product p, member m ");
 			buff.append("    WHERE b.cidx=c.cidx ");
 			buff.append("        AND ");
@@ -215,7 +254,8 @@ public class BoardSql {
 			buff.append("    subject, ");
 			buff.append("	    readcnt, ");
 			buff.append("    likecnt, ");
-			buff.append("    board.createdt ");
+			buff.append("    board.createdt, ");
+			buff.append("    notiyn ");
 			buff.append("from ");
 			buff.append("    board,product,member ");
 			buff.append("where ");
@@ -224,7 +264,7 @@ public class BoardSql {
 			buff.append("    board.userid=member.userid ");
 			buff.append("and ");
 			buff.append("    board.status=1 ");
-			buff.append("order by notiyn asc, bidx desc");
+			buff.append("order by notiyn desc, bidx desc");
 			break;
 		}
 		return 	buff.toString();
