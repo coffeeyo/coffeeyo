@@ -322,7 +322,8 @@ public class ProductCommDao {
 			sql.delete(0, sql.toString().length());
 			
 			rs = pstmt.executeQuery();
-			if(rs.next())	result = rs.getFloat(1);
+			if(rs.next())
+				result = rs.getFloat(1);
 			DBConnection.close(rs);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
