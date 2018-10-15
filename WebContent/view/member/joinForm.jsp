@@ -139,7 +139,7 @@
 					<td id="title">아이디</td>
 					<td>
 						<input type="text" name="userid" maxlength="50" onkeydown="inputIdChk()">
-						<input type="button" value="중복확인" onclick="openIdChk()">	
+						<input type="button" value="중복확인" class="btn btn-info"  onclick="openIdChk()">	
 						<input type="hidden" name="idDuplication" value="idUncheck" >
 					</td>
 				</tr>
@@ -169,7 +169,7 @@
 					<td id="title">닉네임</td>
 					<td>
 						<input type="text" name="nick" maxlength="50" onkeydown="inputNickChk()">
-						<input type="button" value="중복확인" onclick="openNickChk()">	
+						<input type="button" value="중복확인" class="btn btn-info"  onclick="openNickChk()">	
 						<input type="hidden" name="nickDuplication" value="nickUncheck" >
 					</td>
 				</tr>
@@ -190,8 +190,8 @@
 				</tr>
 			</table>
 			<br>
-			<input type="submit" value="가입"/>  
-			<input type="button" value="취소" onclick="goFirstForm()">
+			<input type="submit" value="가입" class="btn btn-success" />  
+			<input type="button" value="취소"  class="btn btn-default" onclick="goFirstForm()">
 		</form>
 </div>
 </body>
