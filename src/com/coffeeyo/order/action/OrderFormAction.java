@@ -50,7 +50,7 @@ public class OrderFormAction implements Action {
 		Cart cart = new Cart();
 		cart.setUserid(id);
 		cart.setBuychk("Y");
-		
+		//
 		//	tm은 카트에서 제조소요시간을 불러와서 담은 변수이다.
 		int tm	=	dao.getReadyTime(cart);
 		
