@@ -24,7 +24,6 @@
 	<form id="resFrm" name="resFrm" action="../member/memberUpdateFormAction.yo" method="post">
 		<input type="hidden" id="userid" name="userid" /> 
 	</form>
-	<c:set var="msg" value="${sessionScope.msg}" scope="session" />
 	<c:choose>
 		<c:when test="${msg!=null && msg=='0'}">
 			<font size='6'>회원정보가 수정되었습니다.</font>

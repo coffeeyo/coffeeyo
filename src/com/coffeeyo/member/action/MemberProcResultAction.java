@@ -11,7 +11,9 @@ public class MemberProcResultAction implements Action {
 			HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8"); // ÀÎÄÚµù
-   		
+		String msg = request.getParameter("msg");
+		request.setAttribute("msg", msg);
+		
 		return "/view/member/resultForm.jsp";
 	}
 }
