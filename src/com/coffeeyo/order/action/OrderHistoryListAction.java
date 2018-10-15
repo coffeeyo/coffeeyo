@@ -70,15 +70,17 @@ public class OrderHistoryListAction implements Action {
 		// 비즈니스로직
 		
 		// 검색조건과 내용을 Map에 담는다.
+		Order ord = new Order();
+		
 		HashMap<String, Object> listOpt = new HashMap<String, Object>();
 		listOpt.put("startDay", startDay);
 		listOpt.put("endDay", endDay);
+		listOpt.put("userId", id);
 
 		OrderDao dao = OrderDao.getInstance();
 		
 		int listCount = dao.getOrderCount(listOpt);
-		
-		Order ord = new Order();
+				
 		ord.setUserid(id);
 		
 		//페이지 정보를 만들어 놓자
