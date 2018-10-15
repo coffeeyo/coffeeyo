@@ -111,7 +111,7 @@
             </th>
         </tr>
     </table>
-    <table border="1" width="70%" align="center">
+    <table width="70%" align="center">
         <tr>
             <td colspan="2" align="center"><h4>상품정보</h4></td>
             <td>결제금액</td>
