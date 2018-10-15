@@ -12,6 +12,14 @@
 <link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 <meta charset="UTF-8">
     <title>orderHistoryList</title>
+    <style>
+    	.width70{
+    		width:70%;
+    		border-bottom: 2px solid #77563c;
+    	}
+    		.style1 tr:hover { 
+		background-color: #EFE4B0; 
+    </style>
     <script src="jquery-3.3.1.min.js"></script>
     <script>
 	    function f1(days){
@@ -92,10 +100,10 @@
 
 </head>
 <body>
-<div align="left"><table width="70%" align="center"><tr><td><h3>주문내역 목록</h3></td></tr></table> </div>
+<table width="70%" align="center" ><tr><td><h2>주문내역 목록</h2></td></tr></table> 
 <hr>
 <form action="/order/orderHistoryListAction.yo" method="post">
-    <table border="1" width="70%" align="center">
+    <table class="width70" align="center" >
         <tr>
             <th>기간별</th>
             <th><input type="button" onclick="f1('1')" value="오늘"></th>
@@ -111,22 +119,23 @@
             </th>
         </tr>
     </table>
-    <table width="70%" align="center">
-        <tr>
-            <td colspan="2" align="center"><h4>상품정보</h4></td>
-            <td>결제금액</td>
-            <td>주문일시</td>
-            <td>상품상세보기 및 상품평보기</td>
+    <table  align="center" class="style1">
+        <tr class="width70">
+        	<td><h4>상품이미지</h4></td>
+            <td><h4>상품정보</h4></td>
+            <td><h4>결제금액</h4></td>
+            <td><h4>주문일시</h4></td>
+            <td><h4>상품상세보기 및 상품평보기</h4></td>
         </tr>
         <c:forEach var="data" items="${orderList}">
-        <tr>
-            <td align="center">
+        <tr style="border-bottom: 2px solid #77563c;">
+            <td>
                 <a href="../order/orderHistoryDetailAction.yo?orderno=${data.orderno}">
                     <img src="../view/upload/product/${data.image}" width="150px" height="150px"/>
                     주문내역상세보기
                 </a>
             </td>
-            <td>
+            <td >
 					주문번호:${data.orderno}<br/>
 					주문자아이디: ${data.userid}	<br/>
         			상품명: ${data.pname} <c:if test="${data.amount gt 1 }"> 외 ${data.amount - 1} 건</c:if> 

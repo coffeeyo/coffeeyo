@@ -12,6 +12,12 @@
 <link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 <meta charset="UTF-8">
 <title>orderHistoryListAdm.jsp</title>
+	<style>
+    	.width70{
+    		width:70%;
+    		border-bottom: 2px solid #77563c;
+    	}
+    </style>
     <script src="jquery-3.3.1.min.js"></script>
     <script>
 	    function f1(days){
@@ -92,10 +98,10 @@
 
 </head>
 <body>
-<span>주문현황 목록</span> <span>네비게이션바</span>
+<table width="70%" align="center" ><tr><td><h2>주문현황 목록</h2></td></tr></table>
 <hr>
 <form action="/admin/orderHistoryListAction.yo" method="post">
-    <table border="1" width="70%" align="center">
+    <table class="width70" align="center" >
         <tr>
             <th>기간별</th>
             <th><input type="button" onclick="f1('1')" value="오늘"></th>
@@ -111,15 +117,16 @@
             </th>
         </tr>
     </table>
-    <table border="1" width="70%" align="center">
-        <tr>
-            <td colspan="2" align="center">상품정보</td>
-            <td align="center">결제금액</td>
-            <td align="center">주문일시</td>
-            <td align="center">처리상태</td>
+    <table  align="center">
+        <tr class="width70">
+            <td><h4>상품이미지</h4></td>
+            <td><h4>상품정보</h4></td>
+            <td><h4>결제금액</h4></td>
+            <td><h4>주문일시</h4></td>
+            <td><h4>처리상태</h4></td>
         </tr>
         <c:forEach var="data" items="${orderList}">
-        <tr>
+        <tr style="border-bottom: 2px solid #77563c;">
             <td align="center">
                 <a href="../admin/orderHistoryDetailAction.yo?orderno=${data.orderno}&userid=${data.userid}">
                     <img src="../view/upload/product/${data.image}" width="150px" height="150px"/>
