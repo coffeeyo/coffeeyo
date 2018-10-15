@@ -17,6 +17,9 @@
     		width:70%;
     		border-bottom: 2px solid #77563c;
     	}
+    	.style1 tr:hover { 
+		background-color: #EFE4B0; 
+		}
     </style>
     <script src="jquery-3.3.1.min.js"></script>
     <script>
@@ -117,7 +120,7 @@
             </th>
         </tr>
     </table>
-    <table  align="center">
+    <table  align="center" class="style1">
         <tr class="width70">
             <td><h4>상품이미지</h4></td>
             <td><h4>상품정보</h4></td>

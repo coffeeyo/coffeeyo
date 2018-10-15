@@ -19,6 +19,7 @@
     	}
     		.style1 tr:hover { 
 		background-color: #EFE4B0; 
+		}
     </style>
     <script src="jquery-3.3.1.min.js"></script>
     <script>
