@@ -120,8 +120,6 @@
 	<div class="top_title" >
 		<p>회원가입</p>
 	</div>
-	<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
-	<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
 	<form method="post" action="/member/joinProcAction.yo" 
 			name="userInfo" onsubmit="return checkValue()">
 		<table class="inner_tb">
