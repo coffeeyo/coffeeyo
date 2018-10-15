@@ -4,6 +4,7 @@
     </decorator>
     
     <decorator name="popup" page="popup_decorator.jsp">
+        <pattern>/popup/*</pattern>
         <pattern>/view/popup/*</pattern>
     </decorator>
     
