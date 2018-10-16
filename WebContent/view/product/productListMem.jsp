@@ -63,7 +63,7 @@ li{float:left;padding:10px;}
 	</td>
 </tr>
 </table>	
- --%>
+
 <table class="top_b">
 	<tr>
 		<td class="incontent" >[전체 상품 개수: ${requestScope.listCount}]</td>
@@ -76,6 +76,7 @@ li{float:left;padding:10px;}
 		</td>
 	</tr>
 </table>
+ --%>
 	<div id="listbig">
 		<ul>
 			<c:if test="${fn:length(requestScope.prodList) > 0}"> 

@@ -34,7 +34,7 @@
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 22px;
+    padding: 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -506,7 +506,7 @@
 <!-- 댓글 부분 -->
 	<div class="Reviews">
 		<div class="grade">고객총평점:  
-										<c:if test="${commentAvg==0}">
+										<c:if test="${commentAvg>=0 && commentAvg<=0.9}">
 								        	☆☆☆☆☆
 								        </c:if>
 								        <c:if test="${commentAvg==1}">
@@ -515,7 +515,7 @@
 								        <c:if test="${commentAvg==2}">
 								      		★★☆☆☆
 								        </c:if>
-								        <c:if test="${commentAvg==3}">
+								        <c:if test="${commentAvg>=3 && commentAvg<=3.9 }">
 								       		★★★☆☆
 								        </c:if>
 								        <c:if test="${commentAvg==4}">
@@ -537,7 +537,7 @@
 			<tr>
 				
 				<!-- 아이디-->
-				<td style="width:150px;height:60px;padding:10px; background:lightgray;">
+				<td style="width:150px;height:60px;padding:10px; background:lightgray;text-align:center;">
 					<div id="writer">${sessionScope.nick}</div>
 					<div class="small_text"><p>별점주기
 						<select id="score">
@@ -552,7 +552,7 @@
 					</div>
 				</td>
 				<!-- 본문 작성-->
-				<td>
+				<td style="padding:10px">
 					<div>
 						<div><textarea name="comment_content" id="comment_content" rows="3" cols="80" maxlength="1000"></textarea></div>
 					</div>
@@ -573,17 +573,17 @@
 				<c:forEach var="comment" items="${requestScope.commentList}">
 					<tr>
 						<!-- 아이디, 작성날짜 -->
-						<td>
-							<div>					
-								${comment.nickName} ${comment.pcpoint} / 5  <br>
-								<font size="2" color="lightgray">${comment.createdt}</font>
+						<td style="width:150px;height:60px;padding:10px; background:lightgray;">
+							<div >					
+								${comment.nickName} : ${comment.pcpoint} / 5
+								
 							</div>
 						</td>
 						<!-- 본문내용 -->
-						<td width="550">
+						<td style="width:550px;height:50px;padding:10px;" >
 							<div class="text_wrapper">
 								${fn:replace(comment.comm, cn, br)}
-								<fmt:formatDate value="${comment.createdt}" pattern="yyyy년MM월dd일 a hh시mm분 ss초"/> 
+								<p style="color:gray;font-size:8px;"><fmt:formatDate value="${comment.createdt}" pattern="yyyy년MM월dd일 a hh시mm분 ss초"/> </p>
 							</div>
 						</td>
 						<!-- 버튼 -->
