@@ -157,23 +157,58 @@
 	function addCart() {
 		var direct = 'N';
 		var pdNum = $('#pdNum').val();
-		var price = $("#basicPrice").val();
+		//기본가격 값
+		var basicPrice=${po.price};
+		numBasicPrice = parseInt(basicPrice); 
+		
 		//수량 옵션 값
 		var pdCount=$("#pdCount").val();
+		var numPdCn=parseInt(pdCount);
+		
 		//컵사이즈 옵션 값
 		var cupSize = document.getElementById("cupSize");	
 		var cupSizeVal= cupSize.options[cupSize.selectedIndex].value;
+		
+		if(cupSizeVal=="medium"){
+			cupSizeVal=0;
+		}
+		else if(cupSizeVal=="large"){
+			cupSizeVal=500;
+		}
+		else if(cupSizeVal=="Grande"){
+			cupSizeVal=1000;
+		}
+	
 		//시럽 옵션 값	
-		var syrub = document.getElementById("syrubAdd");	
-		var syrubVal= syrub.options[syrub.selectedIndex].value;
+		var syrubAdd = document.getElementById("syrubAdd");	
+		var syrubVal= syrubAdd.options[syrubAdd.selectedIndex].value;
+		if(syrubVal=="basic"){
+			syrubVal=0;
+		}
+		else{
+			syrubVal=500;
+		}
 		//얼음 옵션 값	
 		var ice = document.getElementById("iceAdd");	
 		var iceVal= ice.options[ice.selectedIndex].value;
+		if(iceVal=="hot"){
+			iceVal=0;
+		}
+		else{
+			iceVal=600;
+		}
+				
 		//샷 옵션 값
 		var shotCount=$("#shotAdd").val();
-		//alert("pdNum="+pdNum+"&pdCount="+pdCount+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount);
-        var param = "pdNum="+pdNum+"&pdCount="+pdCount+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount;
-        //alert(param);
+		var numShCn=parseInt(shotCount)*600;
+		
+		var opt="컵사이즈: "+cupSizeVal+"& 시럽: "+syrubVal+"& 얼음: "+iceVal+"& 샷: "+shotCount;
+		var optPrice=cupSizeVal+syrubVal+iceVal+numShCn;
+		var priceSum=numBasicPrice*numPdCn+optPrice;
+        var param = "pdNum="+pdNum+"&pdCount="+pdCount+"&numBasicPrice="+numBasicPrice+"&optPrice="+optPrice+"&opt="+opt+"&direct="+direct;
+        
+     
+        alert(param);
         //return;
         $.ajax({
 			url: '/popup/cartAddAction.yo',
@@ -189,7 +224,7 @@
 					$.cookie('cartOpen', 'Y', { expires: 7, path: '/', domain: 'localhost', secure: false });
 					$('.cart_r').css('width','400px');
 					
-					location.reload();
+					//location.reload();
 				}
 			},
 			error:function(){
@@ -246,6 +281,9 @@
    	
 		return;
 	}
+	function goList(){
+		location.href="../product/productListAction.yo?pageNum=${spage}&cidx=${po.cidx}";
+	}
 
 	function sumPrice() {
 		//기본가격 값
@@ -292,7 +330,12 @@
 		//샷 옵션 값
 		var shotCount=$("#shotAdd").val();
 		var numShCn=parseInt(shotCount)*600;
-		var priceSum=numBasicPrice*numPdCn+cupSizeVal+syrubVal+iceVal+numShCn;
+		
+		var optPrice=cupSizeVal+syrubVal+iceVal+numShCn;
+		
+		
+		
+		var priceSum=numBasicPrice*numPdCn+optPrice;
 		$("#priceSum").attr("value",priceSum);
 		
 	}	
@@ -309,6 +352,8 @@
 			 var num_count=parseInt(pdCount)+1;
 			 $("#pdCount").attr("value",num_count);
 		 }
+		 sumPrice(); 
+		 
 	 });
 	 $("#minusPd").click(function(){
 		 var pdCount=$("#pdCount").attr("value");
@@ -319,6 +364,7 @@
 			 var num_count=parseInt(pdCount)-1;
 			 $("#pdCount").attr("value",num_count);
 		 }
+		 sumPrice();
 	 });
 	 	 
 	 $("#plusShot").click(function(){
@@ -331,6 +377,7 @@
 			 var numshot=parseInt(shotplus)+1;
 			 $("#shotAdd").attr("value",numshot)
 		 }
+		 sumPrice();
 	 });
 	
 	 $("#minusShot").click(function(){
@@ -342,6 +389,7 @@
 			 var numshot=parseInt(shotplus)-1;
 			 $("#shotAdd").attr("value",numshot);
 		 }
+		 sumPrice();
 
 	 });
 	
@@ -374,7 +422,7 @@
 						<p>옵션 선택</p>
 							<ul>
                                 <li class="cup"><p>
-                                        컵사이즈: <select name="cup_size" class="select" id="cupSize" >
+                                        컵사이즈: <select name="cup_size" class="select" id="cupSize" onchange="sumPrice();">
                                         				<option value="medium">Medium</option>	<%--기본사이즈 --%>	
                                         				<option value="large">Large</option>			<%--+500원 --%>
                                         				<option value="Grande">Grande</option>		<%--+1000원 --%>
@@ -383,7 +431,7 @@
                                   </li>
                                   <li class="syrup">
                                   		<p>시럽추가: 
-                                        			<select name="syrub_add" class="select" id="syrubAdd">
+                                        			<select name="syrub_add" class="select" id="syrubAdd" onchange="sumPrice();">
                                         				<option value="basic">시럽없음</option>					<%--기본시럽 --%>
                                         				<option value="vanilla">바닐라 시럽</option>			<%--+500원 --%>
                                         				<option value="Hazelnut">헤이즐넛 시럽</option>		<%--+500원 --%>
@@ -391,7 +439,7 @@
                                         			</select></p>
                                   </li>
                                   <li class="ice">
-                                   		<p>얼음: <select name="ice_add" class="select" id="iceAdd">
+                                   		<p>얼음: <select name="ice_add" class="select" id="iceAdd" onchange="sumPrice();">
                                         				<option value="hot">HOT</option>				<%--기본사이즈 --%>	
                                         				<option value="usually">보통</option>			<%--600원 --%>	
                                         				<option value="less">적게</option>				<%--600원 --%>	
@@ -417,12 +465,18 @@
 	<div class="in_subcontent" id="page_action">
 		<input type="button" name="cart" id="cartBtn" value="장바구니 담기" onclick="addCart();"/>
 		<input type="button" name="buy" id="buyBtn" value="바로구매" onclick="direcBuy();"/>
-		<input type="button" name="buy" id="sumBtn" value="합계" onclick="sumPrice();"/>
+		<input type="button" name="buy" id="listBtn" value="목록" onclick="goList();"/>
 	</div>	
 	
 	<div class="Reviews">
 		
-			<div class="grade">고객총평점:  <fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5</div>
+		<div class="grade">고객총평점:  <fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5</div>
+			
+<%-- 댓글 등록: 로그인 했을 경우에만 댓글 작성 --%>
+		<c:if test="${sessionScope.userid !=null}">
+			<form id="writeCommentForm">
+				<input type="hidden" id="comment_board" name="comment_board" value="${num}">
+				<input type="hidden" id="comment_id" name="comment_id" value="${sessionScope.userid}">
 				<div>
 					<div class="small_text"><p>별점주기
 						<select id="core">
@@ -436,10 +490,16 @@
 						</p>
 					</div>
 					<div class="Review_wr">
-						<div><textarea name="Review_text" id="Review_text" rows="3" cols="100" maxlength="1000"></textarea></div>
-						<div><button name="Review" id="Review_button" >등록</button></div>
+						<div><textarea name="comment_content" id="comment_content" rows="3" cols="100" maxlength="1000"></textarea></div>
+						<div><button name="Review" id="Review_button" onclick="writeCmt()">등록</button></div>
 					</div>
-			</div>
+				</div>
+			</form>
+		</c:if>
+			
+<%-- 댓글 목록 --%>			
+	<c:if test="${requestScope.commentList != null}">
+		<c:forEach var="comment" items="${requestScope.commentList}">		
 			<div class="Review_list">
 				<ul display="block">
 					<li style="border-style:1">
@@ -454,21 +514,10 @@
 								<input type="button" name="delete" id="review_delete" value="삭제"/>
 						</p>
 					</li>
-					<li style="border-style:1">
-						<div>
-							<span id="nick">닉네임 데이터 불러와서 표시,</span>
-							<span id="jumsu1">별점 데이터 불러와서 표시,</span>
-							<span id="jumsu2">점수 데이터 불러와서 표시</span>
-						</div>
-						<p id="review_detail">상품평 본문 불러와서 표시</p>
-						<p id="Date_Created">작성일 데이터 불러와서 표시</p>
-						<p><input type="button" name="update" id="review_update" value="수정"/>
-								<input type="button" name="delete" id="review_delete" value="삭제"/>
-						</p>
-					</li>
 				</ul>
 			</div>
-		</div>
+		</c:forEach>
+	</c:if>
 </body>
 
 </body>

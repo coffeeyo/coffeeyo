@@ -28,10 +28,10 @@ public class CartAddAction implements Action {
 		
 		// 파리미터 값을 가져온다.
 		int cartNum = dao.getSeq();
-		int num = Integer.parseInt(request.getParameter("num"));
+		int pdNum = Integer.parseInt(request.getParameter("pdNum"));
 		String direct = request.getParameter("direct");
-		int amt = Integer.parseInt(request.getParameter("amt"));
-		int sum = Integer.parseInt(request.getParameter("sum_price"));
+		int pdCount = Integer.parseInt(request.getParameter("pdCount"));
+		int price = Integer.parseInt(request.getParameter("numBasicPrice"));
 		String opt = request.getParameter("opt");
 		String strOptPrice = request.getParameter("optPrice");
 		int optPrice = 0;
@@ -41,11 +41,11 @@ public class CartAddAction implements Action {
 		}
 		
 		cart.setCidx(cartNum);
-		cart.setPidx(num);
+		cart.setPidx(pdNum);
 		cart.setBuychk(direct);
 		cart.setUserid(id);
-		cart.setAmount(amt);
-		cart.setPrice(sum);
+		cart.setAmount(pdCount);
+		cart.setPrice(price);
 		cart.setOptprice(optPrice);
 		cart.setOptions(opt);
 				
