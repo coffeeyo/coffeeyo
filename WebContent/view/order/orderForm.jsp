@@ -14,7 +14,7 @@
 <style>
     	.width70{
     		width:70%;
-    		border-bottom: 2px solid #77563c;
+    		border-bottom: 0.5px solid #77563c;
     	}
     		.style1 tr:hover { 
 		background-color: #EFE4B0; 
@@ -31,8 +31,9 @@
 <div class="board">
 	<form action="../order/orderProcAction.yo " method="post" id="order_form" name="order_form" >
 	    <table  width="70%" align="center" >
-	        <tr style="border-bottom: 2px solid #77563c;">
-	            <td colspan="2"><h3>상품정보</h3></td>
+	        <tr style="border-bottom: 0.5px solid #77563c;">
+	            <td><h3>상품이미지</h3></td>
+            	<td><h3>상품정보</h3></td>
 	            <td ><h3>상품 구매금액</h3></td>
 	        </tr>
 	        <c:if test="${fn:length(requestScope.buyChkList) eq 0}">
@@ -43,7 +44,7 @@
 			<c:set var="sum" value="0"/>
 			<c:if test="${fn:length(requestScope.buyChkList) gt 0}">
 			  <c:forEach var="cart" items="${requestScope.buyChkList}" varStatus="status">
-			  <tr style="border-bottom: 2px solid #77563c;">	
+			  <tr style="border-bottom: 0.5px solid #77563c;">	
 				  <td>
 				        <c:if test="${cart.image ne null}">
 							<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" style="cursor:pointer;" width="150px" height="150px"/>
@@ -63,7 +64,7 @@
 			  <c:set var="sum" value="${sum + (cart.price + cart.optprice)*cart.amount}"/>
 			  </c:forEach>
 			</c:if>
-	        <tr style="border-bottom: 2px solid #77563c;">
+	        <tr style="border-bottom: 0.5px solid #77563c;">
 	        	<div class="itemfooter">
 		            <td colspan="3" align="right">
 		                <h4>최종결제금액<br/>

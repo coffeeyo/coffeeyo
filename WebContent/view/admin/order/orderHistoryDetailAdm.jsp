@@ -15,7 +15,7 @@
 	<style>
     	.width70{
     		width:70%;
-    		border-bottom: 2px solid #77563c;
+    		border-bottom: 0.5px solid #77563c;
     	}
     </style>
     <script src="jquery-3.3.1.min.js"></script>
@@ -38,32 +38,31 @@
         </tr>
         <tr>
             <td>
-                이름: ${member.uname}
+                <h3>이름: ${member.uname}</h3>
             </td>
             <td>
-                닉네임: ${member.nickName}
+                <h3>닉네임: ${member.nickName}</h3>
             </td>
         </tr>
         <tr>
             <td>
-                전화번호: ${member.hp}
+               <h3> 전화번호: ${member.hp}</h3>
             </td>
             <td>
-                		회원상태: ${member.status} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1:이용회원 2:탈퇴회원)
+            	<h3>회원상태: ${member.status} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1:이용회원 2:탈퇴회원)</h3>
             </td>
         </tr>
+        <br/>
     </table>
-    <br/>
     <table class="width70" align="center" >
-    
         <tr class="width70">
-            <td><h4>상품이미지</h4></td>
-            <td><h4>상품정보</h4></td>
-            <td><h4>상품구매금액</h4></td>
+            <td><h3>상품이미지</h3></td>
+            <td><h3>상품정보</h3></td>
+            <td><h3>상품구매금액</h3></td>
         </tr>
 		<c:forEach var="data" items="${oitemList}">
 			<tr class="width70">
-			    <td><img src="../view/upload/product/${data.image}" width="150px" height="150px"/></td>
+			    <td><img src="../view/upload/product/${data.image}" width="150px" height="150px" style="margin:1px"style="margin:1px;"/></td>
 			    <td>
 			    	주문번호: ${data.orderno}<br/>
 			    	항목번호: ${data.itemno}<br/>

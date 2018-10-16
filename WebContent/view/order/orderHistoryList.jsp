@@ -15,7 +15,7 @@
     <style>
     	.width70{
     		width:70%;
-    		border-bottom: 2px solid #77563c;
+    		border-bottom: 0.5px solid #77563c;
     	}
     		.style1 tr:hover { 
 		background-color: #EFE4B0; 
@@ -122,17 +122,17 @@
         </tr>
     </table>
     <table  align="center" width="70%" class="style1" >
-        <tr style="border-bottom: 2px solid #77563c;">
-        	<td><h4>상품이미지</h4></td>
-            <td><h4>상품정보</h4></td>
-            <td><h4>결제금액</h4></td>
-            <td><h4>주문일시</h4></td>
+        <tr style="border-bottom: 0.5px solid #77563c;">
+        	<td><h3>상품이미지</h3></td>
+            <td><h3>상품정보</h3></td>
+            <td><h3>결제금액</h3></td>
+            <td><h3>주문일시</h3></td>
         </tr>
         <c:forEach var="data" items="${orderList}" >
-        <tr style="border-bottom: 2px solid #77563c;">
+        <tr style="border-bottom: 0.5px solid #77563c;">
             <td>
                 <a href="../order/orderHistoryDetailAction.yo?orderno=${data.orderno}">
-                    <img src="../view/upload/product/${data.image}" width="150px" height="150px"/>
+                    <img src="../view/upload/product/${data.image}" width="150px" height="150px" style="margin:1px"/>
                     주문내역상세보기
                 </a>
             </td>
