@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<title>아이디 중복 체크</title>
+	<title>닉네임 중복 체크</title>
 	
 	<style type="text/css">
 		#wrap {
@@ -106,7 +106,7 @@
 <body>
 <div id="wrap">
 	<br>
-	<b><font size="4" color="gray">아이디 중복체크</font></b>
+	<b><font size="4" color="gray">닉네임 중복체크</font></b>
 	<hr size="1" width="460">
 	<br>
 	<div id="chk">
