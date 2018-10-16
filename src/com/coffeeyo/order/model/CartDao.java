@@ -263,7 +263,7 @@ public class CartDao {
 			if(cart.getUserid() != null) {
 				sql.append("SELECT");
 				sql.append(" C.CIDX, C.USERID, C.PIDX, OPTIONS, ");
-				sql.append(" AMOUNT, C.PRICE, BUYCHK, P.PNAME, P.IMAGE ");
+				sql.append(" AMOUNT, C.PRICE, OPTPRICE, BUYCHK, P.PNAME, P.IMAGE ");
 				sql.append("FROM CART C ");
 				sql.append("LEFT JOIN PRODUCT P ");
 				sql.append("ON C.PIDX=P.PIDX ");
@@ -291,6 +291,7 @@ public class CartDao {
 				ct.setOptions(rs.getString("OPTIONS"));
 				ct.setAmount(rs.getInt("AMOUNT"));
 				ct.setPrice(rs.getInt("PRICE"));
+				ct.setOptprice(rs.getInt("OPTPRICE"));
 				ct.setPname(rs.getString("PNAME"));
 				ct.setImage(rs.getString("IMAGE"));
 				

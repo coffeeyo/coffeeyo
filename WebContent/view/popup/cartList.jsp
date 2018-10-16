@@ -141,13 +141,15 @@ body {
 			  ${cart.pname}<br/>
 			  수량: ${cart.amount}<br/>
 			  옵션: ${cart.options}<br/>
-			  금액: ${(cart.price+cart.optprice) * cart.amount} 원<br/>
+			  단가: ${cart.price}<br/>
+			  옵션합계: ${cart.optprice}<br/>
+			  소계: ${(cart.price * cart.amount) + cart.optprice} 원<br/>
 			  </td>
 			  <td>
 			  <input type="button" value="삭제" onclick="deleteCart('${cart.cidx}');"  class="btn-primary" />
 			  </td>
 		  </tr>
-		  <c:set var="sum" value="${sum + ((cart.price+cart.optprice) * cart.amount)}"/>
+		  <c:set var="sum" value="${sum + ((cart.price * cart.amount) + cart.optprice)}"/>
 		  </c:forEach>
 		</c:if>
 		</table>
