@@ -18,7 +18,7 @@
 	<div class="board">
 	<!-- MD추천 목록 부분 -->
 	<c:if test="${fn:length(requestScope.recommList) > 0}">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:500px;">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:500px;width:500px;">
 		  <!-- Indicators -->
 		  <ol class="carousel-indicators">
 		  	<c:forEach var="recomm" items="${requestScope.recommList}" varStatus="status">
@@ -49,7 +49,7 @@
 	<br>
 		
 		<c:if test="${fn:length(requestScope.prodList1) > 0}">
-		<h3>분류1</h3>
+		<h3>Cold brew</h3>
 		<div class="row">
 		  <c:forEach var="prod" items="${requestScope.prodList1}" varStatus="status">	
 		  <div class="col-md-3">
@@ -72,7 +72,7 @@
 		
 		
 		<c:if test="${fn:length(requestScope.prodList2) > 0}">
-		<h3>분류2</h3>
+		<h3>Espresso</h3>
 		<div class="row">
 		  <c:forEach var="prod" items="${requestScope.prodList2}" varStatus="status">	
 		  <div class="col-md-3">
@@ -95,7 +95,7 @@
 		
 		
 		<c:if test="${fn:length(requestScope.prodList3) > 0}">
-		<h3>분류3</h3>
+		<h3>Frappuccino</h3>
 		<div class="row">
 		  <c:forEach var="prod" items="${requestScope.prodList3}" varStatus="status">	
 		  <div class="col-md-3">
