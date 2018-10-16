@@ -68,7 +68,7 @@ public class ProductDao {
 			sql.append("SELECT");
 			sql.append(" PIDX, c.CNAME, p.CIDX, PNAME, ");
 			sql.append(" IMAGE, PRICE, MAKETM, RECOMM, ");
-			sql.append(" p.STATUS, p.COMM, p.CREATEDT, ");
+			sql.append(" p.STATUS, p.COMM, p.CREATEDT ");
 			sql.append("FROM PRODUCT p ");
 			sql.append("right outer join CATEGORY c ");
 			sql.append("on p.cidx = c.cidx ");
