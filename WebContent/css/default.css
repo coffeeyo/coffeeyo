@@ -53,6 +53,7 @@
 .pordRight{ float:left; }
 .prodBtn01 { clear:both; }
 .prodComm { float:left; }
+.prodPoint { font-weight:bold; }
 
 .search-box01 {
 	border: 1px dashed;

@@ -64,26 +64,42 @@
 				</c:if>
 		        <div class="caption">
 		          <p>[${prod.cateName}] ${prod.pname}</p>
-		          <p>별점: <c:if test="${prod.pcPointAvg >=0 && prod.pcPointAvg <= 0.9}">
-								        	☆☆☆☆☆
+		          <p>별점: <span class="prodPoint">
+		          						<c:if test="${prod.pcPointAvg >= 0 && prod.pcPointAvg < 0.5}">
+								        	<img src="../img/별점0.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 1}">
-								        	★☆☆☆☆
+								        <c:if test="${prod.pcPointAvg >= 0.5 && prod.pcPointAvg < 1}">
+								        	<img src="../img/별점0.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 2}">
-								      		★★☆☆☆
+								        <c:if test="${prod.pcPointAvg >= 1 && prod.pcPointAvg < 1.5}">
+								        	<img src="../img/별점1.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg <= 3.9 }">
-								       		★★★☆☆
+								        <c:if test="${prod.pcPointAvg >= 1.5 && prod.pcPointAvg < 2}">
+								        	<img src="../img/별점1.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 4}">
-								       		  ★★★★☆
+								        <c:if test="${prod.pcPointAvg >= 2 && prod.pcPointAvg < 2.5}">
+								        	<img src="../img/별점2.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 2.5 && prod.pcPointAvg < 3}">
+								        	<img src="../img/별점2.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg < 3.5}">
+								        	<img src="../img/별점3.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg>=3.5 && prod.pcPointAvg<4}">
+								        	<img src="../img/별점3.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 4 && prod.pcPointAvg < 4.5}">
+								        	<img src="../img/별점4.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 4.5 && prod.pcPointAvg < 5}">
+								        	<img src="../img/별점4.5.png" width="200px" height="40px">
 								        </c:if>
 								        <c:if test="${prod.pcPointAvg == 5}">
-								      		 ★★★★★
+								      		<img src="../img/별점5.png" width="200px" height="40px">
 								        </c:if>
-		
 										<fmt:formatNumber value="${prod.pcPointAvg}" pattern="0.0"/>/5
+										</span>
 				  </p>
 		          <p>가격: ${prod.price} 원</p>
 		        </div>
@@ -107,26 +123,42 @@
 				</c:if>
 		        <div class="caption">
 		          <p>[${prod.cateName}] ${prod.pname}</p>
-		          <p>별점: <c:if test="${prod.pcPointAvg >=0 && prod.pcPointAvg <= 0.9}">
-								        	☆☆☆☆☆
+		          <p>별점: <span class="prodPoint">
+		          						<c:if test="${prod.pcPointAvg >= 0 && prod.pcPointAvg < 0.5}">
+								        	<img src="../img/별점0.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 1}">
-								        	★☆☆☆☆
+								        <c:if test="${prod.pcPointAvg >= 0.5 && prod.pcPointAvg < 1}">
+								        	<img src="../img/별점0.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 2}">
-								      		★★☆☆☆
+								        <c:if test="${prod.pcPointAvg >= 1 && prod.pcPointAvg < 1.5}">
+								        	<img src="../img/별점1.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg <= 3.9 }">
-								       		★★★☆☆
+								        <c:if test="${prod.pcPointAvg >= 1.5 && prod.pcPointAvg < 2}">
+								        	<img src="../img/별점1.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 4}">
-								       		  ★★★★☆
+								        <c:if test="${prod.pcPointAvg >= 2 && prod.pcPointAvg < 2.5}">
+								        	<img src="../img/별점2.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 2.5 && prod.pcPointAvg < 3}">
+								        	<img src="../img/별점2.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg < 3.5}">
+								        	<img src="../img/별점3.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg>=3.5 && prod.pcPointAvg<4}">
+								        	<img src="../img/별점3.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 4 && prod.pcPointAvg < 4.5}">
+								        	<img src="../img/별점4.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 4.5 && prod.pcPointAvg < 5}">
+								        	<img src="../img/별점4.5.png" width="200px" height="40px">
 								        </c:if>
 								        <c:if test="${prod.pcPointAvg == 5}">
-								      		 ★★★★★
+								      		<img src="../img/별점5.png" width="200px" height="40px">
 								        </c:if>
-		
 										<fmt:formatNumber value="${prod.pcPointAvg}" pattern="0.0"/>/5
+										</span>
 				 </p>
 		          <p>가격: ${prod.price} 원</p>
 		        </div>
@@ -150,26 +182,42 @@
 				</c:if>
 		        <div class="caption">
 		          <p>[${prod.cateName}] ${prod.pname}</p>
-		          <p>별점: <c:if test="${prod.pcPointAvg >=0 && prod.pcPointAvg <= 0.9}">
-								        	☆☆☆☆☆
+		          <p>별점: <span class="prodPoint">
+		          						<c:if test="${prod.pcPointAvg >= 0 && prod.pcPointAvg < 0.5}">
+								        	<img src="../img/별점0.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 1}">
-								        	★☆☆☆☆
+								        <c:if test="${prod.pcPointAvg >= 0.5 && prod.pcPointAvg < 1}">
+								        	<img src="../img/별점0.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 2}">
-								      		★★☆☆☆
+								        <c:if test="${prod.pcPointAvg >= 1 && prod.pcPointAvg < 1.5}">
+								        	<img src="../img/별점1.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg <= 3.9 }">
-								       		★★★☆☆
+								        <c:if test="${prod.pcPointAvg >= 1.5 && prod.pcPointAvg < 2}">
+								        	<img src="../img/별점1.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${prod.pcPointAvg == 4}">
-								       		  ★★★★☆
+								        <c:if test="${prod.pcPointAvg >= 2 && prod.pcPointAvg < 2.5}">
+								        	<img src="../img/별점2.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 2.5 && prod.pcPointAvg < 3}">
+								        	<img src="../img/별점2.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg < 3.5}">
+								        	<img src="../img/별점3.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg>=3.5 && prod.pcPointAvg<4}">
+								        	<img src="../img/별점3.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 4 && prod.pcPointAvg < 4.5}">
+								        	<img src="../img/별점4.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 4.5 && prod.pcPointAvg < 5}">
+								        	<img src="../img/별점4.5.png" width="200px" height="40px">
 								        </c:if>
 								        <c:if test="${prod.pcPointAvg == 5}">
-								      		 ★★★★★
+								      		<img src="../img/별점5.png" width="200px" height="40px">
 								        </c:if>
-		
 										<fmt:formatNumber value="${prod.pcPointAvg}" pattern="0.0"/>/5
+								        </span>
 				</p>
 		          <p>가격: ${prod.price} 원</p>
 		        </div>

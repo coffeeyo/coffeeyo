@@ -179,7 +179,7 @@ public class ProductDao {
 				prod.setRecomm(rs.getInt("RECOMM"));
 				prod.setStatus(rs.getInt("STATUS"));
 				prod.setCreatedt(rs.getDate("CREATEDT"));
-				prod.setPcPointAvg(rs.getLong("PAVG"));
+				prod.setPcPointAvg(rs.getFloat("PAVG"));
 				prodList.add(prod);
 			}
 			//System.out.println("prodList="+prodList.size());
@@ -412,7 +412,7 @@ public class ProductDao {
 				prod.setRecomm(rs.getInt("RECOMM"));
 				prod.setStatus(rs.getInt("STATUS"));
 				prod.setCreatedt(rs.getDate("CREATEDT"));
-				prod.setPcPointAvg(rs.getLong("PAVG"));
+				prod.setPcPointAvg(rs.getFloat("PAVG"));
 				prodList.add(prod);
 			}
 			//System.out.println("prodList="+prodList.size());
@@ -816,7 +816,7 @@ public class ProductDao {
 				prod.setRecomm(rs.getInt("RECOMM"));
 				prod.setStatus(rs.getInt("STATUS"));
 				prod.setCreatedt(rs.getDate("CREATEDT"));
-				prod.setPcPointAvg(rs.getLong("PAVG"));
+				prod.setPcPointAvg(rs.getFloat("PAVG"));
 				prodList.add(prod);
 			}
 			DBConnection.close(rs);

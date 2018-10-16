@@ -9,7 +9,7 @@ public class Product extends Common {
 	private String pname;
 	private int maketm;
 	private long recomm;
-	private long pcPointAvg;
+	private float pcPointAvg;
 	
 	public long getPidx() {
 		return pidx;
@@ -50,10 +50,10 @@ public class Product extends Common {
 	public void setRecomm(long recomm) {
 		this.recomm = recomm;
 	}
-	public long getPcPointAvg() {
+	public float getPcPointAvg() {
 		return pcPointAvg;
 	}
-	public void setPcPointAvg(long pcPointAvg) {
+	public void setPcPointAvg(float pcPointAvg) {
 		this.pcPointAvg = pcPointAvg;
 	}
 	
