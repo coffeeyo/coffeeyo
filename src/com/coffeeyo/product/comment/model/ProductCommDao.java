@@ -65,9 +65,9 @@ public class ProductCommDao {
 			conn.setAutoCommit(false);
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("INSERT INTO BOARDCOMM ");
-			sql.append(" (BCIDX, BIDX, USERID, COMM, PCPOINT, CREATEDT)");
-			sql.append(" VALUES(?,?,?,?,?,sysdate)");
+			sql.append("INSERT INTO PRODCOMM ");
+			sql.append(" (PCIDX, PIDX, USERID, COMM, PCPOINT, CREATEDT, STATUS)");
+			sql.append(" VALUES(?,?,?,?,?,sysdate, 1)");
 	
 			//pstmt = conn.prepareStatement(sql.toString());
 			pstmt = DBConnection.getPstmt(conn, sql.toString());

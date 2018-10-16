@@ -129,6 +129,9 @@ public class ProductCommon {
 		int cidx = Integer.parseInt(request.getParameter("cid"));
 		
 		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";			
+		}
 		System.out.println("pageNum="+pageNum);
 				
 		CategoryDao cateDao = CategoryDao.getInstance();

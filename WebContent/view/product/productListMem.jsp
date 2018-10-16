@@ -13,15 +13,15 @@
 <meta charset="UTF-8">
 <title>상품 상세보기</title>
 <style>
-.top_title{width:1000px; margin:auto; font-size: 30px; font-weight: bold;}
-.pdcount{width:1000px; margin:auto; font-size: 12px; font-weight: bold;}
+.top_title{width:1000px; margin-left:auto; margin-right:auto; font-size: 30px; font-weight: bold;}
+.pdcount{width:1000px; margin-left:auto; margin-right:auto; font-size: 12px; font-weight: bold;}
 td, th{padding:5px 10px;}
-.top_tab{border: 1px solid gray; border-collapse:collapse; width:1000px; margin:auto;}
+.top_tab{border: 1px solid gray; border-collapse:collapse; width:1000px; margin-left:auto; margin-right:auto;}
 .firstrow{text-align:center;background-color:lightgray;font-weight:bold;border: 1px solid gray;}
 .contentrow{text-align:center;valign:middle;height:30px;border: 1px solid gray;}
 .top_b{text-align:right;width:1000px; margin:auto;margin-top:10px;}
 .lname{font-weight:bold; padding-right:10px; padding-left:20px;}
-#listbig{width:1000px; margin:auto;}
+#listbig{width:1000px; margin-left:auto; margin-right:auto;height:100vh;margin-bottom:700px}
 #pname {font-weight:bold; width: 200px; text-overflow: ellipsis;
     -o-text-overflow: ellipsis; overflow: hidden;
     white-space: nowrap; word-wrap: normal !important; display: block;
@@ -90,12 +90,32 @@ li{float:left;padding:10px;}
 						</div>
 							<div><span class="result" id="pname">${pdlist.pname}</span></div>
 							<div>가격:<span class="result">${pdlist.price}&nbsp;원</span></div>
-							<div>별점:<span class="result">${pdlist.pcPointAvg}</span>
+							<div>별점:<span class="result">
+										<c:if test="${pdlist.pcPointAvg==0}">
+								        	별점을 넣어주세요~~
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg==1}">
+								        	★☆☆☆☆
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg==2}">
+								      		★★☆☆☆
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg==3}">
+								       		★★★☆☆
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg==4}">
+								       		  ★★★★☆
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg==5}">
+								      		 ★★★★★
+								        </c:if>${pdlist.pcPointAvg}
+								        </span>
 						</div>
 					</li>
 				</c:forEach>
 			</c:if>
 		</ul>
+		<p>
 	</div>
 
 

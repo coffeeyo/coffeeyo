@@ -35,10 +35,18 @@ public class CartAddAction implements Action {
 		String opt = request.getParameter("opt");
 		String strOptPrice = request.getParameter("optPrice");
 		int optPrice = 0;
-		
 		if(strOptPrice != null) {
 			optPrice = Integer.parseInt(strOptPrice);
 		}
+		
+		/*System.out.println("cartNum= "+cartNum);
+		System.out.println("pdNum= "+pdNum);
+		System.out.println("direct= "+direct);
+		System.out.println("pdCount= "+pdCount);
+		System.out.println("price= "+price);
+		System.out.println("opt= "+opt);
+		System.out.println("strOptPrice= "+strOptPrice);*/
+		
 		
 		cart.setCidx(cartNum);
 		cart.setPidx(pdNum);
@@ -50,9 +58,9 @@ public class CartAddAction implements Action {
 		cart.setOptions(opt);
 				
 		boolean result = dao.insertCart(cart);
-
-		PrintWriter out = response.getWriter();
 		
+		PrintWriter out = response.getWriter();
+				
 		if(result){
 			jsonobj.put("check", 1);
 		}
@@ -63,7 +71,7 @@ public class CartAddAction implements Action {
 		out.print(jsonobj.toString());
 		out.flush();
 		out.close();
-			
+				
 		return null;
 	}
 }

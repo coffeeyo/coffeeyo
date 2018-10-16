@@ -14,13 +14,13 @@
 
 <style>
 td, th{padding:5px 10px;}
-.top_title{width:1000px; margin:auto; font-size: 30px; font-weight: bold;}
-.top_tab{border: 1px solid gray; border-collapse:collapse; width:1000px; margin:auto;}
+.top_title{width:70%; margin:auto; font-size: 30px; font-weight: bold;}
+.top_tab{border: 1px solid gray; border-collapse:collapse; width:70%; margin:auto;}
 .firstrow{text-align:center;background-color:lightgray;font-weight:bold;border: 1px solid gray;}
 .contentrow{text-align:center;valign:middle;height:30px;border: 1px solid gray;}
-.top_b{text-align:right;width:1000px; margin:auto;margin-top:10px;}
+.top_b{text-align:right;width:70%; margin:auto;margin-top:10px;}
 .lname{font-weight:bold; padding-right:10px; padding-left:20px;}
-.listup{width:1000px; margin:auto;}
+.listup{width:70%; margin:auto;}
 #pname {font-weight:bold;text-align:left;
     width: 400px;
     text-overflow: ellipsis;
@@ -54,7 +54,7 @@ $(function(){
 <div class="top_title" >
 		<p>상품 목록</p>
 	</div>
-<table class="top_tab" border="1">
+<!-- <table class="top_tab" border="1">
 <tr>
 	<td>
 	<div class="lookup">
@@ -74,6 +74,7 @@ $(function(){
 	</td>
 </tr>
 </table>
+ -->
 <table class="top_b">
 	<tr>
 		<td align="left">[ 전체 상품 개수 :	${requestScope.listCount}]</td>

@@ -42,45 +42,48 @@
     cursor: pointer;
 }
 .Review_wr{display:flex;}
+#writer{color:darkblue;font-weight:bold;}
 </style>
 <script>
-	
 	//댓글 등록
-	/*function writeCmt()
-	{
+	function writeCmt() {
 		var board = $('#comment_board').val();
 		var id = $('#comment_id').val();
 		var content = $('#comment_content').val();
+		var pdScore = document.getElementById("score");
+		var pdScoreval = pdScore.options[pdScore.selectedIndex].value;
 		
-		if(!content)
-		{
+		if (!content) {
 			alert("내용을 입력하세요.");
 			return false;
-		}
-		else
-		{	
-			var param="comment_board="+board+"&comment_id="+id+"&comment_content="+content;
-	
+		} else {
+			var param = "comment_board=" + board + "&comment_id=" + id
+					+ "&comment_content=" + content + "&comment_point="
+					+ pdScoreval;
+			
+			
 			$.ajax({
-				url: '../product/prodCommentWriteAction.yo',
+				url: '/popup/prodCommentWriteAction.yo',
 				type: 'POST',
 				data: param,
 				dataType: 'JSON',
 				success: function(data) {
 					var resultText = data.check;
 					
-					if(resultText == 1){ 
+					if (resultText == 1) {
 						document.location.reload(); // 상세보기 창 새로고침
 					}
+					else {
+						alert(data);
+					}
 				},
-				error:function(){
-					//
+				error : function() {
+					alert('error');
 				}
 			});
 		}
 	}
-	
-	
+
 	// 댓글 삭제창
 	function cmDeleteOpen(comment_num){
 		var msg = confirm("댓글을 삭제합니다.");	
@@ -148,256 +151,287 @@
 	function loginFail() {
 		alert('로그인 후 투표 가능');
 	}
-	
 	function prodComm(pNum) {
-		
-	}*/
+		submit();
+	}
+	
+
 
 	//장바구니 담기 함수
 	function addCart() {
 		var direct = 'N';
 		var pdNum = $('#pdNum').val();
 		//기본가격 값
-		var basicPrice=${po.price};
-		numBasicPrice = parseInt(basicPrice); 
-		
+		var basicPrice = ${po.price};
+		numBasicPrice = parseInt(basicPrice);
+
 		//수량 옵션 값
-		var pdCount=$("#pdCount").val();
-		var numPdCn=parseInt(pdCount);
-		
+		var pdCount = $("#pdCount").val();
+		var numPdCn = parseInt(pdCount);
+
 		//컵사이즈 옵션 값
-		var cupSize = document.getElementById("cupSize");	
-		var cupSizeVal= cupSize.options[cupSize.selectedIndex].value;
-		
-		if(cupSizeVal=="medium"){
-			cupSizeVal=0;
-		}
-		else if(cupSizeVal=="large"){
-			cupSizeVal=500;
-		}
-		else if(cupSizeVal=="Grande"){
-			cupSizeVal=1000;
-		}
-	
+		var cupSize = document.getElementById("cupSize");
+		var cupSizeVal = cupSize.options[cupSize.selectedIndex].value;
+
 		//시럽 옵션 값	
-		var syrubAdd = document.getElementById("syrubAdd");	
-		var syrubVal= syrubAdd.options[syrubAdd.selectedIndex].value;
-		if(syrubVal=="basic"){
-			syrubVal=0;
-		}
-		else{
-			syrubVal=500;
-		}
+		var syrubAdd = document.getElementById("syrubAdd");
+		var syrubVal = syrubAdd.options[syrubAdd.selectedIndex].value;
+
 		//얼음 옵션 값	
-		var ice = document.getElementById("iceAdd");	
-		var iceVal= ice.options[ice.selectedIndex].value;
-		if(iceVal=="hot"){
-			iceVal=0;
-		}
-		else{
-			iceVal=600;
-		}
-				
+		var ice = document.getElementById("iceAdd");
+		var iceVal = ice.options[ice.selectedIndex].value;
+
 		//샷 옵션 값
-		var shotCount=$("#shotAdd").val();
-		var numShCn=parseInt(shotCount)*600;
+		var shotCount = $("#shotAdd").val();
+		var numShCn = parseInt(shotCount) * 600;
+
+		var opt = "컵사이즈= " + cupSizeVal + ", 시럽= " + syrubVal + ", 얼음= "
+				+ iceVal + ", 샷= " + shotCount;
+
+		if (cupSizeVal == "medium") {
+			cupSizeVal = 0;
+		} else if (cupSizeVal == "large") {
+			cupSizeVal = 500;
+		} else if (cupSizeVal == "Grande") {
+			cupSizeVal = 1000;
+		}
+
+		if (syrubVal == "basic") {
+			syrubVal = 0;
+		} else {
+			syrubVal = 500;
+		}
+		if (iceVal == "hot") {
+			iceVal = 0;
+		} else {
+			iceVal = 600;
+		}
+
+		var optPrice = cupSizeVal + syrubVal + iceVal + numShCn;
+		var priceSum = numBasicPrice * numPdCn + optPrice;
+		var param = "pdNum=" + pdNum + "&pdCount=" + pdCount
+				+ "&numBasicPrice=" + numBasicPrice + "&optPrice=" + optPrice
+				+ "&opt=" + opt + "&direct=" + direct;
+
 		
-		var opt="컵사이즈: "+cupSizeVal+"& 시럽: "+syrubVal+"& 얼음: "+iceVal+"& 샷: "+shotCount;
-		var optPrice=cupSizeVal+syrubVal+iceVal+numShCn;
-		var priceSum=numBasicPrice*numPdCn+optPrice;
-        var param = "pdNum="+pdNum+"&pdCount="+pdCount+"&numBasicPrice="+numBasicPrice+"&optPrice="+optPrice+"&opt="+opt+"&direct="+direct;
-        
-     
-        alert(param);
-        //return;
-        $.ajax({
-			url: '/popup/cartAddAction.yo',
-			type: 'POST',
-			data: param,
-			dataType: 'JSON',
-			success: function(data) {
+		//return;
+		$.ajax({
+			url : '/popup/cartAddAction.yo',
+			type : 'POST',
+			data : param,
+			dataType : 'JSON',
+			success : function(data) {
 				var resultText = data.check;
-				//alert(resultText);
-				if(resultText == 1){ 
+				
+				if (resultText == 1) {
 					$('#btnCartOpen').text('닫기');
-					$.cookie("cartOpen", "N", { expires: -1 });
-					$.cookie('cartOpen', 'Y', { expires: 7, path: '/', domain: 'localhost', secure: false });
-					$('.cart_r').css('width','400px');
-					
+					$.cookie("cartOpen", "N", {
+						expires : -1
+					});
+					$.cookie('cartOpen', 'Y', {
+						expires : 7,
+						path : '/',
+						domain : 'localhost',
+						secure : false
+					});
+					$('.cart_r').css('width', '400px');
+
 					var url = $('#cartFrame').attr('src');
 					$('#cartFrame').attr('src', url);
 				}
 			},
-			error:function(){
-			}
-		});
-		
-		return;
-	}
-	//바로구매 함수
-	function direcBuy() {		
-		var direct = 'Y';
-		var pdNum = $('#pdNum').val();
-		var price = $("#basicPrice").val();
-		//수량 옵션 값
-		var pdCount=$("#pdCount").val();
-		//컵사이즈 옵션 값
-		var cupSize = document.getElementById("cupSize");	
-		var cupSizeVal= cupSize.options[cupSize.selectedIndex].value;
-		//시럽 옵션 값	
-		var syrub = document.getElementById("syrubAdd");	
-		var syrubVal= syrub.options[syrub.selectedIndex].value;
-		//얼음 옵션 값	
-		var ice = document.getElementById("iceAdd");	
-		var iceVal= ice.options[ice.selectedIndex].value;
-		//샷 옵션 값
-		var shotCount=$("#shotAdd").val();
-		
-		//alert("pdCount="+pdCount+"price="+price+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount);
-        
-        var param = "pdNum="+pdNum+"&pdCount="+pdCount+"&cupSizeVal="+cupSizeVal+"&syrubVal="+syrubVal+"&iceVal="+iceVal+"&shotCount"+shotCount;
-        //alert(param);
-        //return;
-        $.ajax({
-			url: '/popup/cartAddAction.yo',
-			type: 'POST',
-			data: param,
-			dataType: 'JSON',
-			success: function(data) {
-				var resultText = data.check;
-				//alert(resultText);
-				if(resultText == 1){ 
-					$('#btnCartOpen').text('열기');
-					$.cookie("cartOpen", "Y", { expires: -1 });
-					$.cookie('cartOpen', 'N', { expires: 7, path: '/', domain: 'localhost', secure: false });
-					$('.cart_r').css('width','0px');
-					
-					location.href = '/order/orderFromAction.yo';
-				}
-			},
-			error:function(){
+			error : function() {
 			}
 		});
 
-   	
 		return;
 	}
-	function goList(){
-		location.href="../product/productListAction.yo?pageNum=${spage}&cidx=${po.cidx}";
+	//바로구매 함수
+	function direcBuy() {
+		var direct = 'Y';
+		var pdNum = $('#pdNum').val();
+		//기본가격 값
+		var basicPrice = ${po.price};
+		numBasicPrice = parseInt(basicPrice);
+
+		//수량 옵션 값
+		var pdCount = $("#pdCount").val();
+		var numPdCn = parseInt(pdCount);
+
+		//컵사이즈 옵션 값
+		var cupSize = document.getElementById("cupSize");
+		var cupSizeVal = cupSize.options[cupSize.selectedIndex].value;
+
+		if (cupSizeVal == "medium") {
+			cupSizeVal = 0;
+		} else if (cupSizeVal == "large") {
+			cupSizeVal = 500;
+		} else if (cupSizeVal == "Grande") {
+			cupSizeVal = 1000;
+		}
+
+		//시럽 옵션 값	
+		var syrubAdd = document.getElementById("syrubAdd");
+		var syrubVal = syrubAdd.options[syrubAdd.selectedIndex].value;
+		if (syrubVal == "basic") {
+			syrubVal = 0;
+		} else {
+			syrubVal = 500;
+		}
+		//얼음 옵션 값	
+		var ice = document.getElementById("iceAdd");
+		var iceVal = ice.options[ice.selectedIndex].value;
+		if (iceVal == "hot") {
+			iceVal = 0;
+		} else {
+			iceVal = 600;
+		}
+
+		//샷 옵션 값
+		var shotCount = $("#shotAdd").val();
+		var numShCn = parseInt(shotCount) * 600;
+
+		var opt = "컵사이즈: " + cupSizeVal + "& 시럽: " + syrubVal + "& 얼음: "
+				+ iceVal + "& 샷: " + shotCount;
+		var optPrice = cupSizeVal + syrubVal + iceVal + numShCn;
+		var priceSum = numBasicPrice * numPdCn + optPrice;
+		var param = "pdNum=" + pdNum + "&pdCount=" + pdCount
+				+ "&numBasicPrice=" + numBasicPrice + "&optPrice=" + optPrice
+				+ "&opt=" + opt + "&direct=" + direct;
+
+		$.ajax({
+			url : '/popup/cartAddAction.yo',
+			type : 'POST',
+			data : param,
+			dataType : 'JSON',
+			success : function(data) {
+				var resultText = data.check;
+				//alert(resultText);
+				if (resultText == 1) {
+					$('#btnCartOpen').text('열기');
+					$.cookie("cartOpen", "Y", {
+						expires : -1
+					});
+					$.cookie('cartOpen', 'N', {
+						expires : 7,
+						path : '/',
+						domain : 'localhost',
+						secure : false
+					});
+					$('.cart_r').css('width', '0px');
+
+					location.href = '/order/orderFromAction.yo';
+				}
+			},
+			error : function() {
+			}
+		});
+
+		return;
+	}
+	function goList() {
+		location.href = "../product/productListAction.yo?pageNum=${spage}&cidx=${po.cidx}";
 	}
 
 	function sumPrice() {
 		//기본가격 값
-		var basicPrice=${po.price};
-		numBasicPrice = parseInt(basicPrice); 
-		
+		var basicPrice = ${po.price};
+		numBasicPrice = parseInt(basicPrice);
+
 		//수량 옵션 값
-		var pdCount=$("#pdCount").val();
-		var numPdCn=parseInt(pdCount);
-		
+		var pdCount = $("#pdCount").val();
+		var numPdCn = parseInt(pdCount);
+
 		//컵사이즈 옵션 값
-		var cupSize = document.getElementById("cupSize");	
-		var cupSizeVal= cupSize.options[cupSize.selectedIndex].value;
-		
-		if(cupSizeVal=="medium"){
-			cupSizeVal=0;
+		var cupSize = document.getElementById("cupSize");
+		var cupSizeVal = cupSize.options[cupSize.selectedIndex].value;
+
+		if (cupSizeVal == "medium") {
+			cupSizeVal = 0;
+		} else if (cupSizeVal == "large") {
+			cupSizeVal = 500;
+		} else if (cupSizeVal == "Grande") {
+			cupSizeVal = 1000;
 		}
-		else if(cupSizeVal=="large"){
-			cupSizeVal=500;
-		}
-		else if(cupSizeVal=="Grande"){
-			cupSizeVal=1000;
-		}
-	
+
 		//시럽 옵션 값	
-		var syrubAdd = document.getElementById("syrubAdd");	
-		var syrubVal= syrubAdd.options[syrubAdd.selectedIndex].value;
-		if(syrubVal=="basic"){
-			syrubVal=0;
-		}
-		else{
-			syrubVal=500;
+		var syrubAdd = document.getElementById("syrubAdd");
+		var syrubVal = syrubAdd.options[syrubAdd.selectedIndex].value;
+		if (syrubVal == "basic") {
+			syrubVal = 0;
+		} else {
+			syrubVal = 500;
 		}
 		//얼음 옵션 값	
-		var ice = document.getElementById("iceAdd");	
-		var iceVal= ice.options[ice.selectedIndex].value;
-		if(iceVal=="hot"){
-			iceVal=0;
+		var ice = document.getElementById("iceAdd");
+		var iceVal = ice.options[ice.selectedIndex].value;
+		if (iceVal == "hot") {
+			iceVal = 0;
+		} else {
+			iceVal = 600;
 		}
-		else{
-			iceVal=600;
-		}
-				
+
 		//샷 옵션 값
-		var shotCount=$("#shotAdd").val();
-		var numShCn=parseInt(shotCount)*600;
-		
-		var optPrice=cupSizeVal+syrubVal+iceVal+numShCn;
-		
-		
-		
-		var priceSum=numBasicPrice*numPdCn+optPrice;
-		$("#priceSum").attr("value",priceSum);
-		
-	}	
+		var shotCount = $("#shotAdd").val();
+		var numShCn = parseInt(shotCount) * 600;
 
-//옵션에 대한 기능 
- $(function(){
-	 $("#plusPd").click(function(){
-		 var pdCount=$("#pdCount").attr("value");
-		 if(pdCount==10){
-			 alert("수량은 10개 까지 추가할 수 있습니다.");
-			 $("#pdCount").attr("value",10);
-		 }
-		 else{
-			 var num_count=parseInt(pdCount)+1;
-			 $("#pdCount").attr("value",num_count);
-		 }
-		 sumPrice(); 
-		 
-	 });
-	 $("#minusPd").click(function(){
-		 var pdCount=$("#pdCount").attr("value");
-		 if(pdCount==1){
-			 $("#pdCount").attr("value",1);
-		 }
-		 else{
-			 var num_count=parseInt(pdCount)-1;
-			 $("#pdCount").attr("value",num_count);
-		 }
-		 sumPrice();
-	 });
-	 	 
-	 $("#plusShot").click(function(){
-		 var shotplus=$("#shotAdd").attr("value");
-		 if(shotplus==4){
-			 alert("Shot은 4번까지 추가할 수 있습니다.");
-			 $("#shotAdd").attr("value",4);
-		 }
-		 else{
-			 var numshot=parseInt(shotplus)+1;
-			 $("#shotAdd").attr("value",numshot)
-		 }
-		 sumPrice();
-	 });
-	
-	 $("#minusShot").click(function(){
-		 var shotplus=$("#shotAdd").attr("value");
-		 if(shotplus==0){
-				$("#shotAdd").attr("value",0);
-		 }
-		 else{
-			 var numshot=parseInt(shotplus)-1;
-			 $("#shotAdd").attr("value",numshot);
-		 }
-		 sumPrice();
+		var optPrice = cupSizeVal + syrubVal + iceVal + numShCn;
 
-	 });
-	
-});
+		var priceSum = numBasicPrice * numPdCn + optPrice;
+		$("#priceSum").attr("value", priceSum);
 
+	}
 
-	
+	//옵션에 대한 기능 
+	$(function() {
+		$("#plusPd").click(function() {
+			var pdCount = $("#pdCount").attr("value");
+			if (pdCount == 10) {
+				alert("수량은 10개 까지 추가할 수 있습니다.");
+				$("#pdCount").attr("value", 10);
+			} else {
+				var num_count = parseInt(pdCount) + 1;
+				$("#pdCount").attr("value", num_count);
+			}
+			sumPrice();
+
+		});
+		$("#minusPd").click(function() {
+			var pdCount = $("#pdCount").attr("value");
+			if (pdCount == 1) {
+				$("#pdCount").attr("value", 1);
+			} else {
+				var num_count = parseInt(pdCount) - 1;
+				$("#pdCount").attr("value", num_count);
+			}
+			sumPrice();
+		});
+
+		$("#plusShot").click(function() {
+			var shotplus = $("#shotAdd").attr("value");
+			if (shotplus == 4) {
+				alert("Shot은 4번까지 추가할 수 있습니다.");
+				$("#shotAdd").attr("value", 4);
+			} else {
+				var numshot = parseInt(shotplus) + 1;
+				$("#shotAdd").attr("value", numshot)
+			}
+			sumPrice();
+		});
+
+		$("#minusShot").click(function() {
+			var shotplus = $("#shotAdd").attr("value");
+			if (shotplus == 0) {
+				$("#shotAdd").attr("value", 0);
+			} else {
+				var numshot = parseInt(shotplus) - 1;
+				$("#shotAdd").attr("value", numshot);
+			}
+			sumPrice();
+
+		});
+
+	});
 </script>
 </head>
 <body>
@@ -469,18 +503,44 @@
 		<input type="button" name="buy" id="listBtn" value="목록" onclick="goList();"/>
 	</div>	
 	
+<!-- 댓글 부분 -->
 	<div class="Reviews">
+		<div class="grade">고객총평점:  
+										<c:if test="${commentAvg==0}">
+								        	☆☆☆☆☆
+								        </c:if>
+								        <c:if test="${commentAvg==1}">
+								        	★☆☆☆☆
+								        </c:if>
+								        <c:if test="${commentAvg==2}">
+								      		★★☆☆☆
+								        </c:if>
+								        <c:if test="${commentAvg==3}">
+								       		★★★☆☆
+								        </c:if>
+								        <c:if test="${commentAvg==4}">
+								       		  ★★★★☆
+								        </c:if>
+								        <c:if test="${commentAvg==5}">
+								      		 ★★★★★
+								        </c:if>
 		
-		<div class="grade">고객총평점:  <fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5</div>
+		<fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5</div>
+		<table class="bbscomm">
+		
+			<!-- 로그인 했을 경우만 댓글 작성가능 -->
+			<c:if test="${sessionScope.userid !=null}">
 			
-<%-- 댓글 등록: 로그인 했을 경우에만 댓글 작성 --%>
-		<c:if test="${sessionScope.userid !=null}">
-			<form id="writeCommentForm">
-				<input type="hidden" id="comment_board" name="comment_board" value="${num}">
-				<input type="hidden" id="comment_id" name="comment_id" value="${sessionScope.userid}">
-				<div>
+			<form id="writeCommentForm" method="post" action="#">
+				<input type="hidden" id="comment_board" name="comment_board" value="${num}"/>
+				<input type="hidden" id="comment_id" name="comment_id" value="${sessionScope.userid}"/>
+			<tr>
+				
+				<!-- 아이디-->
+				<td style="width:150px;height:60px;padding:10px; background:lightgray;">
+					<div id="writer">${sessionScope.nick}</div>
 					<div class="small_text"><p>별점주기
-						<select id="core">
+						<select id="score">
 							<option value="0">0</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -490,36 +550,65 @@
 						</select>
 						</p>
 					</div>
-					<div class="Review_wr">
-						<div><textarea name="comment_content" id="comment_content" rows="3" cols="100" maxlength="1000"></textarea></div>
-						<div><button name="Review" id="Review_button" onclick="writeCmt()">등록</button></div>
+				</td>
+				<!-- 본문 작성-->
+				<td>
+					<div>
+						<div><textarea name="comment_content" id="comment_content" rows="3" cols="80" maxlength="1000"></textarea></div>
 					</div>
-				</div>
+				</td>
+				<!-- 댓글 등록 버튼 -->
+				<td >
+					<div id="btn">
+						<button type="button" id="Review_button" onclick="writeCmt();">등록</button>
+					</div>
+				</td>
+			</tr>
 			</form>
-		</c:if>
 			
-<%-- 댓글 목록 --%>			
-	<c:if test="${requestScope.commentList != null}">
-		<c:forEach var="comment" items="${requestScope.commentList}">		
-			<div class="Review_list">
-				<ul display="block">
-					<li style="border-style:1">
-						<div>
-							<span id="nick">닉네임 데이터 불러와서 표시,</span>
-							<span id="jumsu1">별점 데이터 불러와서 표시,</span>
-							<span id="jumsu2">점수 데이터 불러와서 표시</span>
-						</div>
-						<p id="review_detail">상품평 본문 불러와서 표시</p>
-						<p id="Date_Created">작성일 데이터 불러와서 표시</p>
-						<p><input type="button" name="update" id="review_update" value="수정"/>
-								<input type="button" name="delete" id="review_delete" value="삭제"/>
-						</p>
-					</li>
-				</ul>
-			</div>
-		</c:forEach>
-	</c:if>
-</body>
-
+			</c:if>
+			
+			<!-- 댓글 목록 -->	
+			<c:if test="${requestScope.commentList != null}">
+				<c:forEach var="comment" items="${requestScope.commentList}">
+					<tr>
+						<!-- 아이디, 작성날짜 -->
+						<td>
+							<div>					
+								${comment.nickName} ${comment.pcpoint} / 5  <br>
+								<font size="2" color="lightgray">${comment.createdt}</font>
+							</div>
+						</td>
+						<!-- 본문내용 -->
+						<td width="550">
+							<div class="text_wrapper">
+								${fn:replace(comment.comm, cn, br)}
+								<fmt:formatDate value="${comment.createdt}" pattern="yyyy년MM월dd일 a hh시mm분 ss초"/> 
+							</div>
+						</td>
+						<!-- 버튼 -->
+						<td width="100">
+							<div  id="btn">
+							<c:if test="${comment.userid == sessionScope.userid}">
+								<a href="javascript:void(0)" onclick="cmUpdateOpen(${comment.pcidx})">[수정]</a>
+								<a href="javascript:void(0)" onclick="cmDeleteOpen(${comment.pcidx})">[삭제]</a>
+							</c:if>		
+							</div>
+						</td>
+					</tr>
+					
+				</c:forEach>
+			</c:if>
+			
+			
+		</table>
+		
+		
+	</div>
+<form id="prodComm" action="../product/productDetailAction.yo" method="post">
+<input type="hidden" id="pageNum" name="pageNum" value="${pageNum}" />
+<input type="hidden" id="pNum" name="pNum" value="${pNum}" />
+<input type="hidden" id="ePage" name="ePage" value="${ePage}" />
+</form>
 </body>
 </html>

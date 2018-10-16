@@ -779,12 +779,10 @@ public class ProductDao {
 				sql.append("p.PIDX, c.CNAME, PNAME, IMAGE, ");
 				sql.append("PRICE, MAKETM, RECOMM, P.CIDX, ");
 				sql.append("p.STATUS, p.CREATEDT, ");
-				sql.append("(select nvl((sum(pc.pcpoint)/count(*)),0) from PRODCOMM) as pavg ");
+				sql.append("(select nvl((sum(pcpoint)/count(*)),0) from PRODCOMM) as pavg ");
 				sql.append("FROM PRODUCT p ");
 				sql.append("left join CATEGORY c ");
 				sql.append("on p.cidx = c.cidx ");
-				sql.append("left join PRODCOMM pc ");
-				sql.append("on p.pidx=pc.pidx ");
 				sql.append("WHERE p.cidx=? and p.status = 1 ");
 				sql.append(" ORDER BY PIDX desc ");
 				sql.append(") ");
