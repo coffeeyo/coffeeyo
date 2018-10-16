@@ -120,8 +120,8 @@
             </th>
         </tr>
     </table>
-    <table  align="center" class="style1">
-        <tr class="width70">
+    <table  align="center" class="style1" width="70%">
+        <tr style="border-bottom: 2px solid #77563c;">
             <td><h4>상품이미지</h4></td>
             <td><h4>상품정보</h4></td>
             <td><h4>결제금액</h4></td>
@@ -130,7 +130,7 @@
         </tr>
         <c:forEach var="data" items="${orderList}">
         <tr style="border-bottom: 2px solid #77563c;">
-            <td align="center">
+            <td>
                 <a href="../admin/orderHistoryDetailAction.yo?orderno=${data.orderno}&userid=${data.userid}">
                     <img src="../view/upload/product/${data.image}" width="150px" height="150px"/>
                     주문내역상세보기
@@ -142,9 +142,9 @@
         			상품명: ${data.pname} 
         			<c:if test="${data.amount gt 1 }"> 외 ${data.amount - 1} 건</c:if>        			
             </td>
-            <td align="center">결제금액: ${data.total}원  <%-- 추가로 넣어줘야한다 ${data.optprice} --%></td>
-            <td align="center">주문일시: ${data.orddt} </td>
-            <td align="center">
+            <td>결제금액: ${data.total}원  <%-- 추가로 넣어줘야한다 ${data.optprice} --%></td>
+            <td>주문일시: ${data.orddt} </td>
+            <td>
                		처리상태: ${data.status} <br/>
                		1: 처리중 2: 처리완료
             </td>

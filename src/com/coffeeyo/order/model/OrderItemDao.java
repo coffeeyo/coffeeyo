@@ -128,7 +128,7 @@ public class OrderItemDao {
 				sql.append("SELECT");
 				sql.append(" ORI.ORDNO as ORDERNO, ORD.USERID as USERID, TOTAL, PAYYN, ");
 				sql.append(" ORD.READYTM as READYTM, ORD.ORDDT as ORDDT, ORD.STATUS as STATUS,  ORI.OPTIONS as OPTIONS, ORI.AMOUNT as AMOUNT, ");
-				sql.append(" ORI.PRICE as PRICE, ORI.OPTPRICE as OPTPRICE ,ORI.ITEMNO as ITEMNO ,  P.PNAME as PNAME, P.IMAGE as IMAGE, P.MAKETM as MAKETM ");
+				sql.append(" ORI.PRICE as PRICE, ORI.OPTPRICE as OPTPRICE ,ORI.ITEMNO as ITEMNO ,  P.PNAME as PNAME, P.IMAGE as IMAGE, P.MAKETM as MAKETM, P.PIDX as PIDX,P.CIDX as CIDX  ");
 				sql.append("FROM ORDERS ORD ");
 				sql.append("LEFT JOIN ORDERITEM ORI ");
 				sql.append("	ON ORD.ORDNO=ORI.ORDNO ");
@@ -147,10 +147,10 @@ public class OrderItemDao {
 			}			
 			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) 
 			{
 				OrderItem oitem = new OrderItem();
-				
 				oitem.setOrderno(rs.getString("ORDERNO"));
 				oitem.setItemno(rs.getInt("ITEMNO"));
 				oitem.setStatus(rs.getInt("STATUS"));
@@ -160,10 +160,12 @@ public class OrderItemDao {
 				oitem.setAmount(rs.getInt("AMOUNT"));
 				oitem.setPrice(rs.getLong("PRICE"));
 				oitem.setOptprice(rs.getInt("OPTPRICE"));
+				oitem.setPidx(rs.getLong("PIDX"));
+				oitem.setCidx(rs.getLong("CIDX"));
 				
 				orderItemList.add(oitem);
 			}
-			//System.out.println("orderList="+orderList.size());
+			System.out.println("orderitemList="+orderItemList.size());
 			DBConnection.close(rs);
 		}
 		catch(Exception e) {

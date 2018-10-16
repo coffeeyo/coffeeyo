@@ -7,7 +7,14 @@ public class OrderItem extends Common {
 	private long itemno;
 	private long pidx;
 	private int amount;
+	private long cidx;
 	
+	public long getCidx() {
+		return cidx;
+	}
+	public void setCidx(long cidx) {
+		this.cidx = cidx;
+	}
 	public String getOrderno() {
 		return orderno;
 	}

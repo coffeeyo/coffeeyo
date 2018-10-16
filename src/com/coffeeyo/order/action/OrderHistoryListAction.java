@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.coffeeyo.common.action.Action;
 import com.coffeeyo.order.model.Order;
 import com.coffeeyo.order.model.OrderDao;
+import com.coffeeyo.order.model.OrderItem;
+import com.coffeeyo.order.model.OrderItemDao;
 import com.coffeeyo.product.model.Category;
 import com.coffeeyo.product.model.CategoryDao;
 
@@ -90,7 +92,7 @@ public class OrderHistoryListAction implements Action {
 		
 		ArrayList<Order> orderList = null;
 		orderList = dao.getAllOrder(ord, pinfo, listOpt);		//페이징 실패시 다시 원상복구
-
+		
 		//System.out.println("CartListFormAction cartList : " + cartList);
 		// 모델
 		
@@ -99,7 +101,9 @@ public class OrderHistoryListAction implements Action {
 		CategoryDao cateDao = CategoryDao.getInstance();
 		List<Category> cateList = null;
 		cateList = cateDao.getAllCategory();
-
+		
+		
+		
 		request.setAttribute("cateList", cateList);
 		request.setAttribute("orderList", orderList);
 		request.setAttribute("PINFO", pinfo);

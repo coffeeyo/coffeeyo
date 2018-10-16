@@ -20,6 +20,7 @@
     		.style1 tr:hover { 
 		background-color: #EFE4B0; 
 		}
+		
     </style>
     <script src="jquery-3.3.1.min.js"></script>
     <script>
@@ -120,15 +121,14 @@
             </th>
         </tr>
     </table>
-    <table  align="center" class="style1">
-        <tr class="width70">
+    <table  align="center" width="70%" class="style1" >
+        <tr style="border-bottom: 2px solid #77563c;">
         	<td><h4>상품이미지</h4></td>
             <td><h4>상품정보</h4></td>
             <td><h4>결제금액</h4></td>
             <td><h4>주문일시</h4></td>
-            <td><h4>상품상세보기 및 상품평보기</h4></td>
         </tr>
-        <c:forEach var="data" items="${orderList}">
+        <c:forEach var="data" items="${orderList}" >
         <tr style="border-bottom: 2px solid #77563c;">
             <td>
                 <a href="../order/orderHistoryDetailAction.yo?orderno=${data.orderno}">
@@ -143,9 +143,6 @@
             </td>
             <td>결제금액: ${data.total}원  <%-- ${data.optprice} --%></td>
             <td>주문일시: ${data.orddt} </td>
-            <td align="center">
-                <input type="button" value="바로가기" onclick="location.href='../product/productDetailAction.yo'">	<%-- #상품명 넣을 곳 --%>
-            </td>
         </tr>
         </c:forEach>
     </table>

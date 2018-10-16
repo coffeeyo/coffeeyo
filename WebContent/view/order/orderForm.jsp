@@ -11,66 +11,70 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 <meta charset="UTF-8">
+<style>
+    	.width70{
+    		width:70%;
+    		border-bottom: 2px solid #77563c;
+    	}
+    		.style1 tr:hover { 
+		background-color: #EFE4B0; 
+		}
+		
+    </style>
 <script>
 </script>
 </head>
 <body>
-<span>주문서</span> <span>네비게이션바</span>
-
-
-	
-	
-	
-	
+<table width="70%" align="center" ><tr><td><h2>주문서</h2></td></tr></table>
 	
 <hr>
 <div class="board">
 	<form action="../order/orderProcAction.yo " method="post" id="order_form" name="order_form" >
-	    <table border="1" width="70%" align="center"  class="cartList">
-	        <tr>
-	            <th colspan="2" width="50%">상품정보</th>
-	            <th width="20%">상품 구매금액</th>
+	    <table  width="70%" align="center" >
+	        <tr style="border-bottom: 2px solid #77563c;">
+	            <td colspan="2"><h3>상품정보</h3></td>
+	            <td ><h3>상품 구매금액</h3></td>
 	        </tr>
 	        <c:if test="${fn:length(requestScope.buyChkList) eq 0}">
-				<tr>
+				<tr >
 					<th></th>
 				</tr>
 			</c:if>
 			<c:set var="sum" value="0"/>
 			<c:if test="${fn:length(requestScope.buyChkList) gt 0}">
 			  <c:forEach var="cart" items="${requestScope.buyChkList}" varStatus="status">
-			  <tr>	
-				  <th>
-				    <div class="thumbnail">
+			  <tr style="border-bottom: 2px solid #77563c;">	
+				  <td>
 				        <c:if test="${cart.image ne null}">
 							<img src="../view/upload/product/${cart.image}" title="${cart.pname}" alt="${cart.pname}" style="cursor:pointer;" width="150px" height="150px"/>
 						</c:if>
-				    </div>
-				  </th>
+				  </td>
 				  <td>
 					  상품명: ${cart.pname}<br/>
+					  옵션:${cart.options}<br/>
+					  상품가격:${cart.price}<br/>
+					  옵션가격:${cart.optprice}<br/>
 					  수량: ${cart.amount}<br/>
 				  </td>
 				  <td>
-					  ${cart.price * cart.amount} 원<br/>
+					 <h4> ${(cart.price + cart.optprice)*cart.amount} 원</h4>
 				  </td>
 			  </tr>
-			  <c:set var="sum" value="${sum + (cart.price * cart.amount)}"/>
+			  <c:set var="sum" value="${sum + (cart.price + cart.optprice)*cart.amount}"/>
 			  </c:forEach>
 			</c:if>
-	        <tr>
+	        <tr style="border-bottom: 2px solid #77563c;">
 	        	<div class="itemfooter">
-			
-    	
-	            <td colspan="3" align="right">
-	                최종결제금액<br/>
-	               <div>총계 : ${sum}원</div>
-	            </td>
+		            <td colspan="3" align="right">
+		                <h4>최종결제금액<br/>
+		               		<div>총계 : ${sum}원</div>
+		               </h4>
+		            </td>
 	            </div>
 	        </tr>
 	        <tr>
-	            <th colspan="3">
-	                <input type="submit" value="결제하기">
+	            <td colspan="3" align=right>
+	                <h4><input type="submit" value="결제하기"></h4>
 	            </th>
 	        </tr>
 	    </table>
@@ -78,7 +82,6 @@
 </div>	
 	
 	
-	여기 안쪽은 주문서 작성 폼 입니다.
 	<%--
 	1. 주문서 작성 폼을 작성할때 필수값
 	<input type="hidden" name="price" value="${sum}"/>
