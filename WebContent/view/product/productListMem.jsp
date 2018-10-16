@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.coffeeyo.product.model.ProductDao"%>
-<%@page import="com.coffeeyo.product.model.Product"%>
-<%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
@@ -14,7 +11,7 @@
 <style>
 .top_title{width:1000px; margin-left:auto; margin-right:auto; font-size: 30px; font-weight: bold;}
 .pdcount{width:1000px; margin-left:auto; margin-right:auto; font-size: 12px; font-weight: bold;}
-td, th{padding:5px 10px;}
+
 .top_tab{border: 1px solid gray; border-collapse:collapse; width:1000px; margin-left:auto; margin-right:auto;}
 .firstrow{text-align:center;background-color:lightgray;font-weight:bold;border: 1px solid gray;}
 .contentrow{text-align:center;valign:middle;height:30px;border: 1px solid gray;}
@@ -27,8 +24,8 @@ td, th{padding:5px 10px;}
     color:green;
     font-size:16px;}
 .result{font-weight:bold}
-ul{list-style:none;padding:0px; margin:0px;}
-li{float:left;padding:10px;}
+#listbig ul{list-style:none;padding:0px; margin:0px;}
+#listbig li{float:left;padding:10px;}
 .incontent{text-align:left; }
 </style>
 <script>
