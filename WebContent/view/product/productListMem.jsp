@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 <meta charset="UTF-8">
 <title>상품 상세보기</title>
 <style>
