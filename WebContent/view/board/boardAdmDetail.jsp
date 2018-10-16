@@ -6,6 +6,68 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	h3 {
+		color:#7C5D44;
+	}
+	table {
+		border-collapse:collapse;
+	}
+
+	.style1 tr, .style1 td {
+		border-bottom:2px solid #d2bdad;
+	}
+
+	.button:hover, .btn2:hover {
+		background-color: #f6f2ef;
+		font-weight:bold;
+	    color:black;
+	}
+	.button {
+	    width:80px;
+	    background-color: #d2bdad;
+	    border: none;
+	    color:black;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 13px;
+	    margin: 4px;
+	    cursor: pointer;
+	    border-radius:5px;
+	}
+	.btn2 {
+	    width:40px;
+	    background-color: #d2bdad;
+	    border: none;
+	    color:black;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 13px;
+	    margin: 4px;
+	    cursor: pointer;
+	    border-radius:5px;
+	 }
+	textarea {
+		width:100%;
+	}
+	.brdImage {
+		height:500px;
+		padding:10px; 
+		float:left;
+	}
+	.brdcomm{
+		padding:10px;
+	}
+	.style2 {
+	}
+	.style2 tr {
+		border-bottom:1px solid #d2bdad;
+		background-color:white;
+		color:black;
+	}
+</style>
 <script>
 	$(function(){
 		
@@ -62,51 +124,35 @@
 </head>
 <body>
 <%-- 게시판 상세보기 --%>
-<table border="1" align="center" width="600">
+<table align="center" width="70%">
 	<tr>
-		<th>분류명</th>
-		<td>${DATA.cname }</td>
-		<th>상품명</th>
-		<td>${DATA.pname }</td>
-	</tr>
-	<tr>
-		<th>작성자</th>
-		<td>${DATA.nick }</td>
-		<th>작성일</th>
-		<td>${DATA.createdt }</td>
-	</tr>
-	<tr>
-		<th>조회수</th>
-		<td>${DATA.readcnt }</td>
-		<th>추천수</th>
-		<td>${DATA.likecnt }</td>
-	</tr>
-	<tr>
-		<th>제목</th>
-		<td colspan="3">${DATA.subject }</td>
-	</tr>
-	<tr>
-		<th>내용</th>
-		<td colspan="3">
-		${DATA.comm }
+		<td>
+			<h3 align="left">게시판 상세보기</h3>
 		</td>
 	</tr>
-	<tr>
-		<td>첨부파일</td>
-		<td colspan="3">
-			<c:if test="${DATA.image ne null}">
-				<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}" border="0" /></a>
-			</c:if>
-			<c:if test="${DATA.image eq null}">
-				첨부파일 없음
-			</c:if>
+</table>
+<table align="center" width="70%" class="style1">
+	<tr height="30px">
+		<td colspan="2"><b>${DATA.subject }</b></td>
+	</tr>
+	<tr height="30px">
+		<td align="left">작성자:${DATA.nick } | 분류:${DATA.cname } | 상품명:${DATA.pname }</td>
+		<td align="right"> ${DATA.createdt } 조회${DATA.readcnt } 추천${DATA.likecnt }</td>
+	</tr>
+	<tr height="30px">
+		<td colspan="2" >
+		<c:if test="${DATA.image ne null}">
+		<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}"  class="brdImage"/></a>
+		<br>
+		</c:if>
+		<span class="brdcomm">${DATA.comm }</span>
 		</td>
 	</tr>
 	<tr>
 		<%-- 관리자는 모든 게시물을 수정/삭제할 수 있어야 함 --%>
 		<td colspan="4" align="center">
-				<input type="button" id="mBtn" value="수정">
-				<input type="button" id="dBtn" value="삭제">
+				<input type="button" id="mBtn" value="수정" class="button" >
+				<input type="button" id="dBtn" value="삭제" class="button">
 		</td>
 	</tr>
 </table>
@@ -116,9 +162,10 @@
 		<input type="hidden" name="oriNo" value="${oriNo}">
 		<input type="hidden" name="nowPage" value="${nowPage}">
 		<input type="hidden" name="userid" value="${sessionScope.userid}">
-		<table border="1" align="center" width="600">
+		
+		<table align="center" width="70%">
 			<tr align="center">
-				<td><input type="submit" id="LBtn" value="추천하기/추천취소" ></td>
+				<td><input type="submit" id="LBtn" value="추천/취소" class="button"></td>
 			</tr>
 		</table>
 	</form>
@@ -128,10 +175,10 @@
 	<form id="wrfrm" name="wrfrm" action="../admin/commentWrite.yo" method="post">
 		<input type="hidden" id="oriNo" name="oriNo" value="${oriNo}">
 		<input type="hidden" id="nowPage" name="nowPage" value="${nowPage}">
-		<table width="600" border="1" align="center">
+		<table align="center" width="70%">
 			<tr>
 				<td><textarea name="comm" id="comm" placeholder="댓글 작성란"></textarea></td>
-				<td align="center"><input type="button" id="wrBtn" value="글등록" ></td>
+				<td width="10%" align="center"><input type="button" id="wrBtn" value="글등록"  class="button"></td>
 			</tr>
 		</table>
 	</form>
@@ -139,28 +186,24 @@
 <%-- 댓글이 존재한다면 반복해서 뿌려주기 --%>
 <%-- 댓글이 없는 경우 --%>
 <c:if test="${empty COMM }">
-	<table border="1" width="600" align="center">
+	<table width="70%" align="center">
 		<tr>
-			<td align="center" style="color:red;">댓글을 작성해주세요</td>
+			<td align="center"><h4><b>"첫번째 댓글을 작성해주세요"</b></h4></td>
 		</tr>
 	</table>
 </c:if>
 <%-- 댓글이 존재하는 경우.. 댓글수만큼 반복출력 --%>
 <c:if test="${not empty COMM}">
 	<c:forEach var="temp" items="${COMM}">
-		<table id="${temp.bcidx }" border="1" width="600" align="center">
+		<table id="${temp.bcidx }"  width="70%" align="center" class="style2">
 			<tr>
-				<th>닉네임</th>
-				<td>${temp.nick }</td>
-			</tr>
-			<tr>
-				<td colspan="2">${temp.comm }</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="right">${temp.createdt }
-						<%-- 관리자는 모든 댓글도 수정/삭제 권한을 가지고 있어야 함 --%>
-						<input type="button" class="mCBtn" value="수정">
-						<input type="button" class="dCBtn" value="삭제">
+				<td width="20%"><b>${temp.nick }</b></td>
+				<td width="60%">${temp.comm }</td>
+				<td width="20%" align="right">
+					<%-- 관리자는 모든 댓글도 수정/삭제 권한을 가지고 있어야 함 --%>
+					<input type="button" class="mCBtn btn2" value="수정">
+					<input type="button" class="dCBtn btn2" value="삭제" > 
+					&nbsp;${temp.createdt }
 				</td>
 			</tr>
 		</table>
@@ -169,32 +212,23 @@
 			<input type="hidden" name="reNo" value="${temp.bcidx }"/>
 			<input type="hidden" name="oriNo" value="${temp.bidx }"/>
 			<input type="hidden" name="nowPage" value="${nowPage }"/>
-			<table border="1" width="600" align="center">
+			<table width="70%" align="center" class="style2">
 				<tr>
-					<th>닉네임</th>
-					<td>${temp.nick }</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<textarea name="comm" id="mComm" placeholder="댓글 수정란">${temp.getCommNbr()}</textarea>
-					</td>
-				</tr>
-				<tr>				
-					<td colspan="2" align="right">${temp.createdt }</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<input type="button" class="sCBtn" value="저장">
-						<input type="button" class="bCBtn" value="취소">
+					<td width="20%"><b>${temp.nick }</b></td>
+					<td width="50%"><textarea name="comm" id="mComm" placeholder="댓글 수정란">${temp.getCommNbr()}</textarea></td>
+					<td width="30%" align="right">
+						<input type="button" class="sCBtn btn2" value="저장">
+						<input type="button" class="bCBtn btn2" value="취소">
+						&nbsp;${temp.createdt }
 					</td>
 				</tr>
 			</table>
 		</form>
 	</c:forEach>
 </c:if>
-<table border="1" align="center" width="600">
+<table align="center" width="70%">
 	<tr align="center">
-		<td><input type="button" id="bBtn" value="목록보기" onclick="location.href='/admin/boardBoardList.yo?oriNo=${oriNo}&nowPage=${nowPage }'"></td>
+		<td><input type="button" id="bBtn" value="목록보기" class="button"  onclick="location.href='/admin/boardBoardList.yo?oriNo=${oriNo}&nowPage=${nowPage }'"></td>
 	</tr>
 </table>
 </body>

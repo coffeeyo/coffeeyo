@@ -6,6 +6,52 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+h3 {
+	color:#7C5D44;
+}
+th {
+	width:20%;
+	text-align:center;
+	font-weight:bold;
+	background-color:#ede4de;
+}
+tr {
+	height:30px;
+}
+input{
+	width:95%;
+}
+textarea {
+	height:200px;
+	width:95%
+}
+select {
+	width:30%;
+}
+.brdImage {
+	height:500px;
+	padding:10px; 
+}
+.btn2 {
+    width:60px;
+    background-color: #d2bdad;
+    border: none;
+    color:black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius:5px;
+ }
+.btn2:hover {
+	background-color: #f6f2ef;
+	font-weight:bold;
+    color:black;
+} 
+</style>
 <script>
 	$(function(){
 		//공지 초기값 지정
@@ -69,16 +115,23 @@
 </script>
 </head>
 <body>
+<table align="center" width="70%">
+	<tr>
+		<td>
+			<h3 align="left">게시판 수정하기</h3>
+		</td>
+	</tr>
+</table>
 <form id="frm" name="frm" action="../board/boardUpdateProc.yo" method="post" enctype="multipart/form-data">
 	<%--파라미터 릴레이용 --%>
 	<input type="hidden" id="oriNo" name="oriNo" value="${oriNo}">
 	<input type="hidden" id="nowPage" name="nowPage" value="${nowPage}">
 	
-	<table border="1" align="center" width="600">
+	<table border="1px" align="center" width="70%">
 		<c:if test="${sessionScope.userid eq 'admin' }"> 
 		<tr>
 			<th>공지유무</th>
-			<td>
+			<td>&nbsp;
 				<select id="notiyn" name="notiyn">
 					<option id="N" value="N" >NO</option>
 					<option id="Y" value="Y">YES</option>
@@ -88,7 +141,7 @@
 		</c:if>
 		<tr>
 			<th>상품분류</th>
-			<td>
+			<td>&nbsp;
 				<select id="cname" name="cname">
 					<option>선택하세요</option>
 					<option id="없음" value="0">없음</option>
@@ -100,7 +153,7 @@
 		</tr>
 		<tr>
 			<th>상품명</th>
-			<td>
+			<td>&nbsp;
 				<select id="pname" name="pname">
 					<option>선택하세요</option>
 					<option id="${DATA.pname }"  value="${DATA.pidx }" selected>${DATA.pname }</option>
@@ -118,30 +171,35 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="subject" id="subject" value="${DATA.subject }"></td>
+			<td>&nbsp;<input type="text" name="subject" id="subject" value="${DATA.subject }"></td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="comm" id="comm">${DATA.getCommNbr() }</textarea></td>
+			<td>&nbsp;<textarea name="comm" id="comm">${DATA.getCommNbr() }</textarea></td>
 		</tr>
-		<c:if test="${DATA.image ne null}">
-			<tr>
-				<th>기존파일</th>
-				<td>
-					<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}" border="0" /></a>
-				</td>
-			</tr>
-		</c:if>
+		<tr>
+			<th>기존파일</th>
+			<td>
+				<c:if test="${DATA.image ne null}">
+				<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}" class="brdImage"/></a>
+				</c:if>
+				<c:if test="${DATA.image eq null}">
+				&nbsp;첨부파일 없음
+				</c:if>
+			</td>
+		</tr>	
 		<tr>
 			<th>첨부파일</th>
 			<td>
 				<input type="file" name="file" id="file" >
 			</td>
 		</tr>
+	</table>
+	<table align="center" width="70%">
 		<tr>
 			<td colspan="2" align="center">
-				<input type="button" id="sBtn" value="저장" onclick="UpdateProc()">
-				<input type="button" id="bBtn" value="목록" onclick="location.href='/board/boardBoardList.yo?oriNo=${oriNo}&nowPage=${nowPage }'">
+				<input type="button" class="btn2" id="sBtn" value="저장" onclick="UpdateProc()">
+				<input type="button" class="btn2" id="bBtn" value="목록" onclick="location.href='/board/boardBoardList.yo?oriNo=${oriNo}&nowPage=${nowPage }'">
 			</td>
 		</tr>
 	</table>

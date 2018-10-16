@@ -37,7 +37,7 @@
 	    border-radius:5px;
 	}
 	.btn2 {
-	    width:50px;
+	    width:40px;
 	    background-color: #d2bdad;
 	    border: none;
 	    color:black;
@@ -55,6 +55,10 @@
 	.brdImage {
 		height:500px;
 		padding:10px; 
+		float:left;
+	}
+	.brdcomm{
+		padding:10px;
 	}
 	.style2 {
 	}
@@ -63,7 +67,7 @@
 		background-color:white;
 		color:black;
 	}
-	
+
 </style>
 <script>
 	$(function(){
@@ -136,12 +140,12 @@
 		<td align="right"> ${DATA.createdt } 조회${DATA.readcnt } 추천${DATA.likecnt }</td>
 	</tr>
 	<tr height="30px">
-		<td colspan="2" align="center">
-		${DATA.comm }
-		<br>
+		<td colspan="2" >
 		<c:if test="${DATA.image ne null}">
 		<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}"  class="brdImage"/></a>
+		<br>
 		</c:if>
+		<span class="brdcomm">${DATA.comm }</span>
 		</td>
 	</tr>
 	<c:if test="${sessionScope.userid eq DATA.userid}">
@@ -187,7 +191,7 @@
 <c:if test="${empty COMM }">
 	<table width="70%" align="center">
 		<tr>
-			<td align="center"><b>"첫번째 댓글을 작성해주세요"</b></td>
+			<td align="center"><h4><b>"첫번째 댓글을 작성해주세요"</b></h4></td>
 		</tr>
 	</table>
 </c:if>
@@ -197,13 +201,14 @@
 		<table id="${temp.bcidx }"  width="70%" align="center" class="style2">
 			<tr>
 				<td width="20%"><b>${temp.nick }</b></td>
-				<td width="50%">${temp.comm }</td>
-				<td width="30%" align="right">
-				${temp.createdt }
+				<td width="60%">${temp.comm }</td>
+				<td width="20%" align="right">
 				<c:if test="${temp.userid eq sessionScope.userid}">
 					<input type="button" class="mCBtn btn2" value="수정">
 					<input type="button" class="dCBtn btn2" value="삭제" > 
+					&nbsp;
 				</c:if>
+				${temp.createdt }
 				</td>
 			</tr>
 		</table>
@@ -214,19 +219,14 @@
 			<input type="hidden" name="nowPage" value="${nowPage }"/>
 			<table width="70%" align="center" class="style2">
 				<tr>
-					<th>닉네임</th>
-					<td>${temp.nick }</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<textarea name="comm" id="mComm" placeholder="댓글 수정란">${temp.getCommNbr()}</textarea>
-					</td>
-				</tr>
-				<tr>				
-					<td colspan="2" align="right">${temp.createdt }
+					<td width="20%"><b>${temp.nick }</b></td>
+					<td width="50%"><textarea name="comm" id="mComm" placeholder="댓글 수정란">${temp.getCommNbr()}</textarea></td>
+					<td width="30%" align="right">
 						<input type="button" class="sCBtn btn2" value="저장">
 						<input type="button" class="bCBtn btn2" value="취소">
+						&nbsp;${temp.createdt }
 					</td>
+				</tr>
 			</table>
 		</form>
 	</c:forEach>
