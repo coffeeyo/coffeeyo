@@ -144,7 +144,7 @@
 	    	<div class="panel panel-default">
 	    		<div class="panel-heading"><h3>장바구니</h3></div>
 	    		<div id="panel-body">
-		    	<iframe src="/popup/cartListAction.yo" allowtransparency="true" style="border:none; width:100%; height: 89vh;" ></iframe>
+		    	<iframe id="cartFrame" src="/popup/cartListAction.yo" allowtransparency="true" style="border:none; width:100%; height: 89vh;" ></iframe>
 		    	</div>
 	    	</div>
 	    	
