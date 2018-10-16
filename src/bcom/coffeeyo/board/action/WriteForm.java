@@ -1,12 +1,15 @@
 package bcom.coffeeyo.board.action;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.coffeeyo.common.action.Action;
+import com.coffeeyo.product.model.Category;
+import com.coffeeyo.product.model.CategoryDao;
 
 import bcom.coffeeyo.board.model.BoardDAO;
 
@@ -39,6 +42,13 @@ public class WriteForm implements Action {
 			ArrayList plist1=dao.selectColdbrew();
 			ArrayList plist2=dao.selectEspresso();
 			ArrayList plist3=dao.selectFrappuccino();
+			
+			CategoryDao cateDao = CategoryDao.getInstance();
+			List<Category> cateList = null;
+			cateList = cateDao.getAllCategory();
+
+			req.setAttribute("cateList", cateList);
+			
 			//¸ðµ¨
 			req.setAttribute("CLIST", clist);
 			req.setAttribute("PLIST1", plist1);

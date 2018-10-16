@@ -1,12 +1,15 @@
 package bcom.coffeeyo.board.action;
 
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.coffeeyo.common.action.Action;
+import com.coffeeyo.product.model.Category;
+import com.coffeeyo.product.model.CategoryDao;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -70,6 +73,12 @@ public class WriteProc implements Action {
 	
 		dao.insertBoard(vo);
 		dao.close();
+		
+		CategoryDao cateDao = CategoryDao.getInstance();
+		List<Category> cateList = null;
+		cateList = cateDao.getAllCategory();
+
+		request.setAttribute("cateList", cateList);
 
 		System.out.println("bidx="+bidx);
 		System.out.println("cidx="+cidx+"pidx="+pidx);

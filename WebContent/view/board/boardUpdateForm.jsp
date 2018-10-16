@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="../js/jquery-3.3.1.min.js"></script>
 <script>
 	$(function(){
 		//공지 초기값 지정

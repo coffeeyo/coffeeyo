@@ -38,9 +38,9 @@
 	}
 	.button {
     width:80px;
-    background-color: #7C5D44;
+    background-color: #EFE4B0;
     border: none;
-    color:white;
+    color:black;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -50,8 +50,9 @@
     border-radius:5px;
 	}
 	.button:hover {
-	    background-color: #EFE4B0;
-	    color:black;
+	    background-color: #7C5D44;
+	    color:white;
+	    font-weight:bold;
 	}
 	
 </style>

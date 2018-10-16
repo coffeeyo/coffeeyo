@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WriteForm</title>
-<script src="../js/jquery-3.3.1.min.js"></script>
 <script>
 	//글등록버튼 클릭시 무결성 검사하고 폼을 submit시키겠다
 	function WriteProc(){

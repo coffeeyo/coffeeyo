@@ -15,18 +15,32 @@
 	}
 
 	.style1 tr, .style1 td {
-		border:1px solid black;
+		border-bottom:2px solid #d2bdad;
 	}
-	.style1 th{
-		background-color:#d2bdad;
-		color:black;
-		text-align:center;
-	}	
-	.btn2 {
+
+	.button:hover, .btn2:hover {
+		background-color: #f6f2ef;
+		font-weight:bold;
+	    color:black;
+	}
+	.button {
 	    width:80px;
 	    background-color: #d2bdad;
 	    border: none;
-	    color:white;
+	    color:black;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 13px;
+	    margin: 4px;
+	    cursor: pointer;
+	    border-radius:5px;
+	}
+	.btn2 {
+	    width:50px;
+	    background-color: #d2bdad;
+	    border: none;
+	    color:black;
 	    text-align: center;
 	    text-decoration: none;
 	    display: inline-block;
@@ -35,61 +49,22 @@
 	    cursor: pointer;
 	    border-radius:5px;
 	 }
-	.btn2:hover {
-		background-color: #f6f2ef;
-		font-weight:bold;
-	    color:black;
-	}
-	.button {
-	    width:80px;
-	    background-color: #7C5D44;
-	    border: none;
-	    color:white;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 13px;
-	    margin: 4px;
-	    cursor: pointer;
-	    border-radius:5px;
-	}
-	.button:hover,#LBtn:hover {
-	    background-color: #EFE4B0;
-	    color:black;
-	}
-	#LBtn {
-		width:120px;
-	    background-color: #7C5D44;
-	    border: none;
-	    color:white;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 13px;
-	    margin: 4px;
-	    cursor: pointer;
-	    border-radius:5px;
-	}
-
 	textarea {
 		width:100%;
 	}
-	.style2 {
-		border:1px solid black;
-	}
-	.style2 th {
-		border-bottom:1px solid #d2bdad;
-		background-color:#d2bdad;
-		color:black;
-		text-align:center;
-	}
 	.brdImage {
-		width:60%;
-		padding:4px; 
+		height:500px;
+		padding:10px; 
+	}
+	.style2 {
+	}
+	.style2 tr {
+		border-bottom:1px solid #d2bdad;
+		background-color:white;
+		color:black;
 	}
 	
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	$(function(){
 		
@@ -141,7 +116,6 @@
 			}
 		})	
 	})
-
 </script>
 </head>
 <body>
@@ -155,44 +129,20 @@
 </table>
 <table align="center" width="70%" class="style1">
 	<tr height="30px">
-		<th width="15%">분류명</th>
-		<td width="35%">${DATA.cname }</td>
-		<th width="15%">상품명</th>
-		<td width="35%">${DATA.pname }</td>
+		<td colspan="2"><b>${DATA.subject }</b></td>
 	</tr>
 	<tr height="30px">
-		<th>작성자</th>
-		<td>${DATA.nick }</td>
-		<th>작성일</th>
-		<td>${DATA.createdt }</td>
+		<td align="left">작성자:${DATA.nick } | 분류:${DATA.cname } | 상품명:${DATA.pname }</td>
+		<td align="right"> ${DATA.createdt } 조회${DATA.readcnt } 추천${DATA.likecnt }</td>
 	</tr>
 	<tr height="30px">
-		<th>조회수</th>
-		<td>${DATA.readcnt }</td>
-		<th>추천수</th>
-		<td>${DATA.likecnt }</td>
-	</tr>
-	<tr height="30px">
-		<th>제목</th>
-		<td colspan="3">${DATA.subject }</td>
-	</tr>
-	<tr height="30px">
-		<th>내용</th>
-		<td colspan="3">
+		<td colspan="2" align="center">
 		${DATA.comm }
+		<br>
+		<c:if test="${DATA.image ne null}">
+		<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}"  class="brdImage"/></a>
+		</c:if>
 		</td>
-	</tr>
-	<tr height="30px">
-		<th>첨부파일</th>
-		<td colspan="3" align="center">
-			<c:if test="${DATA.image ne null}">
-				<a href="../view/upload/board/${DATA.image}"> <img src="../view/upload/board/${DATA.image}"  class="brdImage"/></a>
-			</c:if>
-			<c:if test="${DATA.image eq null}">
-				첨부파일 없음
-			</c:if>
-		</td>
-		
 	</tr>
 	<c:if test="${sessionScope.userid eq DATA.userid}">
 	<tr>
@@ -209,9 +159,10 @@
 		<input type="hidden" name="oriNo" value="${oriNo}">
 		<input type="hidden" name="nowPage" value="${nowPage}">
 		<input type="hidden" name="userid" value="${sessionScope.userid}">
+		
 		<table align="center" width="70%">
 			<tr align="center">
-				<td><input type="submit" id="LBtn" value="추천하기/추천취소" ></td>
+				<td><input type="submit" id="LBtn" value="추천/취소" class="button"></td>
 			</tr>
 		</table>
 	</form>
@@ -222,7 +173,7 @@
 	<form id="wrfrm" name="wrfrm" action="../board/commentWrite.yo" method="post">
 		<input type="hidden" id="oriNo" name="oriNo" value="${oriNo}">
 		<input type="hidden" id="nowPage" name="nowPage" value="${nowPage}">
-		<table align="center" width="70%" class="style1">
+		<table align="center" width="70%">
 			<tr>
 				<td><textarea name="comm" id="comm" placeholder="댓글 작성란"></textarea></td>
 				<td width="10%" align="center"><input type="button" id="wrBtn" value="글등록"  class="button"></td>
@@ -234,9 +185,9 @@
 <%-- 댓글이 존재한다면 반복해서 뿌려주기 --%>
 <%-- 댓글이 없는 경우 --%>
 <c:if test="${empty COMM }">
-	<table border="1" width="70%" align="center">
+	<table width="70%" align="center">
 		<tr>
-			<td align="center" style="color:red;">댓글을 작성해주세요</td>
+			<td align="center"><b>"첫번째 댓글을 작성해주세요"</b></td>
 		</tr>
 	</table>
 </c:if>
@@ -245,22 +196,16 @@
 	<c:forEach var="temp" items="${COMM}">
 		<table id="${temp.bcidx }"  width="70%" align="center" class="style2">
 			<tr>
-				<th width="15%">닉네임</th>
-				<td width="35%">${temp.nick }</td>
-				<th width="15%">작성일</th>
-				<td width="35%">${temp.createdt }</td>
+				<td width="20%"><b>${temp.nick }</b></td>
+				<td width="50%">${temp.comm }</td>
+				<td width="30%" align="right">
+				${temp.createdt }
+				<c:if test="${temp.userid eq sessionScope.userid}">
+					<input type="button" class="mCBtn btn2" value="수정">
+					<input type="button" class="dCBtn btn2" value="삭제" > 
+				</c:if>
+				</td>
 			</tr>
-			<tr>
-				<td colspan="4">${temp.comm }</td>
-			</tr>
-			<c:if test="${temp.userid eq sessionScope.userid}">
-			<tr>
-				<td colspan="4" align="right">
-						<input type="button" class="mCBtn btn2" value="수정">
-						<input type="button" class="dCBtn btn2" value="삭제" > 
-				</td>						
-			</tr>
-			</c:if>
 		</table>
 		<%-- 댓글수정을 위한 임시폼 --%>
 		<form id="${temp.bcidx}frm" method="post" action="../board/commentUpdate.yo" style="display:none;">
@@ -286,6 +231,7 @@
 		</form>
 	</c:forEach>
 </c:if>
+<br>
 <table align="center" width="70%">
 	<tr align="center">
 		<td><input type="button" id="bBtn" value="목록보기"  class="button" onclick="location.href='/board/boardBoardList.yo?oriNo=${oriNo}&nowPage=${nowPage }'"></td>
