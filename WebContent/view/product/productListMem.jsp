@@ -108,7 +108,8 @@ li{float:left;padding:10px;}
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg==5}">
 								      		 ★★★★★
-								        </c:if>${pdlist.pcPointAvg}
+								        </c:if>
+								        ${pdlist.pcPointAvg}
 								        </span>
 						</div>
 					</li>
