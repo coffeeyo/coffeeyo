@@ -122,7 +122,7 @@ public class ProductDao {
 				sql.append(" PIDX, c.CNAME, PNAME, IMAGE, ");
 				sql.append(" PRICE, MAKETM, RECOMM, p.CIDX, ");
 				sql.append(" p.STATUS, p.CREATEDT, ");
-				sql.append("(select nvl((sum(pcpoint)/count(*)),0) from PRODCOMM where pidx=p.pidx) as pavg ");
+				sql.append("(select (sum(pcpoint)/count(*)) from PRODCOMM where pidx=p.pidx) as pavg ");
 				sql.append("FROM PRODUCT p ");
 				sql.append("left join CATEGORY c ");
 				sql.append("on p.cidx = c.cidx ");
@@ -147,7 +147,7 @@ public class ProductDao {
 				sql.append(" PIDX, c.CNAME, PNAME, IMAGE, ");
 				sql.append(" PRICE, MAKETM, RECOMM, p.CIDX, ");
 				sql.append(" p.STATUS, p.CREATEDT, ");
-				sql.append("(select nvl((sum(pcpoint)/count(*)),0) from PRODCOMM where pidx=p.pidx) as pavg ");
+				sql.append("(select (sum(pcpoint)/count(*)) from PRODCOMM where pidx=p.pidx) as PAVG ");
 				sql.append("FROM PRODUCT p ");
 				sql.append("left join CATEGORY c ");
 				sql.append("on p.cidx = c.cidx ");
@@ -353,7 +353,8 @@ public class ProductDao {
 				sql.append("(SELECT");
 				sql.append(" PIDX, c.CNAME, PNAME, IMAGE, ");
 				sql.append(" PRICE, MAKETM, RECOMM, P.CIDX, ");
-				sql.append(" p.STATUS, p.CREATEDT ");
+				sql.append(" p.STATUS, p.CREATEDT, ");
+				sql.append("(select nvl((sum(pcpoint)/count(*)),0) from PRODCOMM where pidx=p.pidx) as pavg ");
 				sql.append("FROM PRODUCT p ");
 				sql.append("left join CATEGORY c ");
 				sql.append("on p.cidx = c.cidx ");
@@ -377,7 +378,8 @@ public class ProductDao {
 				sql.append("(SELECT");
 				sql.append(" PIDX, c.CNAME, PNAME, IMAGE, ");
 				sql.append(" PRICE, MAKETM, RECOMM, P.CIDX, ");
-				sql.append(" p.STATUS, p.CREATEDT ");
+				sql.append(" p.STATUS, p.CREATEDT, ");
+				sql.append("(select nvl((sum(pcpoint)/count(*)),0) from PRODCOMM where pidx=p.pidx) as pavg ");
 				sql.append("FROM PRODUCT p ");
 				sql.append("left join CATEGORY c ");
 				sql.append("on p.cidx = c.cidx ");
@@ -410,6 +412,7 @@ public class ProductDao {
 				prod.setRecomm(rs.getInt("RECOMM"));
 				prod.setStatus(rs.getInt("STATUS"));
 				prod.setCreatedt(rs.getDate("CREATEDT"));
+				prod.setPcPointAvg(rs.getLong("PAVG"));
 				prodList.add(prod);
 			}
 			//System.out.println("prodList="+prodList.size());

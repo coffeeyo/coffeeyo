@@ -64,7 +64,27 @@
 				</c:if>
 		        <div class="caption">
 		          <p>[${prod.cateName}] ${prod.pname}</p>
-		          <p>별점: 0 점</p>
+		          <p>별점: <c:if test="${prod.pcPointAvg >=0 && prod.pcPointAvg <= 0.9}">
+								        	☆☆☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 1}">
+								        	★☆☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 2}">
+								      		★★☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg <= 3.9 }">
+								       		★★★☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 4}">
+								       		  ★★★★☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 5}">
+								      		 ★★★★★
+								        </c:if>
+		
+										<fmt:formatNumber value="${prod.pcPointAvg}" pattern="0.0"/>/5
+				  </p>
 		          <p>가격: ${prod.price} 원</p>
 		        </div>
 		      <!--</a>-->
@@ -87,7 +107,27 @@
 				</c:if>
 		        <div class="caption">
 		          <p>[${prod.cateName}] ${prod.pname}</p>
-		          <p>별점: 0 점</p>
+		          <p>별점: <c:if test="${prod.pcPointAvg >=0 && prod.pcPointAvg <= 0.9}">
+								        	☆☆☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 1}">
+								        	★☆☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 2}">
+								      		★★☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg <= 3.9 }">
+								       		★★★☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 4}">
+								       		  ★★★★☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 5}">
+								      		 ★★★★★
+								        </c:if>
+		
+										<fmt:formatNumber value="${prod.pcPointAvg}" pattern="0.0"/>/5
+				 </p>
 		          <p>가격: ${prod.price} 원</p>
 		        </div>
 		      <!--</a>-->
@@ -110,7 +150,27 @@
 				</c:if>
 		        <div class="caption">
 		          <p>[${prod.cateName}] ${prod.pname}</p>
-		          <p>별점: 0 점</p>
+		          <p>별점: <c:if test="${prod.pcPointAvg >=0 && prod.pcPointAvg <= 0.9}">
+								        	☆☆☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 1}">
+								        	★☆☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 2}">
+								      		★★☆☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg >= 3 && prod.pcPointAvg <= 3.9 }">
+								       		★★★☆☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 4}">
+								       		  ★★★★☆
+								        </c:if>
+								        <c:if test="${prod.pcPointAvg == 5}">
+								      		 ★★★★★
+								        </c:if>
+		
+										<fmt:formatNumber value="${prod.pcPointAvg}" pattern="0.0"/>/5
+				</p>
 		          <p>가격: ${prod.price} 원</p>
 		        </div>
 		      <!--</a>-->
