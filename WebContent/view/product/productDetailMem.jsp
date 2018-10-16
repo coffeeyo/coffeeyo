@@ -224,7 +224,8 @@
 					$.cookie('cartOpen', 'Y', { expires: 7, path: '/', domain: 'localhost', secure: false });
 					$('.cart_r').css('width','400px');
 					
-					//location.reload();
+					var url = $('#cartFrame').attr('src');
+					$('#cartFrame').attr('src', url);
 				}
 			},
 			error:function(){
