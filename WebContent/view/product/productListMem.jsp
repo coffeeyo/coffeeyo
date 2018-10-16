@@ -92,25 +92,40 @@ li{float:left;padding:10px;}
 							<div><span class="result" id="pname">${pdlist.pname}</span></div>
 							<div>가격:<span class="result">${pdlist.price}&nbsp;원</span></div>
 							<div>별점:<span class="result">
-										<c:if test="${pdlist.pcPointAvg==0}">
-								        	별점을 넣어주세요~~
+										<c:if test="${pdlist.pcPointAvg >= 0 && pdlist.pcPointAvg < 0.5}">
+								        	<img src="../img/별점0.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${pdlist.pcPointAvg==1}">
-								        	★☆☆☆☆
+								        <c:if test="${pdlist.pcPointAvg >= 0.5 && pdlist.pcPointAvg < 1}">
+								        	<img src="../img/별점0.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${pdlist.pcPointAvg==2}">
-								      		★★☆☆☆
+								        <c:if test="${pdlist.pcPointAvg >= 1 && pdlist.pcPointAvg < 1.5}">
+								        	<img src="../img/별점1.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${pdlist.pcPointAvg==3}">
-								       		★★★☆☆
+								        <c:if test="${pdlist.pcPointAvg >= 1.5 && pdlist.pcPointAvg < 2}">
+								        	<img src="../img/별점1.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${pdlist.pcPointAvg==4}">
-								       		  ★★★★☆
+								        <c:if test="${pdlist.pcPointAvg >= 2 && pdlist.pcPointAvg < 2.5}">
+								        	<img src="../img/별점2.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${pdlist.pcPointAvg==5}">
-								      		 ★★★★★
+								        <c:if test="${pdlist.pcPointAvg >= 2.5 && pdlist.pcPointAvg < 3}">
+								        	<img src="../img/별점2.5.png" width="200px" height="40px">
 								        </c:if>
-								        ${pdlist.pcPointAvg}
+								        <c:if test="${pdlist.pcPointAvg >= 3 && pdlist.pcPointAvg < 3.5}">
+								        	<img src="../img/별점3.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg>=3.5 && pdlist.pcPointAvg<4}">
+								        	<img src="../img/별점3.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg >= 4 && pdlist.pcPointAvg < 4.5}">
+								        	<img src="../img/별점4.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg >= 4.5 && pdlist.pcPointAvg < 5}">
+								        	<img src="../img/별점4.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${pdlist.pcPointAvg == 5}">
+								      		<img src="../img/별점5.png" width="200px" height="40px">
+								        </c:if>
+										<fmt:formatNumber value="${pdlist.pcPointAvg}" pattern="0.0"/>/5
 								        </span>
 						</div>
 					</li>
