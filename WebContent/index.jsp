@@ -18,7 +18,7 @@
 	<div class="board">
 	<!-- MD추천 목록 부분 -->
 	<c:if test="${fn:length(requestScope.recommList) > 0}">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:500px;width:500px;margin:auto;" >
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:500px;width:799px;float:left;" >
 		  <!-- Indicators -->
 		  <ol class="carousel-indicators">
 		  	<c:forEach var="recomm" items="${requestScope.recommList}" varStatus="status">
@@ -44,6 +44,10 @@
 		    <span class="glyphicon glyphicon-chevron-right"></span>
 		    <span class="sr-only">Next</span>
 		  </a>
+		</div>
+		<div style="height:500px; overflow: hidden;">
+			<img src="../img/coffee1.png" title="배너1" alt="배너1"  style="margin-left:3px; margin-bottom: 2px;" />
+			<img src="../img/coffee2.png" title="배너2" alt="배너2"  style="margin-left:3px; margin-top: 2px;"   />
 		</div>
 	</c:if>
 	<br>

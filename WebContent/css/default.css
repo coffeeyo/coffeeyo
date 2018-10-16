@@ -94,7 +94,7 @@
 }
 .topBbs h1 { text-align:center; }
 .board, .comment {
-	width:90%; margin-left:auto; margin-right:auto; margin-top: 20px; z-index: 1;
+	width:1366px; margin-left:auto; margin-right:auto; margin-top: 20px; z-index: 1;
 }
 .bbs, bbscomm {
 	width:100%; border: 1px solid black; 
