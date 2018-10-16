@@ -171,7 +171,6 @@ public class ProductCommDao {
 			StringBuffer sql = new StringBuffer();
 			sql.append("SELECT PCIDX, PIDX, USERID, COMM, CREATEDT   FROM PRODCOMM WHERE PCIDX = ?");
 			
-			//pstmt = conn.prepareStatement(sql.toString());
 			pstmt = DBConnection.getPstmt(conn, sql.toString());
 			pstmt.setInt(1, comment_num);
 			

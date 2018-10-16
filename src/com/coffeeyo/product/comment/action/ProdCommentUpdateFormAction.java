@@ -7,11 +7,12 @@ import com.coffeeyo.common.action.Action;
 import com.coffeeyo.product.comment.model.ProductComm;
 import com.coffeeyo.product.comment.model.ProductCommDao;
 
-public class ProdCommentUpdateFormAction implements Action
-{
+public class ProdCommentUpdateFormAction implements Action{
+
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		System.out.println("ProdCommentUpdateFormAction.java");
 		
 		// 수정할 댓글의 글번호를 가져온다.
 		int comment_num = Integer.parseInt(request.getParameter("num"));

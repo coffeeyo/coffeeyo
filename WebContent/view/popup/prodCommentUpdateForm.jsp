@@ -69,7 +69,7 @@
 
 	<div id="commentUpdateForm">
 		<form name="updateInfo" target="parentForm">
-			<input type="hidden" id="comment_num" name="comment_num" value="${comment.bcidx}"/>
+			<input type="hidden" id="comment_num" name="comment_num" value="${comment.pcidx}"/>
 			<textarea rows="7" cols="70" id="comment_content" name="comment_content">${comment.comm}</textarea>
 			<br><br>
 			<input type="button" value="등록" onclick="checkValue()">

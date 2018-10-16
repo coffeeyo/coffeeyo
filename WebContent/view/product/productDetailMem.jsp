@@ -34,7 +34,7 @@
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -43,6 +43,7 @@
 }
 .Review_wr{display:flex;}
 #writer{color:darkblue;font-weight:bold;}
+
 </style>
 <script>
 	//댓글 등록
@@ -113,7 +114,7 @@
 				}
 			},
 			error:function(){
-				//
+				
 			}
 		});
 	}
@@ -125,7 +126,7 @@
 					"updateForm", "width=570, height=350, resizable = no, scrollbars = no");
 	}
 	
-	function addLinke() {
+	/*function addLinke() {
 		var board = $('#comment_board').val();
 				
 		var param="num="+board;
@@ -146,7 +147,7 @@
 				//
 			}
 		});
-	}
+	}*/
 	
 	function loginFail() {
 		alert('로그인 후 투표 가능');
@@ -456,7 +457,7 @@
 					<div class="in_subcontent">
 						<p>옵션 선택</p>
 							<ul>
-                                <li class="cup"><p>
+                                <li class="cup"><p class="intitle">
                                         컵사이즈: <select name="cup_size" class="select" id="cupSize" onchange="sumPrice();">
                                         				<option value="medium">Medium</option>	<%--기본사이즈 --%>	
                                         				<option value="large">Large</option>			<%--+500원 --%>
@@ -465,7 +466,7 @@
                                         			
                                   </li>
                                   <li class="syrup">
-                                  		<p>시럽추가: 
+                                  		<p class="intitle">시럽추가: 
                                         			<select name="syrub_add" class="select" id="syrubAdd" onchange="sumPrice();">
                                         				<option value="basic">시럽없음</option>					<%--기본시럽 --%>
                                         				<option value="vanilla">바닐라 시럽</option>			<%--+500원 --%>
@@ -474,7 +475,7 @@
                                         			</select></p>
                                   </li>
                                   <li class="ice">
-                                   		<p>얼음: <select name="ice_add" class="select" id="iceAdd" onchange="sumPrice();">
+                                   		<p class="intitle">얼음: <select name="ice_add" class="select" id="iceAdd" onchange="sumPrice();">
                                         				<option value="hot">HOT</option>				<%--기본사이즈 --%>	
                                         				<option value="usually">보통</option>			<%--600원 --%>	
                                         				<option value="less">적게</option>				<%--600원 --%>	
@@ -482,7 +483,7 @@
                                         			</select></p>
                                   </li>   
                                   <li class="shot">
-                                  <p>샷추가: <input type="button" name="minus_btn" id="minusShot" value="-" />
+                                  <p class="intitle">샷추가: <input type="button" name="minus_btn" id="minusShot" value="-" />
                                                 <input type="text" name="shot_add" id="shotAdd" size="3" value="0" readonly/>
                                                 <input type="button" name="plus_btn" id="plusShot" value="+" /></p>
                                   </li>       	
@@ -506,25 +507,39 @@
 <!-- 댓글 부분 -->
 	<div class="Reviews">
 		<div class="grade">고객총평점:  
-										<c:if test="${commentAvg>=0 && commentAvg<=0.9}">
-								        	☆☆☆☆☆
+										<c:if test="${commentAvg>=0 && commentAvg<0.5}">
+								        	<img src="../img/별점0.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${commentAvg==1}">
-								        	★☆☆☆☆
+								        <c:if test="${commentAvg>=0.5 && commentAvg<1}">
+								        	<img src="../img/별점0.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${commentAvg==2}">
-								      		★★☆☆☆
+								        <c:if test="${commentAvg>=1 && commentAvg<1.5}">
+								        	<img src="../img/별점1.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${commentAvg>=3 && commentAvg<=3.9 }">
-								       		★★★☆☆
+								        <c:if test="${commentAvg>=1.5 && commentAvg<2}">
+								        	<img src="../img/별점1.5.png" width="200px" height="40px">
 								        </c:if>
-								        <c:if test="${commentAvg==4}">
-								       		  ★★★★☆
+								        <c:if test="${commentAvg>=2 && commentAvg<2.5}">
+								        	<img src="../img/별점2.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${commentAvg>=2.5 && commentAvg<3}">
+								        	<img src="../img/별점2.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${commentAvg>=3 && commentAvg<3.5}">
+								        	<img src="../img/별점3.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${commentAvg>=3.5 && commentAvg<4}">
+								        	<img src="../img/별점3.5.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${commentAvg>=4 && commentAvg<4.5}">
+								        	<img src="../img/별점4.png" width="200px" height="40px">
+								        </c:if>
+								        <c:if test="${commentAvg>=4.5 && commentAvg<5}">
+								        	<img src="../img/별점4.5.png" width="200px" height="40px">
 								        </c:if>
 								        <c:if test="${commentAvg==5}">
-								      		 ★★★★★
-								        </c:if>
-		
+								      		<img src="../img/별점5.png" width="200px" height="40px">
+								        </c:if>		
 		<fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5</div>
 		<table class="bbscomm">
 		
@@ -537,7 +552,7 @@
 			<tr>
 				
 				<!-- 아이디-->
-				<td style="width:150px;height:60px;padding:10px; background:lightgray;text-align:center;">
+				<td style="width:150px;padding:10px; background:lightgray;text-align:center;">
 					<div id="writer">${sessionScope.nick}</div>
 					<div class="small_text"><p>별점주기
 						<select id="score">
@@ -552,13 +567,13 @@
 					</div>
 				</td>
 				<!-- 본문 작성-->
-				<td style="padding:10px">
+				<td style="padding:5px">
 					<div>
 						<div><textarea name="comment_content" id="comment_content" rows="3" cols="80" maxlength="1000"></textarea></div>
 					</div>
 				</td>
 				<!-- 댓글 등록 버튼 -->
-				<td >
+				<td align="center">
 					<div id="btn">
 						<button type="button" id="Review_button" onclick="writeCmt();">등록</button>
 					</div>
@@ -573,24 +588,26 @@
 				<c:forEach var="comment" items="${requestScope.commentList}">
 					<tr>
 						<!-- 아이디, 작성날짜 -->
-						<td style="width:150px;height:60px;padding:10px; background:lightgray;">
+						<td style="width:150px;height:50px;padding:10px; background:#ffe4b5;border-bottom: 1px solid lightgray;">
 							<div >					
 								${comment.nickName} : ${comment.pcpoint} / 5
 								
 							</div>
 						</td>
 						<!-- 본문내용 -->
-						<td style="width:550px;height:50px;padding:10px;" >
-							<div class="text_wrapper">
+						<td style="width:550px;padding:5px;border-bottom: 1px solid lightgray;" >
+							<div class="text_wrapper" style="padding-top:15px;">
 								${fn:replace(comment.comm, cn, br)}
-								<p style="color:gray;font-size:8px;"><fmt:formatDate value="${comment.createdt}" pattern="yyyy년MM월dd일 a hh시mm분 ss초"/> </p>
+								<p style="color:gray;font-size:8px;">								
+								<fmt:formatDate value="${comment.createdt}" pattern="yyyy년MM월dd일 HH:mm:ss"/> </p>
 							</div>
-						</td>
-						<!-- 버튼 -->
-						<td width="100">
+							</td>
+							<!-- 버튼 -->
+						<td style="width:100;border-bottom: 1px solid lightgray;text-align:center">
 							<div  id="btn">
 							<c:if test="${comment.userid == sessionScope.userid}">
-								<a href="javascript:void(0)" onclick="cmUpdateOpen(${comment.pcidx})">[수정]</a>
+							
+								<a href="javascript:void(0)" onclick="cmUpdateOpen(${comment.pcidx})">[수정]</a><br/>
 								<a href="javascript:void(0)" onclick="cmDeleteOpen(${comment.pcidx})">[삭제]</a>
 							</c:if>		
 							</div>
