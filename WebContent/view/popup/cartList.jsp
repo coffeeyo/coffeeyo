@@ -120,7 +120,7 @@ body {
 		<table class="cartList">
 		<c:if test="${fn:length(requestScope.cartList) eq 0}">
 			<tr>
-				<th align="center">담긴 상품이 없습니다.</th>
+				<td colspan="4" align="center">담긴 상품이 없습니다.</td>
 			</tr>
 		</c:if>
 		<c:set var="sum" value="0"/>

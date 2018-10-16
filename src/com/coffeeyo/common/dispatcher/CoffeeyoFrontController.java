@@ -52,7 +52,7 @@ public class CoffeeyoFrontController extends HttpServlet {
 		FileInputStream in;
 		
 		try {
-			in = new FileInputStream("E:\\JSPWorkspce\\coffeeyo\\src\\com\\coffeeyo\\common\\dispatcher\\coffeeyoRequest.properties");
+			in = new FileInputStream("E:\\jspWorkspace\\coffeeyo\\src\\com\\coffeeyo\\common\\dispatcher\\coffeeyoRequest.properties");
 			//in = new FileInputStream("D:\\jspWorkspace\\coffeeyo\\src\\com\\coffeeyo\\common\\dispatcher\\coffeeyoRequest.properties");
 			
 			prop.load(in);
