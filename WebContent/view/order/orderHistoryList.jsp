@@ -144,7 +144,7 @@
             <td>결제금액: ${data.total}원  <%-- ${data.optprice} --%></td>
             <td>주문일시: ${data.orddt} </td>
             <td align="center">
-                <input type="button" value="바로가기" onclick="location.href='#'">	<%-- #상품명 넣을 곳 --%>
+                <input type="button" value="바로가기" onclick="location.href='../product/productDetailAction.yo'">	<%-- #상품명 넣을 곳 --%>
             </td>
         </tr>
         </c:forEach>

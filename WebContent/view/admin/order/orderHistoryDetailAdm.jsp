@@ -73,14 +73,14 @@
            			옵션가격: ${data.optprice}원<br/>
            			수	량: ${data.amount}개<br/>
 			    </td>
-			    <td align="center">결제금액: ${(data.price+data.optprice)*data.amount} </td>
+			    <td><h3>결제금액: ${(data.price+data.optprice)*data.amount}원</h3> </td>
 			</tr>
 		</c:forEach>
         <tr>
             <td align="center" colspan="2">
                <h3>최종 결제 금액</h3>
             </td>
-            <td align="center">
+            <td>
                <h3> ${ordrt.total}원</h3>
             </td>
         </tr>
@@ -88,7 +88,7 @@
             <td align="center" colspan="2">
                <h3> 상품수령 예상시간</h3>
             </td>
-            <td align="center">
+            <td>
               <h3>  ${ordrt.readytm}</h3>
             </td>
         </tr>

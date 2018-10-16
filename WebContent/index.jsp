@@ -18,7 +18,7 @@
 	<div class="board">
 	<!-- MD추천 목록 부분 -->
 	<c:if test="${fn:length(requestScope.recommList) > 0}">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:500px;">
 		  <!-- Indicators -->
 		  <ol class="carousel-indicators">
 		  	<c:forEach var="recomm" items="${requestScope.recommList}" varStatus="status">
