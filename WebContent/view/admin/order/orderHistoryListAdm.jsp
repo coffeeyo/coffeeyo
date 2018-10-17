@@ -27,13 +27,13 @@
 			var edate = new Date();
 			
 			if(days == '2') {
-				edate.setMonth( edate.getMonth() + 1 );
+				edate.setMonth( edate.getMonth() - 1 );
 			}
 			else if(days == '3') {
-				edate.setMonth( edate.getMonth() + 2 );
+				edate.setMonth( edate.getMonth() - 3 );
 			}
 			else if(days == '4') {
-				edate.setMonth( edate.getMonth() + 3 );
+				edate.setMonth( edate.getMonth() - 6 );
 			}
 			
 			var year1 = sdate.getFullYear(); 
