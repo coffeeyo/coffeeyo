@@ -66,11 +66,11 @@
 	   				<li>
 	   					<ul class="nav nav-tabs">
 	   					<li class="dropdown">
-					      <a class="dropdown-toggle" data-toggle="dropdown" href="#">커피요<span class="caret"></span></a>
+					      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-glass"></span> 커피요<span class="caret"></span></a>
 					      <ul class="dropdown-menu">
 					        <c:if test="${fn:length(requestScope.cateList) > 0}">
 								<c:forEach var="cate" items="${requestScope.cateList}">
-									<li><a href="javascript:void(0);" onclick="goCateProduct('${cate.cidx}')">${cate.cname}</a></li>
+									<li><a href="javascript:void(0);" onclick="goCateProduct('${cate.cidx}')"><span class="glyphicon glyphicon-gift"></span> ${cate.cname}</a></li>
 								</c:forEach>
 								<form id="cateFrm" name="cateFrm" action="/product/productListAction.yo" method="post">
 									<input type="hidden" id="cate"  name="cidx">
@@ -78,7 +78,7 @@
 					      	</c:if>                     
 					      </ul>
 					    </li>
-					    <li><a href="/board/boardBoardList.yo">커뮤니티</a></li>
+					    <li><a href="/board/boardBoardList.yo"><span class="glyphicon glyphicon-cloud"></span> 커뮤니티</a></li>
 	   					<c:if test="${sessionScope.userid eq null}">
 						  <li <c:if test="${conPath eq '/member/loginFormAction.yo'}">class="active"</c:if>><a href="/member/loginFormAction.yo" >로그인</a></li>
 						  <li <c:if test="${conPath eq '/member/joinFormAction.yo'}">class="active"</c:if>><a href="/member/joinFormAction.yo">회원가입</a></li>
@@ -90,22 +90,21 @@
 	              	<li>
 						    <ul class="nav nav-tabs">
 							  <li class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#">${sessionScope.nick}
+							    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>  ${sessionScope.nick}
 							    <span class="caret"></span></a>
 							    <ul class="dropdown-menu">
-							      <li <c:if test="${conPath eq '/member/memberInfoFormAction.yo' or conPath eq '/member/memberUpdateFormAction.yo'}">class="active"</c:if>><a href="/member/memberInfoFormAction.yo">회원정보</a></li>
-							      <li><a href="/order/orderHistoryListAction.yo">주문조회</a></li>
-							      <li><a href="#contact">내글보기</a></li>
 							      <c:if test="${sessionScope.ulevel eq 10}">
-					              	<li><a href="/admin/orderHistoryListAction.yo">사이트관리</a></li>
+					              	<li><a href="/admin/orderHistoryListAction.yo"><span class="glyphicon glyphicon-lock"></span> 사이트관리</a></li>
 					              </c:if>
+							      <li <c:if test="${conPath eq '/member/memberInfoFormAction.yo' or conPath eq '/member/memberUpdateFormAction.yo'}">class="active"</c:if>><a href="/member/memberInfoFormAction.yo"><span class="glyphicon glyphicon-user"></span> 회원정보</a></li>
+							      <li><a href="/order/orderHistoryListAction.yo"><span class="glyphicon glyphicon-shopping-cart"></span> 주문조회</a></li>
 					              <c:if test="${sessionScope.userid ne null}">
-								  	<li><a href="/member/logOutAction.yo">로그아웃</a></li>
+								  	<li><a href="/member/logOutAction.yo"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 								  </c:if>
 							    </ul>
 							  </li>
 							  <c:if test="${sessionScope.userid ne null}">
-							  	<li><a href="javascript:void(0);" onclick="setWingToggleHistory();">장바구니</a></li>
+							  	<li><a href="javascript:void(0);" onclick="setWingToggleHistory();"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
 							  </c:if>
 							</ul>
 	              	</li>
