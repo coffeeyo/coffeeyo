@@ -621,12 +621,12 @@
 				</td>
 				<!-- 본문 작성-->
 				<td style="padding:5px">
-					<div style="width:800px;padding:5px;">
-						<div><textarea name="comment_content" id="comment_content" rows="3" style="width:100%" maxlength="1000"></textarea></div>
+					<div style="padding:5px;">
+						<div><textarea name="comment_content" id="comment_content" rows="3" style="width:102%" maxlength="1000"></textarea></div>
 					</div>
 				</td>
 				<!-- 댓글 등록 버튼 -->
-				<td align="center">
+				<td style="width:100px;text-align:center;">
 					<div id="btn">
 						<button type="button" id="Review_button" onclick="writeCmt();">등록</button>
 					</div>
@@ -656,7 +656,7 @@
 							</div>
 							</td>
 							<!-- 버튼 -->
-						<td style="border-bottom: 1px solid lightgray;text-align:center;">	
+						<td style="border-bottom: 1px solid lightgray;text-align:center;width:100px;">	
 							<div  id="btn">
 							<c:if test="${comment.userid == sessionScope.userid}">
 							    <a href="javascript:void(0)"><input type="button" id="replyBtn1" value="수정" onclick="cmUpdateOpen(${comment.pcidx})"></a><br/>
