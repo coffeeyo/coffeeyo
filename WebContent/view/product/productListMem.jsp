@@ -27,6 +27,11 @@
 #listbig ul{list-style:none;padding:0px; margin:0px;}
 #listbig li{float:left;padding:10px;}
 .incontent{text-align:left; }
+#resultpic{ display: inline-block;
+     margin-bottom:10px;
+     }
+#resultpic img{border-radius: 10px;}
+
 </style>
 <script>
 
@@ -78,7 +83,7 @@
 			<c:if test="${fn:length(requestScope.prodList) > 0}"> 
 				<c:forEach items="${requestScope.prodList}" var="pdlist">
 					<li>
-						<div class="result">
+						<div id="resultpic">
 							<c:if test="${pdlist.image ne null}">
 								<a href="../product/productDetailAction.yo?pid=${pdlist.pidx}&cid=${pdlist.cidx}&pageNum=${spage}">
 								<img src="../view/upload/product/${pdlist.image}" border="0" title="${po.pname}" alt="${po.pname}" width="230px" height="230px" />
@@ -89,37 +94,37 @@
 							<div>가격:<span class="result">${pdlist.price}&nbsp;원</span></div>
 							<div><span class="result">
 										<c:if test="${pdlist.pcPointAvg >= 0 && pdlist.pcPointAvg < 0.5}">
-								        	<img src="../img/별점0.png" width="150px" height="30px">
+								        	<img src="../img/별점0.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 0.5 && pdlist.pcPointAvg < 1}">
-								        	<img src="../img/별점0.5.png" width="150px" height="30px">
+								        	<img src="../img/별점0.5.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 1 && pdlist.pcPointAvg < 1.5}">
-								        	<img src="../img/별점1.png" width="150px" height="30px">
+								        	<img src="../img/별점1.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 1.5 && pdlist.pcPointAvg < 2}">
-								        	<img src="../img/별점1.5.png" width="150px" height="30px">
+								        	<img src="../img/별점1.5.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 2 && pdlist.pcPointAvg < 2.5}">
-								        	<img src="../img/별점2.png" width="150px" height="30px">
+								        	<img src="../img/별점2.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 2.5 && pdlist.pcPointAvg < 3}">
-								        	<img src="../img/별점2.5.png" width="150px" height="30px">
+								        	<img src="../img/별점2.5.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 3 && pdlist.pcPointAvg < 3.5}">
-								        	<img src="../img/별점3.png" width="150px" height="30px">
+								        	<img src="../img/별점3.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg>=3.5 && pdlist.pcPointAvg<4}">
-								        	<img src="../img/별점3.5.png" width="150px" height="30px">
+								        	<img src="../img/별점3.5.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 4 && pdlist.pcPointAvg < 4.5}">
-								        	<img src="../img/별점4.png" width="150px" height="30px">
+								        	<img src="../img/별점4.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg >= 4.5 && pdlist.pcPointAvg < 5}">
-								        	<img src="../img/별점4.5.png" width="150px" height="30px">
+								        	<img src="../img/별점4.5.png" width="140px" height="30px">
 								        </c:if>
 								        <c:if test="${pdlist.pcPointAvg == 5}">
-								      		<img src="../img/별점5.png" width="150px" height="30px">
+								      		<img src="../img/별점5.png" width="140px" height="30px">
 								        </c:if>
 										<fmt:formatNumber value="${pdlist.pcPointAvg}" pattern="0.0"/>/5
 								        </span>

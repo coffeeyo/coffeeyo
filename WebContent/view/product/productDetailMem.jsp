@@ -69,6 +69,11 @@
     width: 30px;
 }
 .bbscomm{margin-bottom:50px;}
+.inpic{ display: inline-block;
+      box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
+     }
+.inpic img{border-radius: 10px;}
+      
 
 </style>
 <script>
@@ -456,7 +461,7 @@
 				</c:if>
 			</div>
 			<div class="incontent">
-				<p id="ptitle"><img src="../img/pname.jpg" width="20px" height="30px">${po.pname}</p>
+				<p id="ptitle">${po.pname}</p>
 				<p class="cate2">기본가격:&nbsp;&nbsp;<span id="price">${po.price} 원</span></p>
 					<div class="in_subcontent">
 						<p class="cate2">옵션 선택</p>
