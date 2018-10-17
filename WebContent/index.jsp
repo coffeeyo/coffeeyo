@@ -53,7 +53,7 @@
 	<br>
 		
 		<c:if test="${fn:length(requestScope.prodList1) > 0}">
-		<h3>Cold brew <span class="cateLink"><a href="javascript:void(0);" onclick="goCateProduct('1');">더보기 <span class="glyphicon glyphicon-plus"></span></a></span></h3>
+		<h3><span class="glyphicon glyphicon-th"></span> Cold brew <span class="cateLink"><a href="javascript:void(0);" onclick="goCateProduct('1');">더보기 <span class="glyphicon glyphicon-plus"></span></a></span></h3>
 		<div class="row">
 		  <c:forEach var="prod" items="${requestScope.prodList1}" varStatus="status">	
 		  <div class="col-md-3">
@@ -112,7 +112,7 @@
 		
 		
 		<c:if test="${fn:length(requestScope.prodList2) > 0}">
-		<h3>Espresso <span class="cateLink"><a href="javascript:void(0);" onclick="goCateProduct('2');">더보기 <span class="glyphicon glyphicon-plus"></span></a></span></h3>
+		<h3><span class="glyphicon glyphicon-th"></span> Espresso <span class="cateLink"><a href="javascript:void(0);" onclick="goCateProduct('2');">더보기 <span class="glyphicon glyphicon-plus"></span></a></span></h3>
 		<div class="row">
 		  <c:forEach var="prod" items="${requestScope.prodList2}" varStatus="status">	
 		  <div class="col-md-3">
@@ -171,7 +171,7 @@
 		
 		
 		<c:if test="${fn:length(requestScope.prodList3) > 0}">
-		<h3>Frappuccino <span class="cateLink"><a href="javascript:void(0);" onclick="goCateProduct('3');">더보기 <span class="glyphicon glyphicon-plus"></span></a></span></h3>
+		<h3><span class="glyphicon glyphicon-th"></span> Frappuccino <span class="cateLink"><a href="javascript:void(0);" onclick="goCateProduct('3');">더보기 <span class="glyphicon glyphicon-plus"></span></a></span></h3>
 		<div class="row">
 		  <c:forEach var="prod" items="${requestScope.prodList3}" varStatus="status">	
 		  <div class="col-md-3">
