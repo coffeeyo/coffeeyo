@@ -134,3 +134,6 @@
 .itemfooter { float: 298px; text-align:center; } 
 .thumb { width: 200px; }
 .thumb img { width: 198px; margin: 2px; }
+
+.cateLink { float: right; }
+.cateLink a { font-weight:bold;  font-size: 16px;  text-align: right; }
