@@ -52,12 +52,12 @@
 	              <li <c:if test="${conPath eq '/admin/productListAction.yo' 
 	              					or conPath eq '/admin/productAddFrmAction.yo' 
 	              					or conPath eq '/admin/productUpdateFrmAction.yo'
-	              					or conPath eq '/admin/productUpdateProcAction.y'}">class="active"</c:if>><a href="../admin/productListAction.yo">상품관리</a></li>
-	              <li <c:if test="${conPath eq '/admin/orderManage.yo'}">class="active"</c:if>><a href="../admin/orderHistoryListAction.yo">주문관리</a></li>
-	              <li <c:if test="${conPath eq '/admin/memberListAction.yo'}">class="active"</c:if>><a href="/admin/memberListAction.yo">회원관리</a></li>
-	              <li <c:if test="${conPath eq '/admin/boardBoardList.yo'}">class="active"</c:if>><a href="../admin/boardBoardList.yo">커뮤니티관리</a></li>
-	              <li><a href="/">홈페이지</a></li>
-	              <li><a href="/member/logOutAction.yo">로그아웃</a></li>
+	              					or conPath eq '/admin/productUpdateProcAction.y'}">class="active"</c:if>><a href="../admin/productListAction.yo"><span class="glyphicon glyphicon-gift"></span> 상품관리</a></li>
+	              <li <c:if test="${conPath eq '/admin/orderManage.yo'}">class="active"</c:if>><a href="../admin/orderHistoryListAction.yo"><span class="glyphicon glyphicon-shopping-cart"></span> 주문관리</a></li>
+	              <li <c:if test="${conPath eq '/admin/memberListAction.yo'}">class="active"</c:if>><a href="/admin/memberListAction.yo"><span class="glyphicon glyphicon-user"></span> 회원관리</a></li>
+	              <li <c:if test="${conPath eq '/admin/boardBoardList.yo'}">class="active"</c:if>><a href="../admin/boardBoardList.yo"><span class="glyphicon glyphicon-cloud"></span> 커뮤니티관리</a></li>
+	              <li><a href="/"><span class="glyphicon glyphicon-home"></span> 홈페이지</a></li>
+	              <li><a href="/member/logOutAction.yo"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 	            </ul>
             </div>
    		</div>
