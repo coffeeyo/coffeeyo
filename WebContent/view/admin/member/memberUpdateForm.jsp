@@ -19,6 +19,11 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			var lv = '${sessionScope.ulevel}';
+			if(lv != 10) {
+				alert('운영자만 이용 하실 수 있습니다.');
+				location.href = '/';
+			}
 			$('#btnUpdate').click(function(){
 				var pwd = $('#passwd').val();
 				var pwdChk = $('#passwdChk').val();
@@ -145,4 +150,5 @@
 		</table>
 	</form>
 </body>
+
 </html>

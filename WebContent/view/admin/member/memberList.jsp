@@ -21,6 +21,13 @@
 		.listup{width:1000px; margin:auto;}
 	</style>
 	<script>
+		$(function(){
+			var lv = '${sessionScope.ulevel}';
+			if(lv != 10) {
+				alert('운영자만 이용 하실 수 있습니다.');
+				location.href = '/';
+			}
+		});
 		function memAdd() {
 			alert('준비중! 개발 후순위~');
 		}
@@ -50,6 +57,7 @@
 	</script>
 </head>
 <body>
+<c:if test="${sessionScope.ulevel eq 10}">
 	<!-- 회원목록 위 부분-->
 	<div class="top_title" >
 		<p>회원 목록</p>
@@ -160,5 +168,6 @@
 		</c:if>
 	</c:if>
 	</div>
+</c:if>
 </body>
 </html>

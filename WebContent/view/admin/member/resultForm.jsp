@@ -7,6 +7,13 @@
 	<meta charset="UTF-8">
 	<title>결과 페이지</title>
 	<script>
+		$(function(){
+			var lv = '${sessionScope.ulevel}';
+			if(lv != 10) {
+				alert('운영자만 이용 하실 수 있습니다.');
+				location.href = '/';
+			}
+		});
 		function goMemberInfo(id) {	
 			$('#userid').val(id);
 			$('#resFrm').submit();
