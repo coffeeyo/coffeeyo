@@ -80,8 +80,8 @@
 					    </li>
 					    <li><a href="/board/boardBoardList.yo"><span class="glyphicon glyphicon-cloud"></span> 커뮤니티</a></li>
 	   					<c:if test="${sessionScope.userid eq null}">
-						  <li <c:if test="${conPath eq '/member/loginFormAction.yo'}">class="active"</c:if>><a href="/member/loginFormAction.yo" >로그인</a></li>
-						  <li <c:if test="${conPath eq '/member/joinFormAction.yo'}">class="active"</c:if>><a href="/member/joinFormAction.yo">회원가입</a></li>
+						  <li <c:if test="${conPath eq '/member/loginFormAction.yo'}">class="active"</c:if>><a href="/member/loginFormAction.yo" ><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+						  <li <c:if test="${conPath eq '/member/joinFormAction.yo'}">class="active"</c:if>><a href="/member/joinFormAction.yo"><span class="glyphicon glyphicon-cloud-upload"></span> 회원가입</a></li>
 						</c:if>
 						</ul>
 	   				</li>
