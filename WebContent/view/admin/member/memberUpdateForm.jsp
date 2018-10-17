@@ -49,7 +49,7 @@
 </head>
 <body>
 	<div class="top_title" >
-		<p>회원정보 수정</p>
+		<p><span class="glyphicon glyphicon-leaf"></span> 회원정보 수정</p>
 	</div>
 
 	<!-- 회원정보를 가져와 member 변수에 담는다. -->

@@ -61,7 +61,7 @@
 <c:if test="${sessionScope.ulevel eq 10}">
 	<!-- 회원목록 위 부분-->
 	<div class="top_title" >
-		<p>회원 목록</p>
+		<p><span class="glyphicon glyphicon-leaf"></span> 회원 목록</p>
 	</div>
 	<table class="top_tab" border="1">
 	<tr>
