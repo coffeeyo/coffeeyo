@@ -57,6 +57,7 @@
 	</script>
 </head>
 <body>
+<!-- 운영자만 목록 조회 -->
 <c:if test="${sessionScope.ulevel eq 10}">
 	<!-- 회원목록 위 부분-->
 	<div class="top_title" >
