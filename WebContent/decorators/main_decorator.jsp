@@ -97,7 +97,7 @@
 							      <li><a href="/order/orderHistoryListAction.yo">주문조회</a></li>
 							      <li><a href="#contact">내글보기</a></li>
 							      <c:if test="${sessionScope.ulevel eq 10}">
-					              	<li><a href="/admin/productListAction.yo">관리자</a></li>
+					              	<li><a href="/admin/orderHistoryListAction.yo">관리자</a></li>
 					              </c:if>
 					              <c:if test="${sessionScope.userid ne null}">
 								  	<li><a href="/member/logOutAction.yo">로그아웃</a></li>
