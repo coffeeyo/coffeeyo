@@ -34,6 +34,14 @@
     line-height: 20px;
 }
 
+.navbar-logo2 {
+	float: left;
+    height: 150px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
 /* href link style */
 .nav  a {
 	color: white;

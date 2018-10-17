@@ -45,9 +45,9 @@
 	              <span class="icon-bar"></span>
 	            </button>
 	            <a class="navbar-logo" href="/"><img src="/img/coffeeLogo.png" class="img-circle" style="width:150px; height:150px;" alt="coffee YO!! logo" title="coffee YO!! logo" /></a>
-	            <a class="navbar-logo" href="/" ><img src="/img/coffeeLogo4.png" alt="coffee YO!! logo2" title="coffee YO!! logo2"/></a>
+	            <a class="navbar-logo2" href="/" ><img src="/img/coffeeLogo4.png" alt="coffee YO!! logo2" title="coffee YO!! logo2"/></a>
           	</div>
-          	<div class="navbar-collapse collapse" style="float:right;">
+          	<div class="navbar-collapse collapse" style="float:right; margin-left:0;">
 	   			<ul class="nav navbar-nav " >
 	              <li <c:if test="${conPath eq '/admin/productListAction.yo' 
 	              					or conPath eq '/admin/productAddFrmAction.yo' 
@@ -56,7 +56,6 @@
 	              <li <c:if test="${conPath eq '/admin/orderManage.yo'}">class="active"</c:if>><a href="../admin/orderHistoryListAction.yo"><span class="glyphicon glyphicon-shopping-cart"></span> 주문관리</a></li>
 	              <li <c:if test="${conPath eq '/admin/memberListAction.yo'}">class="active"</c:if>><a href="/admin/memberListAction.yo"><span class="glyphicon glyphicon-user"></span> 회원관리</a></li>
 	              <li <c:if test="${conPath eq '/admin/boardBoardList.yo'}">class="active"</c:if>><a href="../admin/boardBoardList.yo"><span class="glyphicon glyphicon-cloud"></span> 커뮤니티관리</a></li>
-	              <li><a href="/"><span class="glyphicon glyphicon-home"></span> 홈페이지</a></li>
 	              <li><a href="/member/logOutAction.yo"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
 	            </ul>
             </div>
