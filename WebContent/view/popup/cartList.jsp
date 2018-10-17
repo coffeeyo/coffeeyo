@@ -30,6 +30,10 @@ body {
 			//선택한것을, BUYCHK='Y'로 체크하고
 			//checkbox num
 			var cnt = $('input[name="num"]:checked').length;
+			if(cnt == 0) {
+				alert('주문결제할 상품을 선택하세요.')
+				return;	
+			}
 			
 			var total = $('input[name="num"]').length;
 			
