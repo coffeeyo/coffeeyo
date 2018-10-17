@@ -19,7 +19,7 @@ td, th{padding:5px 10px; border:1px solid gray;}
 		function checkValue(){
 			var prod_subject = $('#pname').val();
 			var prod_content = $('#comm').val();
-			var prod_price = $('#price').val();
+			var prod_price = $('#prodPrice').val();
 			var prod_maketm = $('#maketm').val();
 			
 			if(!prod_subject){																																																																		
@@ -32,12 +32,13 @@ td, th{padding:5px 10px; border:1px solid gray;}
 				$('#comm').focus();
 				return false;
 			}
-			else if(prod_price == 0 || prod_price == '') {
+			else if(prod_price == 0 || prod_price == '' ) {
 				alert("가격을 입력해주세요.");
-				$('#price').focus();
+				$('#prodPrice').focus();
 				return false;
 			}
-			
+
+
 			else if(prod_maketm == 0 || prod_maketm == '') {
 				alert("제조소요시간을 입력해주세요.");
 				$('#maketm').focus();
@@ -46,7 +47,8 @@ td, th{padding:5px 10px; border:1px solid gray;}
 			
 			$('#prodForm').submit();
 		}
-		
+
+	
 	</script>
 </head>
 <body>
@@ -74,7 +76,7 @@ td, th{padding:5px 10px; border:1px solid gray;}
 			</tr>
 			<tr class="inner_tr">
 				<td class="item_col">가격</td>
-				<td><input type="number" id="price" name="price" min="0" /></td>
+				<td><input type="number" id="prodPrice" name="price" min="0" maxlength="5" oninput="priceCheck(this)"/></td>
 			</tr>
 			<tr class="inner_tr">
 				<td class="item_col">제조소요시간</td>

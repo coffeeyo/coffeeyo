@@ -58,7 +58,7 @@
     font-size: 15px;
     border-radius: 8px;
     font-weight:bold;}
-.subBtn{    background-color: silver; /* Green */
+.subBtn{    background-color: silver;
     border: 1px solid silver;
     text-align: center;
     text-decoration: none;
@@ -73,8 +73,26 @@
       box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
      }
 .inpic img{border-radius: 10px;}
-      
-
+#replyBtn1{ background-color: lightgray;
+	font-size: 12px;
+	border-radius: 5px;
+    border: none;
+    padding: 3px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 3px;
+    cursor: pointer;}      
+#replyBtn2{ background-color: lightgray;
+	font-size: 12px;
+	border-radius: 5px;
+    border: none;
+    padding: 3px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    
+    cursor: pointer;} 
 </style>
 <script>
 	//댓글 등록
@@ -577,9 +595,8 @@
 				<input type="hidden" id="comment_board" name="comment_board" value="${num}"/>
 				<input type="hidden" id="comment_id" name="comment_id" value="${sessionScope.userid}"/>
 			<tr>
-				
 				<!-- 아이디-->
-				<td style="width:150px;padding:10px; background:lightgray;text-align:center;">
+				<td style="width:150px; background:lightgray;text-align:center;">
 					<div id="writer">${sessionScope.nick}</div>
 					<div class="small_text"><p>별점주기
 						<select id="score">
@@ -635,8 +652,8 @@
 							<div  id="btn">
 							<c:if test="${comment.userid == sessionScope.userid}">
 							
-								<a href="javascript:void(0)" onclick="cmUpdateOpen(${comment.pcidx})">[수정]</a><br/>
-								<a href="javascript:void(0)" onclick="cmDeleteOpen(${comment.pcidx})">[삭제]</a>
+								<a href="javascript:void(0)"><input type="button" id="replyBtn1" value="수정" onclick="cmUpdateOpen(${comment.pcidx})"></a><br/>
+								<a href="javascript:void(0)"><input type="button" id="replyBtn2" value="삭제" onclick="cmUpdateOpen(${comment.pcidx})"></a>
 							</c:if>		
 							</div>
 						</td>

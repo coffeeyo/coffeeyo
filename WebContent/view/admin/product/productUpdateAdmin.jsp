@@ -132,7 +132,7 @@ td, th{padding:5px 10px; border:1px solid gray;}
 				<td colspan="5" >
 					<input type="button" value="저장" onclick="checkValue()" />
 					<input type="button" id="lBtn" value="목록" onclick="location.href='../admin/productListAction.yo?pageNum=${pageNum}'"/>
-					<input type="reset" value="삭제"  onclick="prodDelete()" />
+					<!--input type="reset" value="삭제"  onclick="prodDelete()" />-->
 				</td>
 			</tr>
 		</table>

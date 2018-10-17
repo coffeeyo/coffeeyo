@@ -220,7 +220,7 @@ public class ProductDao {
 					sql.append("FROM PRODUCT p ");
 					sql.append("left join CATEGORY c ");
 					sql.append("on p.cidx = c.cidx ");
-					sql.append("WHERE p.cidx=? and p.status = 1 ");
+					sql.append("WHERE p.cidx=? ");
 					sql.append(" ORDER BY PIDX desc ");
 					sql.append(") ");
 					sql.append(" data) ");
@@ -244,7 +244,6 @@ public class ProductDao {
 					sql.append("FROM PRODUCT p ");
 					sql.append("left join CATEGORY c ");
 					sql.append("on p.cidx = c.cidx ");
-					sql.append("WHERE p.status = 1 ");
 					sql.append(" ORDER BY PIDX desc ");
 					sql.append(") ");
 					sql.append(" data) ");
@@ -270,7 +269,7 @@ public class ProductDao {
 					sql.append("FROM PRODUCT p ");
 					sql.append("left join CATEGORY c ");
 					sql.append("on p.cidx = c.cidx  ");
-					sql.append("WHERE p.cidx=? and p.status = 1 and p.pname like ?  ");
+					sql.append("WHERE p.cidx=? and p.pname like ?  ");
 					sql.append("ORDER BY PIDX desc  ");
 					sql.append(") ");
 					sql.append(" data) ");
@@ -295,7 +294,7 @@ public class ProductDao {
 					sql.append("FROM PRODUCT p ");
 					sql.append("left join CATEGORY c ");
 					sql.append("on p.cidx = c.cidx  ");
-					sql.append(" WHERE p.pname like ? and p.status = 1 ");
+					sql.append(" WHERE p.pname like ? ");
 					sql.append(" ORDER BY PIDX desc ");
 					sql.append(") ");
 					sql.append(" data) ");
@@ -490,13 +489,13 @@ public class ProductDao {
 			if(opt == null)	// 전체글의 개수
 			{
 				if(cidx > 0) {
-					sql.append("select count(*) from PRODUCT where status = 1 and cidx = ? ");
+					sql.append("select count(*) from PRODUCT where cidx = ? ");
 					//pstmt = conn.prepareStatement(sql.toString());
 					pstmt = DBConnection.getPstmt(conn, sql.toString());
 					pstmt.setInt(1, cidx);
 				} 
 				else {
-					sql.append("select count(*) from PRODUCT where status = 1 ");
+					sql.append("select count(*) from PRODUCT");
 					//pstmt = conn.prepareStatement(sql.toString());
 					pstmt = DBConnection.getPstmt(conn, sql.toString());
 				}
@@ -507,14 +506,14 @@ public class ProductDao {
 			else if(opt.equals("0")) // 제목으로 검색한 글의 개수
 			{
 				if(cidx > 0) {
-					sql.append("select count(*) from PRODUCT where PNAME like ? and status = 1 and cidx = ? ");
+					sql.append("select count(*) from PRODUCT where PNAME like ?  and cidx = ? ");
 					//pstmt = conn.prepareStatement(sql.toString());
 					pstmt = DBConnection.getPstmt(conn, sql.toString());
 					pstmt.setString(1, '%'+condition+'%');
 					pstmt.setInt(2, cidx);
 				}
 				else {
-					sql.append("select count(*) from PRODUCT where PNAME like ? and status = 1 ");
+					sql.append("select count(*) from PRODUCT where PNAME like ? ");
 					//pstmt = conn.prepareStatement(sql.toString());
 					pstmt = DBConnection.getPstmt(conn, sql.toString());
 					pstmt.setString(1, '%'+condition+'%');

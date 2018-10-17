@@ -42,7 +42,7 @@
 <div class="top_title" >
 		<p class="incontent">
 		<c:forEach end="0" items="${requestScope.prodList}" var="pdlist">
-			${po.cateName}</c:forEach> 상품 전체보기</p>
+			${pdlist.cateName}</c:forEach> 상품 보기</p>
 </div>
 <%--<table class="top_tab" border="1">
 <tr>
