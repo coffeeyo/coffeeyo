@@ -55,7 +55,7 @@
 					  옵션: ${cart.options}<br/>
 					  상품가격: <fmt:formatNumber value="${cart.price}" type="number" />원<br/>
 					  옵션가격: <fmt:formatNumber value="${cart.optprice}" type="number" />원<br/>
-					  수량: <fmt:formatNumber value="${cart.amount}" type="number" />원<br/>
+					  수량: <fmt:formatNumber value="${cart.amount}" type="number" />개<br/>
 				  </td>
 				  <td>
 					 <h4> <fmt:formatNumber value="${(cart.price + cart.optprice)*cart.amount}" type="number" />원</h4>
