@@ -120,7 +120,7 @@ public class ProductCommDao {
 			sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
 			sql.append("	(SELECT PCIDX, PIDX,");
 			sql.append("			c.USERID, COMM, PCPOINT, ");
-			sql.append("			c.CREATEDT, m.nick, to_char(c.createdt, 'YYYY-MM-DD HH:mm:SS') as createDay ");
+			sql.append("			c.CREATEDT, m.nick, to_char(c.createdt, 'YYYY-MM-DD HH24:mm:SS') as createDay ");
 			sql.append("	FROM PRODCOMM c");
 			sql.append("	LEFT JOIN MEMBER m");
 			sql.append("	ON c.USERID=m.USERID");
@@ -170,7 +170,7 @@ public class ProductCommDao {
 			conn = DBConnection.getConnection();
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT PCIDX, PIDX, USERID, COMM, CREATEDT, to_char(createdt, 'YYYY-MM-DD HH:mm:SS') as createDay   FROM PRODCOMM WHERE PCIDX = ?");
+			sql.append("SELECT PCIDX, PIDX, USERID, COMM, CREATEDT, to_char(createdt, 'YYYY-MM-DD HH24:mm:SS') as createDay   FROM PRODCOMM WHERE PCIDX = ?");
 
 			pstmt = DBConnection.getPstmt(conn, sql.toString());
 			pstmt.setInt(1, comment_num);

@@ -45,7 +45,7 @@
 #writer{color:darkblue;font-weight:bold;}
 .cate2{font-weight:bold;font-size:18px;color:#191970;}
 .cate3{padding-top:5px;padding-bottom:5px;}
-#optTab{width:200px;margin-left:40px;}
+#optTab{width:250px;margin-left:40px;}
 .actionBtn{background-color: #202050; /* Green */
     border: none;
     color: white;
@@ -68,6 +68,7 @@
     border-radius: 2px;
     width: 30px;
 }
+.bbscomm{margin-bottom:50px;}
 
 </style>
 <script>
@@ -455,14 +456,14 @@
 				</c:if>
 			</div>
 			<div class="incontent">
-				<p id="ptitle">${po.pname}</p>
+				<p id="ptitle"><img src="../img/pname.jpg" width="20px" height="30px">${po.pname}</p>
 				<p class="cate2">기본가격:&nbsp;&nbsp;<span id="price">${po.price} 원</span></p>
 					<div class="in_subcontent">
 						<p class="cate2">옵션 선택</p>
 							
 								<table id="optTab">
 									<tr>
-		                                <td class="cate3">컵사이즈:</td>
+		                                <td class="cate3">▶ 컵사이즈:</td>
 		                                <td> <select name="cup_size" class="select" id="cupSize" onchange="sumPrice();">
 		                                        				<option value="medium">Medium</option>	<%--기본사이즈 --%>	
 		                                        				<option value="large">Large</option>			<%--+500원 --%>
@@ -473,7 +474,7 @@
 		                                  </td>
 	                                  </tr>
                                		<tr>
-	                               		<td class="cate3">시럽추가:</td>
+	                               		<td class="cate3">▶ 시럽추가:</td>
 										<td><select name="syrub_add" class="select" id="syrubAdd"
 											onchange="sumPrice();">
 												<option value="basic">시럽없음</option>
@@ -487,7 +488,7 @@
 										</select></td>
 
 									<tr>
-										<td class="cate3">얼음:</td>
+										<td class="cate3">▶ 얼음:</td>
 										<td> <select name="ice_add" class="select" id="iceAdd" onchange="sumPrice();">
                                         				<option value="hot">HOT</option>				<%--기본사이즈 --%>	
                                         				<option value="usually">보통</option>			<%--600원 --%>	
@@ -498,7 +499,7 @@
                                    
                                		</tr>
                                		<tr>
-	                                  <td class="cate3">샷추가: </td>
+	                                  <td class="cate3">▶ 샷추가: </td>
 	                                  <td><input type="button" class="subBtn" name="minus_btn" id="minusShot" value="-" />
 	                                                <input type="text" name="shot_add" id="shotAdd" size="3" value="0" readonly/>
 	                                                <input type="button" class="subBtn" name="plus_btn" id="plusShot" value="+" />
