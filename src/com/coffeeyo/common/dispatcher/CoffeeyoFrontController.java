@@ -33,8 +33,11 @@ public class CoffeeyoFrontController extends HttpServlet {
 			
 			try {
  				String view = controller.execute(request, response);
-				RequestDispatcher rd = request.getRequestDispatcher(view);
-				rd.forward(request, response);
+ 				
+ 				if(!view.equals("none")) {
+					RequestDispatcher rd = request.getRequestDispatcher(view);
+					rd.forward(request, response);
+ 				}
 			} catch (Exception e) {
 				System.out.println("∫‰ »£√‚ ø°∑Ø="+e);
 			}
