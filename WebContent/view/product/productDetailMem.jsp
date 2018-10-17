@@ -9,22 +9,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품상세조회</title>
 <style>
-.top_title{width:1000px; margin:auto; font-size: 30px; font-weight: bold;}
-.content{width:1000px; margin:auto;}
+.top_title{width:55%; margin:auto; font-size: 30px; font-weight: bold;}
+.content{width:55%; margin:auto;}
 
 #page_action{width:1000px; margin:auto; text-align:center}
 
 .top_b{text-align:right;width:1000px; margin:auto;margin-top:10px;}
 .lname{font-weight:bold; padding-right:10px; padding-left:20px;}
 
-.Reviews{width:1000px; margin:auto;}
-.grade{padding-top:20px;font-weight:bold;font-size:25px;margin-bottom:20px }
+.grade{width:55%;margin:auto;padding-top:20px;font-weight:bold;font-size:25px;margin-bottom:20px }
 #pname {font-weight:bold; width: 200px; text-overflow: ellipsis;
     -o-text-overflow: ellipsis; overflow: hidden;
     white-space: nowrap; word-wrap: normal !important; display: block;
     color:green;
     font-size:16px;}
-
+.Reviews{width:55%;margin:auto;}
 #ptitle{font-weight:bold;font-size:35px;color:green;margin-bottom:20px;}
 #sum{font-weight:bold;font-size:25px;color:#c8852c;padding-top:15px;}
 #price_sum{font-weight:bold;font-size:25px;color:orange;border:1px solid gray; padding-left:150px; }
@@ -69,10 +68,9 @@
     width: 30px;
 }
 .bbscomm{margin-bottom:50px;}
-.inpic{ display: inline-block;
-      box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
-     }
-.inpic img{border-radius: 10px;}
+.inpic img{border-radius: 10px;
+				display: inline-block;
+      box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8)}
 #replyBtn1{ background-color: lightgray;
 	font-size: 12px;
 	border-radius: 5px;
@@ -92,6 +90,7 @@
     text-decoration: none;
     display: inline-block;
     cursor: pointer;} 
+.alertCom{width:50%;margin-left:auto;margin-right:auto;border: 1px solid #c0c0c0;border-radius:10px;padding:10px}
 </style>
 <script>
 	//댓글 등록
@@ -198,7 +197,7 @@
 	}*/
 	
 	function loginFail() {
-		alert('로그인 후 투표 가능');
+		alert('로그인 후 구매 가능합니다.');
 	}
 	function prodComm(pNum) {
 		submit();
@@ -228,24 +227,24 @@
 
 		var opt = "컵사이즈= " + cupSizeVal + ", 시럽= " + syrubVal + ", 얼음= " + iceVal + ", 샷= " + shotCount;
 
-		if (cupSizeVal == "medium") {
-			cupSizeVal = 0;
-		} else if (cupSizeVal == "large") {
-			cupSizeVal = 500;
-		} else if (cupSizeVal == "Grande") {
-			cupSizeVal = 1000;
-		}
-
-		if (syrubVal == "basic") {
-			syrubVal = 0;
-		} else {
-			syrubVal = 500;
-		}
-		if (iceVal == "hot") {
-			iceVal = 0;
-		} else {
-			iceVal = 600;
-		}
+			if (cupSizeVal == "medium") {
+				cupSizeVal = 0;
+			} else if (cupSizeVal == "large") {
+				cupSizeVal = 500;
+			} else if (cupSizeVal == "Grande") {
+				cupSizeVal = 1000;
+			}
+	
+			if (syrubVal == "basic") {
+				syrubVal = 0;
+			} else {
+				syrubVal = 500;
+			}
+			if (iceVal == "hot") {
+				iceVal = 0;
+			} else {
+				iceVal = 600;
+			}
 
 		var optPrice = cupSizeVal + syrubVal + iceVal + numShCn;
 		var priceSum = (numBasicPrice+optPrice)*numPdCn;
@@ -284,8 +283,9 @@
 			},
 			error : function() {
 			}
-		});
-
+		
+			});
+		
 		return;
 	}
 	//바로구매 함수
@@ -542,14 +542,20 @@
 			</div>
 		</div>
 	</div>
-	<div class="in_subcontent" id="page_action">
-		<input type="button" class="actionBtn" name="cart" id="cartBtn" value="장바구니 담기" onclick="addCart();"/>
-		<input type="button" class="actionBtn" name="buy" id="buyBtn" value="바로구매" onclick="direcBuy();"/>
-		<input type="button" class="actionBtn" name="list" id="listBtn" value="목록" onclick="goList();"/>
-	</div>	
-	
+	<c:if test="${empty sessionScope.userid}">
+		<div class="alertCom">
+					<p align="center" style="color:#2f4f4f; font-size:15px;font-weight:bold;padding-top:10px;">구매하려면 로그인해야 합니다.</p>
+		</div>
+	</c:if>
+	<c:if test="${sessionScope.userid !=null}">
+		<div class="in_subcontent" id="page_action">
+			<input type="button" class="actionBtn" name="cart" id="cartBtn" value="장바구니 담기" onclick="addCart();"/>
+			<input type="button" class="actionBtn" name="buy" id="buyBtn" value="바로구매" onclick="direcBuy();"/>
+			<input type="button" class="actionBtn" name="list" id="listBtn" value="목록" onclick="goList();"/>
+		</div>	
+	</c:if>
+
 <!-- 댓글 부분 -->
-	<div class="Reviews">
 		<div class="grade">고객총평점:  
 										<c:if test="${commentAvg>=0 && commentAvg<0.5}">
 								        	<img src="../img/별점0.png" width="200px" height="40px">
@@ -586,11 +592,13 @@
 								        </c:if>		
 		<fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5
 		</div>
-		<c:if test="${empty commentList}">
-			<div style="width:800px;margin-left:auto;margin-right:auto;border: 1px solid #c0c0c0;border-radius:10px;padding:10px">
-						<p align="center" style="color:#2f4f4f; font-size:15px;font-weight:bold;">상품평이 없습니다.</p>
+		<c:if test="${empty commentList && sessionScope.userid eq null}">
+			<div class="alertCom">
+					<p align="center" style="color:#2f4f4f; font-size:15px;font-weight:bold;padding-top:10px;">상품평이 없습니다.</p>
 			</div>
-</c:if>
+		</c:if>
+	<div class="Reviews">
+
 		<table class="bbscomm">
 		
 			<!-- 로그인 했을 경우만 댓글 작성가능 -->
@@ -617,8 +625,8 @@
 				</td>
 				<!-- 본문 작성-->
 				<td style="padding:5px">
-					<div>
-						<div><textarea name="comment_content" id="comment_content" rows="3" cols="100" maxlength="1000"></textarea></div>
+					<div style="width:800px;padding:5px;">
+						<div><textarea name="comment_content" id="comment_content" rows="3" style="width:100%" maxlength="1000"></textarea></div>
 					</div>
 				</td>
 				<!-- 댓글 등록 버튼 -->
@@ -640,11 +648,10 @@
 						<td style="width:150px;height:50px;padding:10px; background:#e7e6d2;border-bottom: 1px solid lightgray;">
 							<div >					
 								${comment.nickName} : ${comment.pcpoint} / 5
-								
 							</div>
 						</td>
 						<!-- 본문내용 -->
-						<td style="width:650px;padding:5px;border-bottom: 1px solid lightgray;" >
+						<td style="width:800px;padding:5px;border-bottom: 1px solid lightgray;" >
 							<div class="text_wrapper" style="padding-top:15px;">
 								${fn:replace(comment.comm, cn, br)}
 								<p style="color:gray;font-size:8px;">	
@@ -653,13 +660,15 @@
 							</div>
 							</td>
 							<!-- 버튼 -->
-						<td style="border-bottom: 1px solid lightgray;text-align:center">	
+						<td style="border-bottom: 1px solid lightgray;text-align:center;">	
 							<div  id="btn">
 							<c:if test="${comment.userid == sessionScope.userid}">
-							
-								<a href="javascript:void(0)"><input type="button" id="replyBtn1" value="수정" onclick="cmUpdateOpen(${comment.pcidx})"></a><br/>
-								<a href="javascript:void(0)"><input type="button" id="replyBtn2" value="삭제" onclick="cmUpdateOpen(${comment.pcidx})"></a>
-							</c:if>		
+							    <a href="javascript:void(0)"><input type="button" id="replyBtn1" value="수정" onclick="cmUpdateOpen(${comment.pcidx})"></a><br/>
+								<a href="javascript:void(0)"><input type="button" id="replyBtn2" value="삭제" onclick="cmDeleteOpen(${comment.pcidx})"></a>
+							</c:if>	
+							<c:if test="${empty sessionScope.userid}">
+								<div class="text_wrapper" style="padding-top:15px;color:white;">coffeeYo</div>
+							</c:if>
 							</div>
 						</td>
 					</tr>
