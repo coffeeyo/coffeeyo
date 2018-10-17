@@ -115,19 +115,19 @@ public class ProductCommDao {
 			/* 
 			 * 댓글의 페이지 처리를 하고싶다면 이 쿼리를 사용하면 된다.
 			 */
-			
 			StringBuffer sql = new StringBuffer();
 			sql.append("SELECT * FROM");
 			sql.append(" (SELECT  ROWNUM AS rnum, data.* FROM ");
 			sql.append("	(SELECT PCIDX, PIDX,");
 			sql.append("			c.USERID, COMM, PCPOINT, ");
-			sql.append("			c.CREATEDT, m.nick ");
+			sql.append("			c.CREATEDT, m.nick, to_char(c.createdt, 'YYYY-MM-DD HH:mm:SS') as createDay ");
 			sql.append("	FROM PRODCOMM c");
 			sql.append("	LEFT JOIN MEMBER m");
 			sql.append("	ON c.USERID=m.USERID");
 			sql.append("	WHERE PIDX = ? AND c.STATUS=1) ");
 			sql.append(" data) ");
 			sql.append("WHERE rnum >= ? and rnum <= ?");
+			
 			
 			//pstmt = conn.prepareStatement(sql.toString());
 			pstmt = DBConnection.getPstmt(conn, sql.toString());
@@ -146,6 +146,7 @@ public class ProductCommDao {
 				comment.setPcpoint(rs.getLong("PCPOINT"));
 				comment.setCreatedt(rs.getDate("CREATEDT"));
 				comment.setNickName(rs.getString("NICK"));
+				comment.setCreateDay(rs.getString("CREATEDAY"));
 
 				list.add(comment);
 			}
@@ -169,8 +170,8 @@ public class ProductCommDao {
 			conn = DBConnection.getConnection();
 			
 			StringBuffer sql = new StringBuffer();
-			sql.append("SELECT PCIDX, PIDX, USERID, COMM, CREATEDT   FROM PRODCOMM WHERE PCIDX = ?");
-			
+			sql.append("SELECT PCIDX, PIDX, USERID, COMM, CREATEDT, to_char(createdt, 'YYYY-MM-DD HH:mm:SS') as createDay   FROM PRODCOMM WHERE PCIDX = ?");
+
 			pstmt = DBConnection.getPstmt(conn, sql.toString());
 			pstmt.setInt(1, comment_num);
 			
@@ -183,6 +184,7 @@ public class ProductCommDao {
 				comment.setUserid(rs.getString("USERID"));
 				comment.setComm(rs.getString("COMM"));
 				comment.setCreatedt(rs.getDate("CREATEDT"));
+				comment.setCreateDay(rs.getString("CREATEDAY"));
 			}
 			DBConnection.close(rs);
 		} catch (Exception e) {
@@ -191,6 +193,7 @@ public class ProductCommDao {
 			DBConnection.close(pstmt);
 			DBConnection.close(conn);
 		}
+		
 		return comment; 
 	} // end getComment
 	

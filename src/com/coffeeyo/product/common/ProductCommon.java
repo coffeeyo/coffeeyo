@@ -166,7 +166,7 @@ public class ProductCommon {
 		listOpt.put("start", spg*10-9);
 		
 		// 게시글 번호를 이용하여 해당 글에 있는 댓글 목록을 가져온다.
-		
+		System.out.println("날짜성공??");
 		listOpt.put("pidx", pidx);
 		ArrayList<ProductComm> commentList = commentDAO.getCommentList(listOpt);
 		

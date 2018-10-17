@@ -24,9 +24,9 @@
     white-space: nowrap; word-wrap: normal !important; display: block;
     color:green;
     font-size:16px;}
-#price{font-weight:bold;font-size:18px;}
-#ptitle{font-weight:bold;font-size:30px;color:green;}
-#sum{font-weight:bold;font-size:25px;color:orange;padding-top:15px;}
+
+#ptitle{font-weight:bold;font-size:35px;color:green;margin-bottom:20px;}
+#sum{font-weight:bold;font-size:25px;color:#c8852c;padding-top:15px;}
 #price_sum{font-weight:bold;font-size:25px;color:orange;border:1px solid gray; padding-left:150px; }
 .content{display:flex;padding:20px 10px 20px 0px}
 .incontent{padding-left:20px}
@@ -43,7 +43,31 @@
 }
 .Review_wr{display:flex;}
 #writer{color:darkblue;font-weight:bold;}
-.cate2{font-weight:bold;font-size:16px;color:#191970}
+.cate2{font-weight:bold;font-size:18px;color:#191970;}
+.cate3{padding-top:5px;padding-bottom:5px;}
+#optTab{width:200px;margin-left:40px;}
+.actionBtn{background-color: #202050; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 15px 5px;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 8px;
+    font-weight:bold;}
+.subBtn{    background-color: silver; /* Green */
+    border: 1px solid silver;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 30px;
+}
 
 </style>
 <script>
@@ -156,9 +180,6 @@
 	function prodComm(pNum) {
 		submit();
 	}
-	
-
-
 	//장바구니 담기 함수
 	function addCart() {
 		var direct = 'N';
@@ -166,29 +187,23 @@
 		//기본가격 값
 		var basicPrice = ${po.price};
 		numBasicPrice = parseInt(basicPrice);
-
 		//수량 옵션 값
 		var pdCount = $("#pdCount").val();
 		var numPdCn = parseInt(pdCount);
-
 		//컵사이즈 옵션 값
 		var cupSize = document.getElementById("cupSize");
 		var cupSizeVal = cupSize.options[cupSize.selectedIndex].value;
-
 		//시럽 옵션 값	
 		var syrubAdd = document.getElementById("syrubAdd");
 		var syrubVal = syrubAdd.options[syrubAdd.selectedIndex].value;
-
 		//얼음 옵션 값	
 		var ice = document.getElementById("iceAdd");
 		var iceVal = ice.options[ice.selectedIndex].value;
-
 		//샷 옵션 값
 		var shotCount = $("#shotAdd").val();
 		var numShCn = parseInt(shotCount) * 600;
 
-		var opt = "컵사이즈= " + cupSizeVal + ", 시럽= " + syrubVal + ", 얼음= "
-				+ iceVal + ", 샷= " + shotCount;
+		var opt = "컵사이즈= " + cupSizeVal + ", 시럽= " + syrubVal + ", 얼음= " + iceVal + ", 샷= " + shotCount;
 
 		if (cupSizeVal == "medium") {
 			cupSizeVal = 0;
@@ -211,12 +226,14 @@
 
 		var optPrice = cupSizeVal + syrubVal + iceVal + numShCn;
 		var priceSum = (numBasicPrice+optPrice)*numPdCn;
+		
+		
 		var param = "pdNum=" + pdNum + "&pdCount=" + pdCount
 				+ "&numBasicPrice=" + numBasicPrice + "&optPrice=" + optPrice
 				+ "&opt=" + opt + "&direct=" + direct;
 
 		
-		//return;
+		//선택 값을 ajax 형태로 넘기기
 		$.ajax({
 			url : '/popup/cartAddAction.yo',
 			type : 'POST',
@@ -339,11 +356,9 @@
 		//기본가격 값
 		var basicPrice = ${po.price};
 		numBasicPrice = parseInt(basicPrice);
-
 		//수량 옵션 값
 		var pdCount = $("#pdCount").val();
 		var numPdCn = parseInt(pdCount);
-
 		//컵사이즈 옵션 값
 		var cupSize = document.getElementById("cupSize");
 		var cupSizeVal = cupSize.options[cupSize.selectedIndex].value;
@@ -376,15 +391,12 @@
 		//샷 옵션 값
 		var shotCount = $("#shotAdd").val();
 		var numShCn = parseInt(shotCount) * 600;
-
-		var optPrice = cupSizeVal + syrubVal + iceVal + numShCn;
-
-		var priceSum = (numBasicPrice+optPrice)*numPdCn;
+		var optPrice = cupSizeVal + syrubVal + iceVal + numShCn;		//옵션가격 총합
+		var priceSum = (numBasicPrice+optPrice)*numPdCn;				//총 가격
 		$("#priceSum").attr("value", priceSum);
-
 	}
 
-	//옵션에 대한 기능 
+	//옵션 선택관련 기능 
 	$(function() {
 		$("#plusPd").click(function() {
 			var pdCount = $("#pdCount").attr("value");
@@ -396,7 +408,6 @@
 				$("#pdCount").attr("value", num_count);
 			}
 			sumPrice();
-
 		});
 		$("#minusPd").click(function() {
 			var pdCount = $("#pdCount").attr("value");
@@ -408,7 +419,6 @@
 			}
 			sumPrice();
 		});
-
 		$("#plusShot").click(function() {
 			var shotplus = $("#shotAdd").attr("value");
 			if (shotplus == 4) {
@@ -420,7 +430,6 @@
 			}
 			sumPrice();
 		});
-
 		$("#minusShot").click(function() {
 			var shotplus = $("#shotAdd").attr("value");
 			if (shotplus == 0) {
@@ -430,7 +439,6 @@
 				$("#shotAdd").attr("value", numshot);
 			}
 			sumPrice();
-
 		});
 
 	});
@@ -443,7 +451,7 @@
 		<div class="content">
 			<div class="inpic">
 				<c:if test="${po.image ne null}">
-					<img src="../view/upload/product/${po.image}" border="0" title="${po.pname}" alt="${po.pname}" width="350px" height="350px" />
+					<img src="../view/upload/product/${po.image}" border="0" title="${po.pname}" alt="${po.pname}" width="380px" height="380px" />
 				</c:if>
 			</div>
 			<div class="incontent">
@@ -451,56 +459,70 @@
 				<p class="cate2">기본가격:&nbsp;&nbsp;<span id="price">${po.price} 원</span></p>
 					<div class="in_subcontent">
 						<p class="cate2">옵션 선택</p>
-							<ul>
-                                <li class="cup"><p class="cate3">
-                                        컵사이즈: <select name="cup_size" class="select" id="cupSize" onchange="sumPrice();">
-                                        				<option value="medium">Medium</option>	<%--기본사이즈 --%>	
-                                        				<option value="large">Large</option>			<%--+500원 --%>
-                                        				<option value="Grande">Grande</option>		<%--+1000원 --%>
-                                        			</select></p>
-                                        			
-                                  </li>
-                                  <li class="syrup">
-                                  		<p class="cate3">시럽추가: 
-                                        			<select name="syrub_add" class="select" id="syrubAdd" onchange="sumPrice();">
-                                        				<option value="basic">시럽없음</option>					<%--기본시럽 --%>
-                                        				<option value="vanilla">바닐라 시럽</option>			<%--+500원 --%>
-                                        				<option value="Hazelnut">헤이즐넛 시럽</option>		<%--+500원 --%>
-                                        				<option value="Caramel">캬라멜 시럽</option>			<%--+500원 --%>
-                                        			</select></p>
-                                  </li>
-                                  <li class="ice">
-                                   		<p class="cate3">얼음: <select name="ice_add" class="select" id="iceAdd" onchange="sumPrice();">
+							
+								<table id="optTab">
+									<tr>
+		                                <td class="cate3">컵사이즈:</td>
+		                                <td> <select name="cup_size" class="select" id="cupSize" onchange="sumPrice();">
+		                                        				<option value="medium">Medium</option>	<%--기본사이즈 --%>	
+		                                        				<option value="large">Large</option>			<%--+500원 --%>
+		                                        				<option value="Grande">Grande</option>		<%--+1000원 --%>
+		                                        			</select>
+		                                        			
+		                                  
+		                                  </td>
+	                                  </tr>
+                               		<tr>
+	                               		<td class="cate3">시럽추가:</td>
+										<td><select name="syrub_add" class="select" id="syrubAdd"
+											onchange="sumPrice();">
+												<option value="basic">시럽없음</option>
+												<%--기본시럽 --%>
+												<option value="vanilla">바닐라 시럽</option>
+												<%--+500원 --%>
+												<option value="Hazelnut">헤이즐넛 시럽</option>
+												<%--+500원 --%>
+												<option value="Caramel">캬라멜 시럽</option>
+												<%--+500원 --%>
+										</select></td>
+
+									<tr>
+										<td class="cate3">얼음:</td>
+										<td> <select name="ice_add" class="select" id="iceAdd" onchange="sumPrice();">
                                         				<option value="hot">HOT</option>				<%--기본사이즈 --%>	
                                         				<option value="usually">보통</option>			<%--600원 --%>	
                                         				<option value="less">적게</option>				<%--600원 --%>	
                                         				<option value="more">많게</option>				<%--600원 --%>		
-                                        			</select></p>
-                                  </li>   
-                                  <li class="shot">
-                                  <p class="cate3">샷추가: <input type="button" name="minus_btn" id="minusShot" value="-" />
-                                                <input type="text" name="shot_add" id="shotAdd" size="3" value="0" readonly/>
-                                                <input type="button" name="plus_btn" id="plusShot" value="+" /></p>
-                                  </li>       	
-                                  
-                           </ul>
+                                        			</select>
+                                       	</td>
+                                   
+                               		</tr>
+                               		<tr>
+	                                  <td class="cate3">샷추가: </td>
+	                                  <td><input type="button" class="subBtn" name="minus_btn" id="minusShot" value="-" />
+	                                                <input type="text" name="shot_add" id="shotAdd" size="3" value="0" readonly/>
+	                                                <input type="button" class="subBtn" name="plus_btn" id="plusShot" value="+" />
+	                                  </td>
+                                  </tr>       	
+                            </table>      
+                 
                            <input type="hidden" id="pdNum" value="${po.pidx}"/>  
                                      
                     </div>
-                    <br/>
-               <p class="cate2"> 수량: <input type="button" name="minus_btn" id="minusPd" value="-" />
+          		<br/>
+              <p ><span class="cate2">수량: &nbsp;</span> <input type="button" class="subBtn" name="minus_btn" id="minusPd" value="-" />
                            	<input type="text" name="count" id="pdCount" size="3" value="1" style="text-align:center" readonly />
-                            <input type="button" name="plus_btn" id="plusPd" value="+" /></p>
-   
+                            <input type="button" class="subBtn" name="plus_btn" id="plusPd" value="+" /></p>
+   			
             <div class="in_subcontent" id="sum">
-				총합계: <input type="text" id="priceSum" value="${po.price}" style="text-align:right" readonly/>  원
+				총합계: <input type="text" id="priceSum" value="${po.price}" style="text-align:right;padding-right:5px;" readonly/>  원
 			</div>
 		</div>
 	</div>
 	<div class="in_subcontent" id="page_action">
-		<input type="button" name="cart" id="cartBtn" value="장바구니 담기" onclick="addCart();"/>
-		<input type="button" name="buy" id="buyBtn" value="바로구매" onclick="direcBuy();"/>
-		<input type="button" name="buy" id="listBtn" value="목록" onclick="goList();"/>
+		<input type="button" class="actionBtn" name="cart" id="cartBtn" value="장바구니 담기" onclick="addCart();"/>
+		<input type="button" class="actionBtn" name="buy" id="buyBtn" value="바로구매" onclick="direcBuy();"/>
+		<input type="button" class="actionBtn" name="list" id="listBtn" value="목록" onclick="goList();"/>
 	</div>	
 	
 <!-- 댓글 부분 -->
@@ -587,7 +609,7 @@
 				<c:forEach var="comment" items="${requestScope.commentList}">
 					<tr>
 						<!-- 아이디, 작성날짜 -->
-						<td style="width:150px;height:50px;padding:10px; background:#ffe4b5;border-bottom: 1px solid lightgray;">
+						<td style="width:150px;height:50px;padding:10px; background:#e7e6d2;border-bottom: 1px solid lightgray;">
 							<div >					
 								${comment.nickName} : ${comment.pcpoint} / 5
 								
@@ -597,8 +619,9 @@
 						<td style="width:650px;padding:5px;border-bottom: 1px solid lightgray;" >
 							<div class="text_wrapper" style="padding-top:15px;">
 								${fn:replace(comment.comm, cn, br)}
-								<p style="color:gray;font-size:8px;">								
-								<fmt:formatDate value="${comment.createdt}" pattern="yyyy년MM월dd일 HH:mm:ss"/> </p>
+								<p style="color:gray;font-size:8px;">	
+								<fmt:parseDate value="${comment.createDay}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:SS"/>
+								<fmt:formatDate value="${dateFmt}" pattern="yyyy년MM월dd일 HH시mm분SS초"/> </p>
 							</div>
 							</td>
 							<!-- 버튼 -->

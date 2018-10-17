@@ -5,6 +5,7 @@ import java.util.Date;
 public class Common {
 	private int status;
 	private Date createdt;
+	private String createDay;
 	private Date updatedt;
 	private String options;
 	private long price;
@@ -28,6 +29,12 @@ public class Common {
 	}
 	public void setCreatedt(Date createdt) {
 		this.createdt = createdt;
+	}
+	public String getCreateDay() {
+		return createDay;
+	}
+	public void setCreateDay(String createDay) {
+		this.createDay = createDay;
 	}
 	public Date getUpdatedt() {
 		return updatedt;
