@@ -11,12 +11,8 @@
 <style>
 .top_title{width:55%; margin:auto; font-size: 30px; font-weight: bold;}
 .content{width:55%; margin:auto;}
-
-#page_action{width:1000px; margin:auto; text-align:center}
-
-.top_b{text-align:right;width:1000px; margin:auto;margin-top:10px;}
+#page_action{width:55%; margin:auto; text-align:center}
 .lname{font-weight:bold; padding-right:10px; padding-left:20px;}
-
 .grade{width:55%;margin:auto;padding-top:20px;font-weight:bold;font-size:25px;margin-bottom:20px }
 #pname {font-weight:bold; width: 200px; text-overflow: ellipsis;
     -o-text-overflow: ellipsis; overflow: hidden;
@@ -67,7 +63,7 @@
     border-radius: 2px;
     width: 30px;
 }
-.bbscomm{margin-bottom:50px;}
+.bbscomm{margin-bottom:50px;width:100%;}
 .inpic img{border-radius: 10px;
 				display: inline-block;
       box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8)}
@@ -651,7 +647,7 @@
 							</div>
 						</td>
 						<!-- 본문내용 -->
-						<td style="width:800px;padding:5px;border-bottom: 1px solid lightgray;" >
+						<td style="padding:5px;border-bottom: 1px solid lightgray;" >
 							<div class="text_wrapper" style="padding-top:15px;">
 								${fn:replace(comment.comm, cn, br)}
 								<p style="color:gray;font-size:8px;">	
