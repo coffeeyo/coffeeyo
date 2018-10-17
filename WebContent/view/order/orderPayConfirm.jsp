@@ -39,7 +39,8 @@
 	<table width="70%" align="center" class="orderList">
 	    <tr style="border-bottom: 0.5px solid #77563c;">
 	        <td><h1>총 결제 금액</h1></td>
-	        <td><h1>${ORD.total}원</h1></td>
+	        <td><h1><fmt:formatNumber value="${ORD.total}" type="number" />원</h1></td>
+	        
 	    </tr>
 	    <tr style="border-bottom: 0.5px solid #77563c;">
 	        <td><h1>상품수령 예상시간</h1></td>
