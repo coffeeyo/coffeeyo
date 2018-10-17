@@ -322,7 +322,7 @@
 					});
 					$('.cart_r').css('width', '0px');
 
-					location.href = '/order/orderFromAction.yo';
+					location.href = '/order/orderFormAction.yo';
 				}
 			},
 			error : function() {
