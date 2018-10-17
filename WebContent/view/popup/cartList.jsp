@@ -116,6 +116,11 @@ body {
 </script>
 </head>
 <body>
+<%
+	// 줄바꿈 
+	pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("crcn", "\r\n");
+%>
 	<form id="cartFrm" name="cartFrm" method="post">
 		<table class="cartList">
 		<c:if test="${fn:length(requestScope.cartList) eq 0}">
@@ -138,24 +143,28 @@ body {
 			    </div>
 			  </td>
 			  <td>
+			  <c:set var="amount" value="${cart.amount}"/>
+			  <c:set var="price" value="${cart.price}"/>
+			  <c:set var="optprice" value="${cart.optprice}"/>
 			  ${cart.pname}<br/>
-			  수량: ${cart.amount}<br/>
-			  옵션: ${cart.options}<br/>
-			  단가: ${cart.price}<br/>
-			  옵션합계: ${cart.optprice}<br/>
-			  소계: ${(cart.price * cart.amount) + cart.optprice} 원<br/>
+			  수량: ${amount}<br/>
+			  옵션: ${fn:replace(cart.options, crcn, br)}<br/>
+			  단가: <fmt:formatNumber value="${price}" type="number" />원<br/>
+			  옵션합계: <fmt:formatNumber value="${optprice}" type="number" />원<br/>
+			  <c:set var="subTotal" value="${(price + optprice) * amount}"/>
+			  합계:<fmt:formatNumber value="${subTotal}" type="number" />원<br/>
 			  </td>
 			  <td>
 			  <input type="button" value="삭제" onclick="deleteCart('${cart.cidx}');"  class="btn-primary" />
 			  </td>
 		  </tr>
-		  <c:set var="sum" value="${sum + ((cart.price * cart.amount) + cart.optprice)}"/>
+		  <c:set var="sum" value="${sum + subTotal}"/>
 		  </c:forEach>
 		</c:if>
 		</table>
 		<p></p>
 		<div class="itemfooter">
-			<div>소계 : ${sum}</div>
+			<div>소계 : <fmt:formatNumber value="${sum}" type="number" />원</div>
     		<input type="button" value="주문결제" id="orderSave"  class="btn-success"  />
     	</div>
 	</form>
