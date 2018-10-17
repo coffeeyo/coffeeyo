@@ -130,6 +130,7 @@
     z-index: 2;
 }
 .cartTitle { float: left; width:100%; margin-left:auto; margin-right:auto; text-align:center }
+.cartDesc > li{ list-style-type: none; border-bottom: 1px dashed black; }
 .itemfooter { float: 298px; text-align:center; } 
 .thumb { width: 200px; }
 .thumb img { width: 198px; margin: 2px; }

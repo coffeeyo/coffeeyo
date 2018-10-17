@@ -150,14 +150,15 @@ body {
 			  <c:set var="amount" value="${cart.amount}"/>
 			  <c:set var="price" value="${cart.price}"/>
 			  <c:set var="optprice" value="${cart.optprice}"/>
-			  ${cart.pname}<br/>
-			  수량: ${amount}<br/>
-			  옵션: ${fn:replace(cart.options, crcn, br)}<br/>
-			  단가: <fmt:formatNumber value="${price}" type="number" />원<br/>
-			  옵션합계: <fmt:formatNumber value="${optprice}" type="number" />원<br/>
-			  <c:set var="subTotal" value="${(price + optprice) * amount}"/>
-			  소계:<fmt:formatNumber value="${subTotal}" type="number" />원<br/>
-			  </td>
+			  <ul class="cartDesc">
+			  	<li><b>${cart.pname}</b></li>
+			  	<li>수량: ${amount}</li>
+			  	<li>옵션: ${fn:replace(cart.options, crcn, br)}</li>
+			  	<li>단가: <fmt:formatNumber value="${price}" type="number" />원</li>
+			  	<li>옵션합계: <fmt:formatNumber value="${optprice}" type="number" />원</li>
+			  	<li><c:set var="subTotal" value="${(price + optprice) * amount}"/>
+			  소계:<fmt:formatNumber value="${subTotal}" type="number" />원</li>
+			  </ul>
 			  <td>
 			  <input type="button" value="삭제" onclick="deleteCart('${cart.cidx}');"  class="btn-primary" />
 			  </td>
