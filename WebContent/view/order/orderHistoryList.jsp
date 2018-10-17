@@ -141,7 +141,7 @@
 					주문자아이디: ${data.userid}	<br/>
         			상품명: ${data.pname} <c:if test="${data.amount gt 1 }"> 외 ${data.amount - 1} 건</c:if> 
             </td>
-            <td>결제금액: ${data.total}원  <%-- ${data.optprice} --%></td>
+            <td><fmt:formatNumber value="${data.total}" type="number" />원 <%-- ${data.optprice} --%></td>
             <td>주문일시: ${data.orddt} </td>
         </tr>
         </c:forEach>

@@ -52,13 +52,13 @@
 				  </td>
 				  <td>
 					  상품명: ${cart.pname}<br/>
-					  옵션:${cart.options}<br/>
-					  상품가격:${cart.price}<br/>
-					  옵션가격:${cart.optprice}<br/>
-					  수량: ${cart.amount}<br/>
+					  옵션: ${cart.options}<br/>
+					  상품가격: <fmt:formatNumber value="${cart.price}" type="number" />원<br/>
+					  옵션가격: <fmt:formatNumber value="${cart.optprice}" type="number" />원<br/>
+					  수량: <fmt:formatNumber value="${cart.amount}" type="number" />원<br/>
 				  </td>
 				  <td>
-					 <h4> ${(cart.price + cart.optprice)*cart.amount} 원</h4>
+					 <h4> <fmt:formatNumber value="${(cart.price + cart.optprice)*cart.amount}" type="number" />원</h4>
 				  </td>
 			  </tr>
 			  <c:set var="sum" value="${sum + (cart.price + cart.optprice)*cart.amount}"/>
@@ -68,7 +68,7 @@
 	        	<div class="itemfooter">
 		            <td colspan="3" align="right">
 		                <h4>최종결제금액<br/>
-		               		<div>총계 : ${sum}원</div>
+		               		<div>총계 : <fmt:formatNumber value="${sum}" type="number" />원</div>
 		               </h4>
 		            </td>
 	            </div>

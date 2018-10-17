@@ -45,18 +45,18 @@
 	           	주문번호: ${data.orderno}<br/>
 	           	주문항목번호: ${data.itemno}<br/>
 				상품명: ${data.pname} <br/>
-				상품가격: ${data.price}원<br/>
+				상품가격: <fmt:formatNumber value="${data.price}" type="number" />원<br/>
 				옵	션:  ${data.options}<br/>
-				옵션가격:  ${data.optprice}원<br/>
+				옵션가격: <fmt:formatNumber value="${data.optprice}" type="number" />원<br/>
 				수	량: ${data.amount}개<br/>
 	            </td>
-	            <td><h4>${(data.price+data.optprice)*data.amount}원</h4></td>
+	            <td><h4><fmt:formatNumber value="${(data.price+data.optprice)*data.amount}" type="number" />원</h4></td>
 	        </tr>
 		</c:forEach>	 	        
 	        <tr>
 	            <td colspan="3" align="right">
 					<h2>최종결제금액</h2>
-					<h2>${ORD.total}원</h2>
+					<h2><fmt:formatNumber value="${ORD.total}" type="number" />원</h2>
 	            </td>
 	        </tr>
 	        <tr style="border-bottom: 0.5px solid #77563c;">

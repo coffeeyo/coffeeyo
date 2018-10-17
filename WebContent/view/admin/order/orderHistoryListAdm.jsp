@@ -142,7 +142,7 @@
         			상품명: ${data.pname} 
         			<c:if test="${data.amount gt 1 }"> 외 ${data.amount - 1} 건</c:if>        			
             </td>
-            <td>결제금액: ${data.total}원  <%-- 추가로 넣어줘야한다 ${data.optprice} --%></td>
+            <td>결제금액: <fmt:formatNumber value="${data.total}" type="number" />원  <%-- 추가로 넣어줘야한다 ${data.optprice} --%></td>
             <td>주문일시: ${data.orddt} </td>
             <td>
                		처리상태: ${data.status} <br/>
