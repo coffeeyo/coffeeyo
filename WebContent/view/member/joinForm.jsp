@@ -118,7 +118,7 @@
 </head>
 <body>
 	<div class="top_title" >
-		<p>회원가입</p>
+		<p><span class="glyphicon glyphicon-log-in"></span> 회원가입</p>
 	</div>
 	<form method="post" action="/member/joinProcAction.yo" 
 			name="userInfo" onsubmit="return checkValue()">

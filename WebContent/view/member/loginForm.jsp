@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="loginFrm">
-	<b><font size="6" color="gray">로그인</font></b>
+	<b><font size="6" color="gray"><span class="glyphicon glyphicon-log-in"></span>  로그인</font></b>
 	<br><br><br>
 	
 	<form name="login" method="post" action="/member/loginProcAction.yo" class="navbar-form navbar-left">

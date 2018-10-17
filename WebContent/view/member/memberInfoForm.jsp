@@ -35,7 +35,7 @@
 </head>
 <body>
 	<div class="top_title" >
-		<p>내 정보</p>
+		<p><span class="glyphicon glyphicon-info-sign"></span> 내 정보</p>
 	</div>
 	<!-- 회원정보를 가져와 member 변수에 담는다. -->
 	<c:set var="member" value="${requestScope.memberInfo}"/>
