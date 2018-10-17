@@ -87,7 +87,7 @@
 						</div>
 							<div><span class="result" id="pname">${pdlist.pname}</span></div>
 							<div>가격:<span class="result">${pdlist.price}&nbsp;원</span></div>
-							<div>별점:<span class="result">
+							<div><span class="result">
 										<c:if test="${pdlist.pcPointAvg >= 0 && pdlist.pcPointAvg < 0.5}">
 								        	<img src="../img/별점0.png" width="200px" height="40px">
 								        </c:if>
