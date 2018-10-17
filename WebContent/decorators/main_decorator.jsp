@@ -132,7 +132,7 @@
     </div>
     
     <decorator:body />
-    
+    <!-- footer -->
     <div class="footer">
     	<span class="footer-text">Copyright&copy; CoffeeYO corp.</span>
     	<span class="show-on-scroll "><a href="javascript:scrollUp()">Top</a></span>
