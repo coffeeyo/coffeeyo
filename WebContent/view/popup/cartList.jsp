@@ -152,7 +152,7 @@ body {
 			  단가: <fmt:formatNumber value="${price}" type="number" />원<br/>
 			  옵션합계: <fmt:formatNumber value="${optprice}" type="number" />원<br/>
 			  <c:set var="subTotal" value="${(price + optprice) * amount}"/>
-			  합계:<fmt:formatNumber value="${subTotal}" type="number" />원<br/>
+			  소계:<fmt:formatNumber value="${subTotal}" type="number" />원<br/>
 			  </td>
 			  <td>
 			  <input type="button" value="삭제" onclick="deleteCart('${cart.cidx}');"  class="btn-primary" />
@@ -164,7 +164,7 @@ body {
 		</table>
 		<p></p>
 		<div class="itemfooter">
-			<div>소계 : <fmt:formatNumber value="${sum}" type="number" />원</div>
+			<div>합계 : <fmt:formatNumber value="${sum}" type="number" />원</div>
     		<input type="button" value="주문결제" id="orderSave"  class="btn-success"  />
     	</div>
 	</form>
