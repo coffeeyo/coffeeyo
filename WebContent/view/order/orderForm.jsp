@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link href="https://fonts.googleapis.com/css?family=Barrio"	rel="stylesheet">
 <meta charset="UTF-8">
 <style>
     	.width70{
