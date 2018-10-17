@@ -113,26 +113,6 @@
 	            </ul>
             </div>
    		</div>
-   		<!--
-   		<div style="width: 200px; margin-left:auto; margin-right:auto;">
-   			<ul class="nav nav-tabs">
-			    <li class="dropdown">
-			      <a class="dropdown-toggle" data-toggle="dropdown" href="#">커피요<span class="caret"></span></a>
-			      <ul class="dropdown-menu">
-			        <c:if test="${fn:length(requestScope.cateList) > 0}">
-						<c:forEach var="cate" items="${requestScope.cateList}">
-							<li><a href="javascript:void(0);" onclick="goCateProduct('${cate.cidx}')">${cate.cname}</a></li>
-						</c:forEach>
-						<form id="cateFrm" name="cateFrm" action="/product/productListAction.yo" method="post">
-							<input type="hidden" id="cate"  name="cidx">
-						</form>
-			      	</c:if>                     
-			      </ul>
-			    </li>
-			    <li><a href="/board/boardListAction.yo">커뮤니티</a></li>
-			  </ul>
-		</div>
-		-->
     </div>
     <div id="viewCart" class="cart_r">
     	<div id="itemhead">
