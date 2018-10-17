@@ -43,7 +43,7 @@ public class OrderFormAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		CartDao dao = CartDao.getInstance();

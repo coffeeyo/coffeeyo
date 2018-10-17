@@ -46,6 +46,6 @@ public class ProdCommentUpdateAction implements Action
 		out.flush();
 		out.close();
 		
-		return null;
+		return "none";
 	}
 }

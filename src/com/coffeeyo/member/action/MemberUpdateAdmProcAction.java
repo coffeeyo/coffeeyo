@@ -43,6 +43,6 @@ public class MemberUpdateAdmProcAction implements Action {
    		// 회원정보 수정 성공 메시지를 세션에 담는다.   		
 		response.sendRedirect("/admin/resultFormAction.yo?userid="+id+"&msg=0&nowPage="+nowPage);
 		
-		return null;
+		return "none";
 	}
 }

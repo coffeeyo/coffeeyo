@@ -82,6 +82,6 @@ public class CartBuyCheckAction implements Action {
 		out.flush();
 		out.close();
 			
-		return null;
+		return "none";
 	}
 }

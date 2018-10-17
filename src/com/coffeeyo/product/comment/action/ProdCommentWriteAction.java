@@ -33,9 +33,6 @@ public class ProdCommentWriteAction implements Action
 		System.out.println("comment_content="+comment_content);
 		System.out.println("comment_point="+comment_point);
 		
-		
-		
-		
 		comment.setPcidx(dao.getSeq());	// 댓글 번호는 시퀀스값으로
 		comment.setPidx(comment_board);
 		comment.setUserid(comment_id);
@@ -57,8 +54,7 @@ public class ProdCommentWriteAction implements Action
 		out.print(jsonobj.toString());
 		out.flush();
 		out.close();
-				
 		
-		return null;
+		return "none";
 	}
 }

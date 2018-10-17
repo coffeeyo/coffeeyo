@@ -35,7 +35,7 @@ public class LoginProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		else if(check == 2) // 탈퇴한 아이디인 경우 -> 다시 로그인 화면으로 이동
 		{
@@ -46,7 +46,7 @@ public class LoginProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		else if(check == -1) // 아이디가 없을 경우 -> 다시 로그인 화면으로 이동
 		{
@@ -57,7 +57,7 @@ public class LoginProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		else
 		{
@@ -71,7 +71,7 @@ public class LoginProcAction implements Action {
 	   		// 로그인 성공후 메인화면으로 이동
 	   		response.sendRedirect("/");
 	   		
-	   		return null;
+	   		return "none";
 		}
 	}
 }

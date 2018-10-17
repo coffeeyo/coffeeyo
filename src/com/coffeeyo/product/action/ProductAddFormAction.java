@@ -16,7 +16,6 @@ public class ProductAddFormAction implements Action {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		
 		CategoryDao cateDao = CategoryDao.getInstance();
 		List<Category> cateList = null;
 		cateList = cateDao.getAllCategory();

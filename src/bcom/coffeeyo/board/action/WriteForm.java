@@ -32,7 +32,7 @@ public class WriteForm implements Action {
 			} catch (Exception e) {
 				System.out.println("세션에 아이디가 없어서 로그인폼으로 이동하는 중 문제 발생="+e);
 			}
-			return null;
+			return "none";
 		}
 		//로그인 했을 때 글쓰기폼 보여주기
 		else {

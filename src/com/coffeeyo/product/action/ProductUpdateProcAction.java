@@ -36,7 +36,7 @@ public class ProductUpdateProcAction implements Action {
 			
 		if(pageNum==null){
 			response.sendRedirect("../admin/productListAction.yo");
-			return null;
+			return "none";
 		}
 	
 		HttpSession session = request.getSession();
@@ -50,7 +50,7 @@ public class ProductUpdateProcAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		int ulevel = Integer.parseInt(session.getAttribute("ulevel").toString());
@@ -63,7 +63,7 @@ public class ProductUpdateProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 
 		ProductDao dao = ProductDao.getInstance();
@@ -95,8 +95,7 @@ public class ProductUpdateProcAction implements Action {
 		
 		if (check == true) {
 			response.sendRedirect("../admin/productListAction.yo?pageNum="+pageNum);
-			return null;
-
+			return "none";
 		} else if (check == false) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -105,8 +104,7 @@ public class ProductUpdateProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
-
+			return "none";
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -115,7 +113,7 @@ public class ProductUpdateProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 	}
 	

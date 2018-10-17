@@ -44,7 +44,7 @@ public class ProductDeleteProcAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		int ulevel = Integer.parseInt(session.getAttribute("ulevel").toString());
@@ -57,7 +57,7 @@ public class ProductDeleteProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		
@@ -73,7 +73,7 @@ public class ProductDeleteProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		
@@ -95,10 +95,10 @@ public class ProductDeleteProcAction implements Action {
 		
 		if(result){
 			response.sendRedirect("../admin/productListAction.yo");
-			return null;
+			return "none";
 		}
 		else {
-			return null;
+			return "none";
 		}
 	}	
 }

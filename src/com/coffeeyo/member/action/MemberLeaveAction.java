@@ -27,7 +27,7 @@ public class MemberLeaveAction implements Action {
 		}
 		else{
 			System.out.println("È¸¿ø Å»Åð ½ÇÆÐ");
-			return null;
+			return "none";
 		}
 	}
 }

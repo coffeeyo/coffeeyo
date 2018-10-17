@@ -50,6 +50,6 @@ public class ProductListAllAction implements Action {
 		out.flush();
 		out.close();
 
-		return null;
+		return "none";
 	}
 }

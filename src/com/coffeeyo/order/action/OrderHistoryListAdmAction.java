@@ -65,7 +65,7 @@ public class OrderHistoryListAdmAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		// 비즈니스로직
 		// 검색조건과 내용을 Map에 담는다.

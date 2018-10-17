@@ -38,7 +38,7 @@ public class MemberInfoFormAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		// 그 아이디 해당하는 회원정보를 가져온다.

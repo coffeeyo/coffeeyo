@@ -20,7 +20,7 @@ public class MemberUpdateFormAction implements Action {
 		
 		// 세션이 가지고있는 로그인한 ID 정보를 가져온다
 		HttpSession session = request.getSession();
-String id = null;
+		String id = null;
 		
 		try {
 			id = session.getAttribute("userid").toString();
@@ -37,7 +37,7 @@ String id = null;
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		// 수정할 회원정보를 가져온다.

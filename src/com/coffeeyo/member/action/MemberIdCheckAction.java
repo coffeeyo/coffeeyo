@@ -35,6 +35,6 @@ public class MemberIdCheckAction implements Action {
 		out.flush();
 		out.close();
 		
-		return null;
+		return "none";
 	}
 }

@@ -21,7 +21,7 @@ public class MemberUpdateAdmFormAction implements Action {
 		
 		if(!ulevel.equals("10")) {
 			response.sendRedirect("/admin/memberListAction.yo?nowPage="+nowPage);
-			return null;
+			return "none";
 		}
 		
 		// 수정할 회원정보를 가져온다.

@@ -45,7 +45,7 @@ public class OrderProcAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		//결제하기 버튼을 누르면 결제처리하는 프로세스

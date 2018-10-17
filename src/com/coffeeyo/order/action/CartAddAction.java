@@ -39,15 +39,6 @@ public class CartAddAction implements Action {
 			optPrice = Integer.parseInt(strOptPrice);
 		}
 		
-		/*System.out.println("cartNum= "+cartNum);
-		System.out.println("pdNum= "+pdNum);
-		System.out.println("direct= "+direct);
-		System.out.println("pdCount= "+pdCount);
-		System.out.println("price= "+price);
-		System.out.println("opt= "+opt);
-		System.out.println("strOptPrice= "+strOptPrice);*/
-		
-		
 		cart.setCidx(cartNum);
 		cart.setPidx(pdNum);
 		cart.setBuychk(direct);
@@ -72,6 +63,6 @@ public class CartAddAction implements Action {
 		out.flush();
 		out.close();
 				
-		return null;
+		return "none";
 	}
 }

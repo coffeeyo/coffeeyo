@@ -14,6 +14,6 @@ public class LogOutProcAction implements Action {
 		
 		response.sendRedirect("/");
    		
-   		return null;
+		return "none";
 	}
 }

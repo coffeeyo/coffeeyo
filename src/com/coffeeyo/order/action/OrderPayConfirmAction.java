@@ -46,7 +46,7 @@ public class OrderPayConfirmAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		

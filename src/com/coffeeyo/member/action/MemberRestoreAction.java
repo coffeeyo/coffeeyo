@@ -23,11 +23,11 @@ public class MemberRestoreAction implements Action {
 			session.setAttribute("msg", "3");
 			
 			response.sendRedirect("/admin/resultFormAction.yo");
-			return null;
+			return "none";
 		}
 		else{
 			System.out.println("회원 복원 실패");
-			return null;
+			return "none";
 		}
 	}
 }

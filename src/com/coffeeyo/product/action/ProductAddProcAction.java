@@ -32,7 +32,7 @@ public class ProductAddProcAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		int ulevel = Integer.parseInt(session.getAttribute("ulevel").toString());
@@ -45,7 +45,7 @@ public class ProductAddProcAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		
 		ProductDao dao = ProductDao.getInstance();
@@ -94,6 +94,6 @@ public class ProductAddProcAction implements Action {
 		System.out.println("ContentAction execute() result : " + result);
 		
 		response.sendRedirect("../admin/productListAction.yo");
-		return null;
+		return "none";
 	}
 }

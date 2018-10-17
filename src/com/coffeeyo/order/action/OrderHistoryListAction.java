@@ -67,7 +67,7 @@ public class OrderHistoryListAction implements Action {
 			out.println("location.href='/';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return "none";
 		}
 		// 비즈니스로직
 		

@@ -22,11 +22,11 @@ public class MemberLeaveAdmAction implements Action {
 		if(check == 1){
 			session.setAttribute("msg", "2");
 			response.sendRedirect("/admin/resultFormAction.yo");
-			return null;
+			return "none";
 		}
 		else{
 			System.out.println("È¸¿ø Å»Åð ½ÇÆÐ");
-			return null;
+			return "none";
 		}
 	}
 }

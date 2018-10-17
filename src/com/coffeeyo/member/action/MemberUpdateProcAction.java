@@ -34,6 +34,6 @@ public class MemberUpdateProcAction implements Action {
 		dao.updateMember(member);
 		 		
 		response.sendRedirect("../member/resultFormAction.yo?msg=0");
-		return null;
+		return "none";
 	}
 }

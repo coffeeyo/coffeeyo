@@ -42,6 +42,6 @@ public class JoinProcAction implements Action {
    		
 		//return "/view/member/resultFormAction.me";
    		response.sendRedirect("/member/resultFormAction.yo");
-   		return null;
+   		return "none";
 	}
 }
