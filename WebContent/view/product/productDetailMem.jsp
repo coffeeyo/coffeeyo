@@ -18,7 +18,7 @@
 .lname{font-weight:bold; padding-right:10px; padding-left:20px;}
 
 .Reviews{width:1000px; margin:auto;}
-.grade{padding-top:20px;font-weight:bold;font-size:25px; }
+.grade{padding-top:20px;font-weight:bold;font-size:25px;margin-bottom:20px }
 #pname {font-weight:bold; width: 200px; text-overflow: ellipsis;
     -o-text-overflow: ellipsis; overflow: hidden;
     white-space: nowrap; word-wrap: normal !important; display: block;
@@ -91,7 +91,6 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    
     cursor: pointer;} 
 </style>
 <script>
@@ -585,7 +584,13 @@
 								        <c:if test="${commentAvg==5}">
 								      		<img src="../img/별점5.png" width="200px" height="40px">
 								        </c:if>		
-		<fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5</div>
+		<fmt:formatNumber value="${commentAvg}" pattern="0.0"/>/5
+		</div>
+		<c:if test="${empty commentList}">
+			<div style="width:800px;margin-left:auto;margin-right:auto;border: 1px solid #c0c0c0;border-radius:10px;padding:10px">
+						<p align="center" style="color:#2f4f4f; font-size:15px;font-weight:bold;">상품평이 없습니다.</p>
+			</div>
+</c:if>
 		<table class="bbscomm">
 		
 			<!-- 로그인 했을 경우만 댓글 작성가능 -->
