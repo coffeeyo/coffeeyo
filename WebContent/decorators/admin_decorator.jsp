@@ -35,7 +35,7 @@
     <body>
 	<c:set var="conPath" value="${pageContext.request.requestURI}"/>
 	<!-- header 스타일 수정(20181010) -->
-    <div class="navbar navbar-inverse" style="background-color: #77563cf5; border-color: #77563cf5; width:100%;  height:190px; z-index:999;">
+    <div class="navbar navbar-inverse" style="background-color: rgba(119, 86, 60, 0.96); border-color: rgba(119, 86, 60, 0.96); width:100%;  height:190px; z-index:999;">
     	<div class="container" style="width:90%">
     		<div class="navbar-header">
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">

@@ -22,8 +22,8 @@
 	color		: white;
 	text-align		: center;
 	vertical-align:middle;
-	background-color: #77563cf5;
-    border-color: #77563cf5;
+	background-color: rgba(119, 86, 60, 0.96);
+    border-color: rgba(119, 86, 60, 0.96);
 }
 
 .navbar-logo {
